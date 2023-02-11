@@ -2,11 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 
 const initialState = {
-  email: "",
+  user: { email: "", name: "", photo: "" },
   isLoading: false,
   error: "",
 };
@@ -32,43 +33,43 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, { payload }) => {
-      state.email = payload;
+      state.user.email = payload;
       state.isLoading = false;
     },
     logOut: (state) => {
-      state.email = "";
+      state.user.email = "";
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(createUser.pending, (state, action) => {
         state.isLoading = true;
-        state.email = "";
+        state.user.email = "";
         state.error = "";
       })
       .addCase(createUser.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.email = payload;
+        state.user.email = payload;
         state.error = "";
       })
       .addCase(createUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.email = "";
+        state.user.email = "";
         state.error = action.error.message;
       })
       .addCase(signInUser.pending, (state, action) => {
         state.isLoading = true;
-        state.email = "";
+        state.user.email = "";
         state.error = "";
       })
       .addCase(signInUser.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.email = payload;
+        state.user.email = payload;
         state.error = "";
       })
       .addCase(signInUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.email = "";
+        state.user.email = "";
         state.error = action.error.message;
       });
   },

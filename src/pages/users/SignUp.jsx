@@ -1,10 +1,10 @@
-import { useSelect } from "@material-tailwind/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
+import { BiPhotoAlbum } from "react-icons/bi";
 import { BsFillLockFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../features/auth/authSlice";
 
 const SignUp = () => {
@@ -15,9 +15,34 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
+  const {
+    user: { email },
+    isLoading,
+    error,
+  } = useSelector((state) => state.auth);
+
+  // useEffect(() => {}, [email]);
+
   const handleCreateUser = (data) => {
     dispatch(createUser({ email: data.email, password: data.password }));
+    if (email) {
+      return navigate("/");
+    }
   };
+
+  let setError = "";
+
+  if (error === "Firebase: Error (auth/email-already-in-use).") {
+    setError = "This Email already exists !!";
+  } else if (
+    error ===
+    "Firebase: Password should be at least 6 characters (auth/weak-password)."
+  ) {
+    setError = "Password should be at least 6 characters";
+  }
+
   return (
     <div className="max-w-md mx-auto my-10 p-4 rounded-md shadow-md">
       <h1 className="text-primary text-center text-2xl font-medium font-radio-canada mb-5">
@@ -86,6 +111,24 @@ const SignUp = () => {
             </p>
           )}
         </div>
+        <div className="relative flex w-full flex-wrap items-stretch">
+          <span className="z-10 h-full leading-snug font-normal text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+            <BiPhotoAlbum />
+          </span>
+          <input
+            type="text"
+            placeholder="Photo URL"
+            {...register("photo", {
+              required: "Photo URL is required",
+            })}
+            className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-gray-100 rounded text-sm border-0 shadow focus:bg-white focus:ring-1 outline-none focus:outline-none w-full pl-10"
+          />
+          {errors.photo && (
+            <p className="text-red-400 text-xs font-medium">
+              {errors.photo?.message}
+            </p>
+          )}
+        </div>
         <div className="text-center">
           <button
             type="submit"
@@ -95,6 +138,9 @@ const SignUp = () => {
           </button>
         </div>
       </form>
+      <div className="flex items-center justify-center gap-1 mt-4 text-sm">
+        <p className="text-red-500 text-center text-xs">{setError}</p>
+      </div>
       <div className="flex items-center justify-center gap-1 mt-4 text-sm">
         <p>Already have an account?</p>
         <Link to="/sign-in" className="text-blue-500 hover:underline">

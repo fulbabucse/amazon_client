@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsFillLockFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { signInUser } from "../../features/auth/authSlice";
 
@@ -14,9 +14,20 @@ const SignIn = () => {
     formState: { errors },
   } = useForm();
 
+  const { error } = useSelector((state) => state.auth);
+
   const handleSignUser = (data) => {
     dispatch(signInUser({ email: data.email, password: data.password }));
   };
+
+  let setError;
+
+  if (error === "Firebase: Error (auth/user-not-found).") {
+    setError = "User dose not exists!!";
+  } else if (error === "Firebase: Error (auth/wrong-password).") {
+    setError = "You are entering the wrong password";
+  }
+
   return (
     <div className="max-w-md mx-auto my-10 p-4 rounded-md shadow-md">
       <h1 className="text-primary text-center text-2xl font-medium font-radio-canada mb-5">
@@ -68,6 +79,10 @@ const SignIn = () => {
           </button>
         </div>
       </form>
+
+      <div className="flex items-center justify-center gap-1 mt-4 text-sm">
+        <p className="text-red-500 text-center text-xs">{setError}</p>
+      </div>
       <div className="flex items-center justify-center gap-1 mt-4 text-sm">
         <p>New customer?</p>
         <Link to="/sign-up" className="text-blue-500 hover:underline">

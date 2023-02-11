@@ -22,7 +22,7 @@ import {
 } from "@material-tailwind/react";
 import { signOut } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../features/auth/authSlice";
 
 const Navbar = () => {
@@ -34,6 +34,10 @@ const Navbar = () => {
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
+
+  const {
+    user: { email },
+  } = useSelector((state) => state.auth);
 
   const customAnimation = {
     mount: { scale: 1 },
@@ -147,7 +151,7 @@ const Navbar = () => {
                     <div className="flex items-center gap-1">
                       <AiOutlineUserAdd className="text-3xl font-medium" />
                       <h3 className="text-xs text-start">
-                        Log In <br /> My Account
+                        {email ? "Logged" : "Log In"} <br /> My Account
                       </h3>
                     </div>
                   </button>
@@ -155,24 +159,37 @@ const Navbar = () => {
                 <MenuList className="mt-4">
                   <div className="p-2 w-96">
                     <div className="w-52 mx-auto">
-                      <Link
-                        to="/sign-in"
-                        className=" block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
-                        role="menuitem"
-                        tabIndex="-1"
-                        id="menu-item-0"
-                      >
-                        Sign In
-                      </Link>
-                      <div className="flex items-center justify-center gap-1 mt-2 text-sm">
-                        <p>New customer?</p>
-                        <Link
-                          to="/sign-up"
-                          className="text-blue-500 hover:underline"
+                      {email ? (
+                        <button
+                          className=" block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
+                          role="menuitem"
+                          tabIndex="-1"
+                          id="menu-item-0"
                         >
-                          Start here
+                          {email}
+                        </button>
+                      ) : (
+                        <Link
+                          to="/sign-in"
+                          className=" block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
+                          role="menuitem"
+                          tabIndex="-1"
+                          id="menu-item-0"
+                        >
+                          Sign In
                         </Link>
-                      </div>
+                      )}
+                      {!email && (
+                        <div className="flex items-center justify-center gap-1 mt-2 text-sm">
+                          <p>New customer?</p>
+                          <Link
+                            to="/sign-up"
+                            className="text-blue-500 hover:underline"
+                          >
+                            Start here
+                          </Link>
+                        </div>
+                      )}
                     </div>
                     <div className="grid grid-cols-2 mt-3 border-t border-t-gray-300">
                       <div className="mt-3">
@@ -185,18 +202,20 @@ const Navbar = () => {
                         >
                           Account
                         </Link>
-                        <div>
-                          <button
-                            onClick={() => handleSignOut()}
-                            type="button"
-                            className="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
-                            role="menuitem"
-                            tabIndex="-1"
-                            id="menu-item-3"
-                          >
-                            Sign out
-                          </button>
-                        </div>
+                        {email && (
+                          <div>
+                            <button
+                              onClick={() => handleSignOut()}
+                              type="button"
+                              className="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                              role="menuitem"
+                              tabIndex="-1"
+                              id="menu-item-3"
+                            >
+                              Sign out
+                            </button>
+                          </div>
+                        )}
                       </div>
                       <div className="mt-2 border-l border-l-gray-200">
                         <div className="flex flex-col">
