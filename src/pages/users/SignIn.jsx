@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
+import { AiOutlineMail } from "react-icons/ai";
 import { BsFillLockFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
