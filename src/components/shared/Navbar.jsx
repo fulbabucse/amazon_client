@@ -131,17 +131,17 @@ const Navbar = () => {
               {userDrop && (
                 <>
                   <div
-                    class={`absolute -right-10 z-10 mt-5 w-40 text-center origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-300 ease-in-out`}
+                    class={`absolute -right-10 z-10 mt-5 w-40 text-center shadow-md bg-white focus:outline-none transition-all duration-300 ease-in-out rounded-md`}
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="menu-button"
                     tabindex="-1"
                   >
-                    <div class="py-1" role="none">
+                    <div className="p-2">
                       <Link
                         onClick={() => setUserDrop(!userDrop)}
                         to="/sign-in"
-                        class="text-gray-700 block px-4 py-2 text-sm"
+                        class="text-gray-700 block px-4 py-2 text-sm hover:bg-yellow-600 hover:text-white transition-colors duration-200 ease-in-out rounded-md"
                         role="menuitem"
                         tabindex="-1"
                         id="menu-item-0"
@@ -151,7 +151,7 @@ const Navbar = () => {
                       <Link
                         to="/sign-up"
                         onClick={() => setUserDrop(!userDrop)}
-                        class="text-gray-700 block px-4 py-2 text-sm"
+                        class="text-gray-700 block px-4 py-2 text-sm hover:bg-yellow-600 hover:text-white transition-colors duration-200 ease-in-out rounded-md"
                         role="menuitem"
                         tabindex="-1"
                         id="menu-item-0"
@@ -161,7 +161,7 @@ const Navbar = () => {
                       <Link
                         to="/"
                         onClick={() => setUserDrop(!userDrop)}
-                        class="text-gray-700 block px-4 py-2 text-sm"
+                        class="text-gray-700 block px-4 py-2 text-sm hover:bg-yellow-600 hover:text-white transition-colors duration-200 ease-in-out rounded-md"
                         role="menuitem"
                         tabindex="-1"
                         id="menu-item-2"
@@ -172,7 +172,7 @@ const Navbar = () => {
                         <button
                           type="button"
                           onClick={() => setUserDrop(!userDrop)}
-                          class="text-gray-700 block w-full px-4 py-2 text-sm"
+                          class="text-gray-700 block w-full px-4 py-2 text-sm hover:bg-yellow-600 hover:text-white transition-colors duration-200 ease-in-out rounded-md"
                           role="menuitem"
                           tabindex="-1"
                           id="menu-item-3"
