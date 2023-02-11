@@ -17,6 +17,11 @@ import {
   Accordion,
   AccordionBody,
   AccordionHeader,
+  Button,
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
 } from "@material-tailwind/react";
 
 const Navbar = () => {
@@ -102,13 +107,13 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-16 px-20 py-5">
+          <div className="flex items-center justify-between px-20 py-5">
             <div>
               <Link to="/" className="text-2xl font-semibold">
                 Crafty Commerce
               </Link>
             </div>
-            <div className="w-[480px]">
+            <div className="w-[640px]">
               <form className="flex items-center">
                 <input
                   type="text"
@@ -121,82 +126,60 @@ const Navbar = () => {
                 </button>
               </form>
             </div>
-            <div className="flex items-center justify-end gap-6">
-              <Link to="/compare">
-                <div className="flex items-center gap-1">
-                  <BiGitCompare className="text-3xl font-medium" />
-                  <h3 className="text-xs">
-                    Compare <br /> Product
-                  </h3>
-                </div>
-              </Link>
-              <Link to="/favorite-wishlist">
-                <div className="flex items-center gap-1">
-                  <MdOutlineFavoriteBorder className="text-3xl font-medium" />
-                  <h3 className="text-xs">
-                    Favorite <br /> Wishlist
-                  </h3>
-                </div>
-              </Link>
-              <div class="relative inline-block text-left">
-                <button
-                  onClick={() => setUserDrop(!userDrop)}
-                  animate={customAnimation}
-                >
-                  <div className="flex items-center gap-1">
-                    <AiOutlineUserAdd className="text-3xl font-medium" />
-                    <h3 className="text-xs text-start">
-                      Log In <br /> My Account
-                    </h3>
-                  </div>
-                </button>
-
-                {/* Drop */}
-                {userDrop && (
-                  <>
-                    <div
-                      class={`absolute -right-10 z-10 mt-5 w-40 text-center shadow-md bg-white focus:outline-none transition-all duration-300 ease-in-out rounded-md`}
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="menu-button"
-                      tabindex="-1"
-                    >
-                      <div className="p-2">
-                        <Link
-                          onClick={() => setUserDrop(!userDrop)}
-                          to="/sign-in"
-                          class="text-gray-700 block px-4 py-2 text-sm hover:bg-yellow-600 hover:text-white transition-colors duration-200 ease-in-out rounded-md"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-0"
-                        >
-                          Sign In
-                        </Link>
+            <div className="flex items-center gap-6">
+              <Menu
+                animate={{
+                  mount: { y: 0 },
+                  unmount: { y: 25 },
+                }}
+              >
+                <MenuHandler>
+                  <button>
+                    <div className="flex items-center gap-1">
+                      <AiOutlineUserAdd className="text-3xl font-medium" />
+                      <h3 className="text-xs text-start">
+                        Log In <br /> My Account
+                      </h3>
+                    </div>
+                  </button>
+                </MenuHandler>
+                <MenuList className="mt-4">
+                  <div className="p-2 w-96">
+                    <div className="w-52 mx-auto">
+                      <Link
+                        to="/sign-in"
+                        class=" block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
+                        role="menuitem"
+                        tabindex="-1"
+                        id="menu-item-0"
+                      >
+                        Sign In
+                      </Link>
+                      <div className="flex items-center justify-center gap-1 mt-2 text-sm">
+                        <p>New customer?</p>
                         <Link
                           to="/sign-up"
-                          onClick={() => setUserDrop(!userDrop)}
-                          class="text-gray-700 block px-4 py-2 text-sm hover:bg-yellow-600 hover:text-white transition-colors duration-200 ease-in-out rounded-md"
-                          role="menuitem"
-                          tabindex="-1"
-                          id="menu-item-0"
+                          className="text-blue-500 hover:underline"
                         >
-                          Sign Up
+                          Start here
                         </Link>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 mt-3 border-t border-t-gray-300">
+                      <div className="mt-3">
                         <Link
                           to="/"
-                          onClick={() => setUserDrop(!userDrop)}
-                          class="text-gray-700 block px-4 py-2 text-sm hover:bg-yellow-600 hover:text-white transition-colors duration-200 ease-in-out rounded-md"
+                          class="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
                           role="menuitem"
                           tabindex="-1"
                           id="menu-item-2"
                         >
-                          Orders
+                          Account
                         </Link>
-                        <div className="text-center">
+                        <div>
                           <button
                             type="button"
-                            onClick={() => setUserDrop(!userDrop)}
-                            class="text-gray-700 block w-full px-4 py-2 text-sm hover:bg-yellow-600 hover:text-white transition-colors duration-200 ease-in-out rounded-md"
+                            class="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
                             role="menuitem"
                             tabindex="-1"
                             id="menu-item-3"
@@ -205,10 +188,41 @@ const Navbar = () => {
                           </button>
                         </div>
                       </div>
+                      <div className="mt-2 border-l border-l-gray-200">
+                        <div className="flex flex-col">
+                          <Link
+                            to="/orders"
+                            class="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-1 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                            role="menuitem"
+                            tabindex="-1"
+                            id="menu-item-2"
+                          >
+                            Orders
+                          </Link>
+                          <Link
+                            to="/compare-product"
+                            class="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-1 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                            role="menuitem"
+                            tabindex="-1"
+                            id="menu-item-2"
+                          >
+                            Compare Product
+                          </Link>
+                          <Link
+                            to="/wishlist-product"
+                            class="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-1 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                            role="menuitem"
+                            tabindex="-1"
+                            id="menu-item-2"
+                          >
+                            Wishlist Product
+                          </Link>
+                        </div>
+                      </div>
                     </div>
-                  </>
-                )}
-              </div>
+                  </div>
+                </MenuList>
+              </Menu>
 
               <Link to="/cart">
                 <div className="flex items-center gap-1">
