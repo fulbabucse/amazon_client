@@ -2,9 +2,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsFillLockFill } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { signInUser } from "../../features/auth/authSlice";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -12,7 +15,7 @@ const SignIn = () => {
   } = useForm();
 
   const handleSignUser = (data) => {
-    console.log(data);
+    dispatch(signInUser({ email: data.email, password: data.password }));
   };
   return (
     <div className="max-w-md mx-auto my-10 p-4 rounded-md shadow-md">
@@ -20,8 +23,8 @@ const SignIn = () => {
         Sign in Account
       </h1>
       <form onSubmit={handleSubmit(handleSignUser)} className="space-y-4">
-        <div class="relative flex w-full flex-wrap items-stretch">
-          <span class="z-10 h-full leading-snug font-normal text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+        <div className="relative flex w-full flex-wrap items-stretch">
+          <span className="z-10 h-full leading-snug font-normal text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
             <AiOutlineMail />
           </span>
           <input
@@ -30,7 +33,7 @@ const SignIn = () => {
               required: "Email is required",
             })}
             placeholder="Email"
-            class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-gray-100 rounded text-sm border-0 shadow focus:bg-white focus:ring-1 outline-none focus:outline-none w-full pl-10"
+            className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-gray-100 rounded text-sm border-0 shadow focus:bg-white focus:ring-1 outline-none focus:outline-none w-full pl-10"
           />
           {errors.email && (
             <p className="text-red-400 text-xs font-medium">
@@ -38,8 +41,8 @@ const SignIn = () => {
             </p>
           )}
         </div>
-        <div class="relative flex w-full flex-wrap items-stretch">
-          <span class="z-10 h-full leading-snug font-normal text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+        <div className="relative flex w-full flex-wrap items-stretch">
+          <span className="z-10 h-full leading-snug font-normal text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
             <BsFillLockFill />
           </span>
           <input
@@ -48,7 +51,7 @@ const SignIn = () => {
             {...register("password", {
               required: "Password is required",
             })}
-            class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-gray-100 rounded text-sm border-0 shadow focus:bg-white focus:ring-1 outline-none focus:outline-none w-full pl-10"
+            className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-gray-100 rounded text-sm border-0 shadow focus:bg-white focus:ring-1 outline-none focus:outline-none w-full pl-10"
           />
           {errors.password && (
             <p className="text-red-400 text-xs font-medium">
@@ -57,7 +60,10 @@ const SignIn = () => {
           )}
         </div>
         <div className="text-center">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-medium font-radio-canada py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-medium font-radio-canada py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+          >
             Sign In
           </button>
         </div>

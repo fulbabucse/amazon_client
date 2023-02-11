@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import {
   MdOutlineLanguage,
-  MdOutlineFavoriteBorder,
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
@@ -10,25 +9,27 @@ import {
   AiOutlineUserAdd,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { BiGitCompare, BiCategoryAlt } from "react-icons/bi";
+import { BiCategoryAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import SmallNavbar from "../SmallNavbar";
 import {
   Accordion,
   AccordionBody,
   AccordionHeader,
-  Button,
   Menu,
   MenuHandler,
-  MenuItem,
   MenuList,
 } from "@material-tailwind/react";
+import { signOut } from "firebase/auth";
+import auth from "../../firebase/firebase.config";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../features/auth/authSlice";
 
 const Navbar = () => {
-  const [userDrop, setUserDrop] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
 
   const [open, setOpen] = useState(1);
+  const dispatch = useDispatch();
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -37,6 +38,14 @@ const Navbar = () => {
   const customAnimation = {
     mount: { scale: 1 },
     unmount: { scale: 0.7 },
+  };
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        dispatch(logOut());
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -60,7 +69,7 @@ const Navbar = () => {
               </div>
               <div className="flex items-center">
                 <MdOutlineLanguage />
-                <select class="text-white bg-transparent text-sm focus-visible:outline-none text-center rounded-none">
+                <select className="text-white bg-transparent text-sm focus-visible:outline-none text-center rounded-none">
                   <option
                     selected
                     value="EN"
@@ -83,7 +92,7 @@ const Navbar = () => {
                 </select>
               </div>
               <div>
-                <select class="text-white bg-transparent text-sm focus-visible:outline-none text-center rounded-none">
+                <select className="text-white bg-transparent text-sm focus-visible:outline-none text-center rounded-none">
                   <option
                     selected
                     value="USD"
@@ -148,9 +157,9 @@ const Navbar = () => {
                     <div className="w-52 mx-auto">
                       <Link
                         to="/sign-in"
-                        class=" block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
+                        className=" block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
                         role="menuitem"
-                        tabindex="-1"
+                        tabIndex="-1"
                         id="menu-item-0"
                       >
                         Sign In
@@ -169,19 +178,20 @@ const Navbar = () => {
                       <div className="mt-3">
                         <Link
                           to="/"
-                          class="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                          className="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
                           role="menuitem"
-                          tabindex="-1"
+                          tabIndex="-1"
                           id="menu-item-2"
                         >
                           Account
                         </Link>
                         <div>
                           <button
+                            onClick={() => handleSignOut()}
                             type="button"
-                            class="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                            className="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
                             role="menuitem"
-                            tabindex="-1"
+                            tabIndex="-1"
                             id="menu-item-3"
                           >
                             Sign out
@@ -192,27 +202,27 @@ const Navbar = () => {
                         <div className="flex flex-col">
                           <Link
                             to="/orders"
-                            class="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-1 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                            className="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-1 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
                             role="menuitem"
-                            tabindex="-1"
+                            tabIndex="-1"
                             id="menu-item-2"
                           >
                             Orders
                           </Link>
                           <Link
                             to="/compare-product"
-                            class="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-1 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                            className="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-1 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
                             role="menuitem"
-                            tabindex="-1"
+                            tabIndex="-1"
                             id="menu-item-2"
                           >
                             Compare Product
                           </Link>
                           <Link
                             to="/wishlist-product"
-                            class="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-1 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                            className="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-1 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
                             role="menuitem"
-                            tabindex="-1"
+                            tabIndex="-1"
                             id="menu-item-2"
                           >
                             Wishlist Product
@@ -241,7 +251,7 @@ const Navbar = () => {
 
         <div className="bg-primary w-full text-white py-3 flex items-center gap-6">
           <div className="pl-20">
-            <div class="relative">
+            <div className="relative">
               <button
                 onClick={() => setOpenCategory(!openCategory)}
                 className="flex items-center gap-14"
@@ -267,13 +277,13 @@ const Navbar = () => {
               {openCategory && (
                 <>
                   <div
-                    class={`absolute z-10 mt-5 w-full text-center origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-300 ease-in-out`}
+                    className={`absolute z-10 mt-5 w-full text-center origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-300 ease-in-out`}
                     aria-orientation="vertical"
                     aria-labelledby="menu-button"
-                    tabindex="-1"
+                    tabIndex="-1"
                   >
                     <div
-                      class="lg:left-0 lg:block lg:fixed lg:top-[168px] lg:bottom-0 lg:overflow-y-auto lg:flex-row lg:flex-nowrap lg:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative lg:w-80 z-10 py-4 px-6 text-primary"
+                      className="lg:left-0 lg:block lg:fixed lg:top-[168px] lg:bottom-0 lg:overflow-y-auto lg:flex-row lg:flex-nowrap lg:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative lg:w-80 z-10 py-4 px-6 text-primary"
                       role="none"
                     >
                       <Fragment>
