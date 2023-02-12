@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Admin from "../admin/Admin";
 import Root from "../layouts/Root";
 import Blogs from "../pages/Blogs";
 import Cart from "../pages/Cart";
@@ -10,6 +11,7 @@ import Orders from "../pages/Orders";
 import OurShop from "../pages/OurShop";
 import SignIn from "../pages/users/SignIn";
 import SignUp from "../pages/users/SignUp";
+import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
@@ -56,6 +58,14 @@ const router = createBrowserRouter([
       { path: "/sign-in", element: <SignIn /> },
       { path: "/sign-up", element: <SignUp /> },
     ],
+  },
+  {
+    path: "admin",
+    element: (
+      <AdminRoute>
+        <Admin />,
+      </AdminRoute>
+    ),
   },
 ]);
 

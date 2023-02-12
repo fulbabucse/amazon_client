@@ -9,6 +9,7 @@ const initialState = {
   user: { email: "", name: "", photoURL: "" },
   isLoading: false,
   error: "",
+  isAdmin: false,
 };
 
 export const createUser = createAsyncThunk(
@@ -31,10 +32,7 @@ export const getUser = createAsyncThunk("auth/getUser", async (email) => {
   const res = await fetch(`http://localhost:5000/users?email=${email}`);
   const user = await res.json();
 
-  console.log("outside user", user);
-
   if (user?.status) {
-    console.log("inside user", user);
     return user;
   }
   return email;

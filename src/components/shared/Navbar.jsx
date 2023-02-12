@@ -37,7 +37,7 @@ const Navbar = () => {
   };
 
   const {
-    user: { email, name, photoURL },
+    user: { email, name, photoURL, isAdmin },
   } = useSelector((state) => state.auth);
 
   const customAnimation = {
@@ -49,6 +49,7 @@ const Navbar = () => {
     signOut(auth)
       .then(() => {
         dispatch(logOut());
+        localStorage.removeItem("cc_token");
       })
       .catch((err) => console.log(err));
   };
@@ -169,7 +170,7 @@ const Navbar = () => {
                         <AiOutlineUserAdd className="text-3xl font-medium" />
                       )}
                       <h3 className="text-xs text-start">
-                        {email ? name.split(" ")[0] : "Log In"} <br /> My
+                        {email ? name?.split(" ")[0] : "Log In"} <br /> My
                         Account
                       </h3>
                     </div>
@@ -177,10 +178,10 @@ const Navbar = () => {
                 </MenuHandler>
                 <MenuList className="mt-4">
                   <div className="p-2 w-96">
-                    <div className="w-52 mx-auto">
+                    <div className="w-52 mx-auto flex flex-col items-center justify-center">
                       {email && name ? (
                         <button
-                          className=" block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
+                          className="block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
                           role="menuitem"
                           tabIndex="-1"
                           id="menu-item-0"
@@ -198,6 +199,20 @@ const Navbar = () => {
                           Sign In
                         </Link>
                       )}
+
+                      {isAdmin && email && (
+                        <Link to="/admin" className="mt-2">
+                          <button
+                            className=" block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
+                            role="menuitem"
+                            tabIndex="-1"
+                            id="menu-item-0"
+                          >
+                            Admin
+                          </button>
+                        </Link>
+                      )}
+
                       {!email && (
                         <div className="flex items-center justify-center gap-1 mt-2 text-sm">
                           <p>New customer?</p>

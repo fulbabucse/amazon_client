@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../features/auth/authSlice";
 import { useSaveToDatabaseMutation } from "../../features/auth/userApi";
+import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -21,16 +22,17 @@ const SignUp = () => {
 
   const {
     user: { email },
-
     error,
   } = useSelector((state) => state.auth);
+
+  const [token] = useToken(email);
 
   const handleCreateUser = (data) => {
     dispatch(createUser({ email: data.email, password: data.password }));
     saveToDB(data);
   };
 
-  if (email) {
+  if (token) {
     return navigate("/");
   }
 

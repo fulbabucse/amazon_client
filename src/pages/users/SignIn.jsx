@@ -5,6 +5,7 @@ import { BsFillLockFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signInUser } from "../../features/auth/authSlice";
+import useToken from "../../hooks/useToken";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -21,11 +22,13 @@ const SignIn = () => {
     error,
   } = useSelector((state) => state.auth);
 
+  const [token] = useToken(email);
+
   const handleSignUser = (data) => {
     dispatch(signInUser({ email: data.email, password: data.password }));
   };
 
-  if (email) {
+  if (token) {
     return navigate("/");
   }
 
