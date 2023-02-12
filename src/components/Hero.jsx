@@ -91,7 +91,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="py-6 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-20">
+    <div className="py-6 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-16">
       <div className="max-w-[640px] h-[380px] w-full m-auto relative group">
         <div
           style={{ backgroundImage: `url(${slides[currentIndex].image})` }}
