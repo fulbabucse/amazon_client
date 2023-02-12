@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
 import { BiPhotoAlbum } from "react-icons/bi";
@@ -19,7 +19,7 @@ const SignUp = () => {
 
   const {
     user: { email },
-    isLoading,
+
     error,
   } = useSelector((state) => state.auth);
 
