@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   MdOutlineLanguage,
   MdOutlineKeyboardArrowDown,
@@ -27,6 +27,7 @@ import { logOut } from "../../features/auth/authSlice";
 
 const Navbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   const [open, setOpen] = useState(1);
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const Navbar = () => {
   };
 
   const {
-    user: { email },
+    user: { email, name, photoURL },
   } = useSelector((state) => state.auth);
 
   const customAnimation = {
@@ -51,6 +52,13 @@ const Navbar = () => {
       })
       .catch((err) => console.log(err));
   };
+
+  useEffect(() => {
+    fetch("cate.json")
+      .then((res) => res.json())
+      .then((data) => setCategories(data))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div>
@@ -149,9 +157,20 @@ const Navbar = () => {
                 <MenuHandler>
                   <button>
                     <div className="flex items-center gap-1">
-                      <AiOutlineUserAdd className="text-3xl font-medium" />
+                      {email && photoURL ? (
+                        <div className="w-10 h-10">
+                          <img
+                            className="w-full h-full rounded-full"
+                            src={photoURL}
+                            alt={name}
+                          />
+                        </div>
+                      ) : (
+                        <AiOutlineUserAdd className="text-3xl font-medium" />
+                      )}
                       <h3 className="text-xs text-start">
-                        {email ? "Logged" : "Log In"} <br /> My Account
+                        {email ? name.split(" ")[0] : "Log In"} <br /> My
+                        Account
                       </h3>
                     </div>
                   </button>
@@ -159,14 +178,14 @@ const Navbar = () => {
                 <MenuList className="mt-4">
                   <div className="p-2 w-96">
                     <div className="w-52 mx-auto">
-                      {email ? (
+                      {email && name ? (
                         <button
                           className=" block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
                           role="menuitem"
                           tabIndex="-1"
                           id="menu-item-0"
                         >
-                          {email}
+                          {name}
                         </button>
                       ) : (
                         <Link
@@ -306,22 +325,38 @@ const Navbar = () => {
                       role="none"
                     >
                       <Fragment>
-                        <Accordion open={open === 1} animate={customAnimation}>
-                          <AccordionHeader
-                            className="text-sm"
-                            onClick={() => handleOpen(1)}
-                          >
-                            Men's Fashion
-                          </AccordionHeader>
-                          <AccordionBody>
-                            We&apos;re not always in the position that we want
-                            to be at. We&apos;re constantly growing. We&apos;re
-                            constantly making mistakes. We&apos;re constantly
-                            trying to express ourselves and actualize our
-                            dreams.
-                          </AccordionBody>
-                        </Accordion>
-                        <Accordion open={open === 2} animate={customAnimation}>
+                        {categories?.map(
+                          ({ category_name, sub_category }, index) => (
+                            <Accordion
+                              key={index}
+                              open={open === index + 1}
+                              animate={customAnimation}
+                            >
+                              <AccordionHeader
+                                className="text-sm"
+                                onClick={() => handleOpen(index + 1)}
+                              >
+                                {category_name}
+                              </AccordionHeader>
+                              <AccordionBody>
+                                <div className="flex flex-col">
+                                  {sub_category?.map(
+                                    ({ name, link }, index) => (
+                                      <Link
+                                        key={index}
+                                        to={link}
+                                        className="transition-colors font-medium duration-300 transform hover:text-gray-900 dark:hover:text-gray-200 text-start capitalize"
+                                      >
+                                        {name}
+                                      </Link>
+                                    )
+                                  )}
+                                </div>
+                              </AccordionBody>
+                            </Accordion>
+                          )
+                        )}
+                        {/* <Accordion open={open === 2} animate={customAnimation}>
                           <AccordionHeader
                             className="text-sm"
                             onClick={() => handleOpen(2)}
@@ -440,7 +475,7 @@ const Navbar = () => {
                             trying to express ourselves and actualize our
                             dreams.
                           </AccordionBody>
-                        </Accordion>
+                        </Accordion> */}
                       </Fragment>
                     </div>
                   </div>

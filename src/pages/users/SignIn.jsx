@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsFillLockFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signInUser } from "../../features/auth/authSlice";
 
 const SignIn = () => {
@@ -14,11 +14,20 @@ const SignIn = () => {
     formState: { errors },
   } = useForm();
 
-  const { error } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  const {
+    user: { email },
+    error,
+  } = useSelector((state) => state.auth);
 
   const handleSignUser = (data) => {
     dispatch(signInUser({ email: data.email, password: data.password }));
   };
+
+  if (email) {
+    return navigate("/");
+  }
 
   let setError;
 

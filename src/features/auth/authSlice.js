@@ -6,7 +6,7 @@ import {
 import auth from "../../firebase/firebase.config";
 
 const initialState = {
-  user: { email: "", name: "", photo: "" },
+  user: { email: "", name: "", photoURL: "" },
   isLoading: false,
   error: "",
 };
@@ -26,6 +26,19 @@ export const signInUser = createAsyncThunk(
     return res.user.email;
   }
 );
+
+export const getUser = createAsyncThunk("auth/getUser", async (email) => {
+  const res = await fetch(`http://localhost:5000/users?email=${email}`);
+  const user = await res.json();
+
+  console.log("outside user", user);
+
+  if (user?.status) {
+    console.log("inside user", user);
+    return user;
+  }
+  return email;
+});
 
 const authSlice = createSlice({
   name: "auth",
@@ -69,6 +82,25 @@ const authSlice = createSlice({
       .addCase(signInUser.rejected, (state, action) => {
         state.isLoading = false;
         state.user.email = "";
+        state.error = action.error.message;
+      })
+      .addCase(getUser.pending, (state, action) => {
+        state.isLoading = true;
+        state.user = {};
+        state.error = "";
+      })
+      .addCase(getUser.fulfilled, (state, { payload }) => {
+        if (payload.status) {
+          state.user = payload.user;
+        } else {
+          state.user.email = payload;
+        }
+        state.isLoading = false;
+        state.error = "";
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.user = {};
         state.error = action.error.message;
       });
   },

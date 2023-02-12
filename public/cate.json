@@ -1,0 +1,94 @@
+[
+  {
+    "category_name": "Men's Fashion",
+    "sub_category": [
+      { "name": "T-Shirt", "link": "t-shirt" },
+      { "name": "Jackets, Blazer & Coats", "link": "men-jackets-coats" },
+      { "name": "bags & backpack", "link": "men-bags-backpack" },
+      { "name": "wallets", "link": "wallets" },
+      { "name": "belts", "link": "belts" },
+      { "name": "Shoes", "link": "men-shoes" }
+    ]
+  },
+  {
+    "category_name": "Women's Fashion",
+    "sub_category": [
+      {
+        "name": "women kurtas kurtis suits",
+        "link": "women-kurtas-kurtis-suits"
+      },
+      { "name": "dress materials", "link": "dress-materials" },
+      { "name": "saree", "link": "saree" },
+      { "name": "lehenga cholis", "link": "lehenga" },
+      { "name": "jackets & Coats", "link": "women-jackets-coats" },
+      { "name": "sleepwear", "link": "sleepwear" },
+      { "name": "shoes", "link": "women-shoes" },
+      { "name": "watches", "link": "women-watches" },
+      { "name": "bags & backpack", "link": "women-bags-backpack" },
+      { "name": "tops", "link": "tops" },
+      { "name": "sunglasses", "link": "women-sunglasses" }
+    ]
+  },
+  {
+    "category_name": "Kid's Fashion",
+    "sub_category": [
+      { "name": "diapering", "link": "diapering" },
+      { "name": "feeding", "link": "feeding" }
+    ]
+  },
+  {
+    "category_name": "Cosmetics",
+    "sub_category": [
+      { "name": "fragrances", "link": "fragrances" },
+      { "name": "skincare", "link": "skincare" },
+      { "name": "sunglass", "link": "sunglass" },
+      { "name": "jewellery", "link": "jewellery" }
+    ]
+  },
+  {
+    "category_name": "Automotive",
+    "sub_category": [
+      { "name": "Automotive", "link": "automotive" },
+      { "name": "motorcycle", "link": "motorcycle" }
+    ]
+  },
+  {
+    "category_name": "Home and Kitchen",
+    "sub_category": [
+      { "name": "furniture", "link": "furniture" },
+      { "name": "home decoration", "link": "home-decoration" }
+    ]
+  },
+  {
+    "category_name": "Movies and Television",
+    "sub_category": [
+      { "name": "movies", "link": "movies" },
+      { "name": "tv shows", "link": "tv-shows" },
+      { "name": "best sellers", "link": "best-sellers" }
+    ]
+  },
+  {
+    "category_name": "Electronics",
+    "sub_category": [
+      { "name": "Smartphones", "link": "smartphones" },
+      { "name": "lighting", "link": "lighting" },
+      { "name": "camera photo", "link": "camera-photo" },
+      { "name": "home audio", "link": "home-audio" },
+      {
+        "name": "security and surveillance",
+        "link": "security-and-surveillance"
+      }
+    ]
+  },
+  {
+    "category_name": "Computers",
+    "sub_category": [
+      { "name": "computer accessories", "link": "computer-accessories" },
+      { "name": "laptops", "link": "laptops" },
+      { "name": "laptop accessories", "link": "laptop-accessories" },
+      { "name": "monitors", "link": "monitors" },
+      { "name": "printers", "link": "printers" },
+      { "name": "scanners", "link": "scanners" }
+    ]
+  }
+]

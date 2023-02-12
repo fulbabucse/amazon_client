@@ -6,9 +6,11 @@ import { BsFillLockFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../features/auth/authSlice";
+import { useSaveToDatabaseMutation } from "../../features/auth/userApi";
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const [saveToDB] = useSaveToDatabaseMutation();
   const {
     register,
     handleSubmit,
@@ -23,14 +25,14 @@ const SignUp = () => {
     error,
   } = useSelector((state) => state.auth);
 
-  // useEffect(() => {}, [email]);
-
   const handleCreateUser = (data) => {
     dispatch(createUser({ email: data.email, password: data.password }));
-    if (email) {
-      return navigate("/");
-    }
+    saveToDB(data);
   };
+
+  if (email) {
+    return navigate("/");
+  }
 
   let setError = "";
 
