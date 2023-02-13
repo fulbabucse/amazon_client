@@ -181,7 +181,7 @@ const Navbar = () => {
                     <div className="w-52 mx-auto flex flex-col items-center justify-center">
                       {email && name ? (
                         <button
-                          className="block px-4 py-2 text-sm bg-[#FFC940] text-primary transition-colors font-medium duration-200 ease-in-out rounded-md text-center"
+                          className="block px-4 py-2 text-sm bg-[#FFC940] text-primary transition-colors hover:bg-opacity-80 font-medium duration-200 ease-in-out rounded-md text-center"
                           role="menuitem"
                           tabIndex="-1"
                           id="menu-item-0"

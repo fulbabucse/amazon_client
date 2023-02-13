@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -6,14 +7,14 @@ const Footer = () => {
       <footer class="bg-[#131A22] text-white">
         <div class="container px-6 py-12 mx-auto">
           <div class="md:flex md:-mx-3 md:items-center md:justify-between">
-            <h1 class="text-xl font-semibold tracking-tight text-gray-800 md:mx-3 xl:text-2xl dark:text-white">
+            <h1 class="text-xl font-semibold tracking-tight text-white md:mx-3 xl:text-2xl ">
               Subscribe our newsletter to get update.
             </h1>
 
             <div class="mt-6 md:mx-3 shrink-0 md:mt-0 md:w-auto">
-              <a
-                href="#"
-                class="inline-flex items-center justify-center w-full px-4 py-2 text-sm text-white duration-300 bg-gray-800 rounded-lg gap-x-3 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80"
+              <Link
+                to="/sign-up"
+                class="flex items-center gap-2 px-4 py-2 text-sm bg-[#FFC940] text-primary transition-colors hover:bg-opacity-80 font-medium duration-200 ease-in-out rounded-md text-center"
               >
                 <span>Sign Up Now</span>
 
@@ -31,112 +32,104 @@ const Footer = () => {
                     d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 
-          <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
+          <hr class="my-6 border-gray-100 md:my-10" />
 
           <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <div>
-              <p class="font-semibold text-gray-800 dark:text-white">
-                Quick Link
-              </p>
+              <p class="font-semibold text-white dark:text-white">Quick Link</p>
 
               <div class="flex flex-col items-start mt-5 space-y-2">
-                <a
-                  href="#"
-                  class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                <Link
+                  to="/"
+                  class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
                   Home
-                </a>
-                <a
-                  href="#"
-                  class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                </Link>
+                <Link
+                  to="/"
+                  class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
                   Who We Are
-                </a>
-                <a
-                  href="#"
-                  class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                </Link>
+                <Link
+                  to="/"
+                  class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
                   Our Philosophy
-                </a>
+                </Link>
               </div>
             </div>
 
             <div>
-              <p class="font-semibold text-gray-800 dark:text-white">
-                Industries
-              </p>
+              <p class="font-semibold text-white dark:text-white">Industries</p>
 
               <div class="flex flex-col items-start mt-5 space-y-2">
-                <a
-                  href="#"
-                  class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                <Link
+                  to="/"
+                  class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
                   Retail & E-Commerce
-                </a>
-                <a
-                  href="#"
-                  class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                </Link>
+                <Link
+                  to="/"
+                  class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
                   Information Technology
-                </a>
-                <a
-                  href="#"
-                  class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                </Link>
+                <Link
+                  to="/"
+                  class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
                   Finance & Insurance
-                </a>
+                </Link>
               </div>
             </div>
 
             <div>
-              <p class="font-semibold text-gray-800 dark:text-white">
-                Services
-              </p>
+              <p class="font-semibold text-white">Services</p>
 
               <div class="flex flex-col items-start mt-5 space-y-2">
-                <a
-                  href="#"
-                  class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                <Link
+                  to="/"
+                  class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
                   Translation
-                </a>
-                <a
-                  href="#"
-                  class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                </Link>
+                <Link
+                  to="/"
+                  class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
                   Proofreading & Editing
-                </a>
-                <a
-                  href="#"
-                  class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                </Link>
+                <Link
+                  to="/"
+                  class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
                   Content Creation
-                </a>
+                </Link>
               </div>
             </div>
 
             <div>
-              <p class="font-semibold text-gray-800 dark:text-white">
-                Contact Us
-              </p>
+              <p class="font-semibold text-white dark:text-white">Contact Us</p>
 
               <div class="flex flex-col items-start mt-5 space-y-2">
-                <a
-                  href="#"
-                  class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                <Link
+                  to="/"
+                  class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
                   +880 768 473 4978
-                </a>
-                <a
-                  href="#"
-                  class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                </Link>
+                <Link
+                  to="/"
+                  class="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
                   info@merakiui.com
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -144,16 +137,10 @@ const Footer = () => {
           <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
 
           <div class="flex flex-col items-center justify-between sm:flex-row">
-            <a href="#">
-              <img
-                class="w-auto h-7"
-                src="https://merakiui.com/images/full-logo.svg"
-                alt=""
-              />
-            </a>
+            <Link to="/">Crafty Commerce</Link>
 
-            <p class="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-300">
-              © Copyright 2021. All Rights Reserved.
+            <p class="mt-4 text-sm text-white sm:mt-0 dark:text-gray-300">
+              © Copyright {new Date().getFullYear()}. All Rights Reserved.
             </p>
           </div>
         </div>
