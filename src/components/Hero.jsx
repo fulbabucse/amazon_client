@@ -141,7 +141,7 @@ const Hero = () => {
         {products?.map((item) => (
           <div
             key={item.id}
-            className="rounded-md bg-gray-100 flex justify-between items-center"
+            className="rounded-md bg-white flex justify-between items-center"
           >
             <div className="px-3 py-6 space-y-2">
               <h4 className="text-red-500 text-xs">{item.sub_heading}</h4>

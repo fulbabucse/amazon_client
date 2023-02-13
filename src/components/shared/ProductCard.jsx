@@ -3,9 +3,10 @@ import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { AiOutlineStar } from "react-icons/ai";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
+import Carousel from "./Carousel";
 
 const ProductCard = ({ product }) => {
-  const { _id, title, price, rating, brand, thumbnail } = product;
+  const { _id, title, price, rating, brand, images } = product;
 
   const ratingStar = Array.from({ length: 5 }, (_, i) => {
     let number = i + 0.5;
@@ -33,11 +34,20 @@ const ProductCard = ({ product }) => {
           {price > 300 && <p>-20%</p>}
         </div>
       )}
-      <Link to={`/product/${_id}`}>
-        <figure className="lg:h-[250px]">
-          <img src={thumbnail} alt={title} className="rounded-t-md h-full" />
-        </figure>
-      </Link>
+
+      <div className="max-w-lg m-auto overflow-hidden w-full">
+        <Carousel>
+          {images?.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={title}
+              className="h-[250px] rounded-t-md w-full"
+            />
+          ))}
+        </Carousel>
+      </div>
+
       <Link to={`/product/${_id}`}>
         <div className="p-3 space-y-3">
           <p className="text-xs text-red-500">{brand}</p>
