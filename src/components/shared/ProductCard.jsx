@@ -57,7 +57,7 @@ const ProductCard = ({ product }) => {
           <img
             src={images[currentIndex]}
             alt={title}
-            className="h-full transition-transform ease-out duration-500"
+            className="h-full transition-transform ease-out duration-500 rounded-t-md"
           />
         </div>
 
