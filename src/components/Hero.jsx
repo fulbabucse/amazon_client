@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 import watch from "../assets/img/apple-watch.png";
@@ -90,8 +90,13 @@ const Hero = () => {
     setCurrentIndex(slideIndex);
   };
 
+  useEffect(() => {
+    const startSlide = setInterval(nextSlide, 10000);
+    return () => clearInterval(startSlide);
+  }, []);
+
   return (
-    <div className="py-6 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-16">
+    <div className="py-6 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-10">
       <div className="max-w-[640px] h-[380px] w-full m-auto relative group">
         <div
           style={{ backgroundImage: `url(${slides[currentIndex].image})` }}
@@ -121,18 +126,15 @@ const Hero = () => {
         >
           <BsChevronRight size={20} />
         </button>
-        <div className="flex justify-center">
-          <div className="absolute bottom-2 flex justify-center items-center py-2">
+        <div className="absolute bottom-3 right-0 left-0 hidden group-hover:block">
+          <div className="flex items-center justify-center gap-1">
             {slides?.map((_, index) => (
               <button
                 onClick={() => goToSLide(index)}
-                className={`${
-                  currentIndex === index ? "text-primary" : "text-white"
+                className={`transition-all w-2 h-2 bg-[#C9563C] rounded-full ${
+                  currentIndex === index ? "p-1" : "bg-opacity-50"
                 }`}
-                key={index}
-              >
-                <RxDotFilled size={30} />
-              </button>
+              ></button>
             ))}
           </div>
         </div>

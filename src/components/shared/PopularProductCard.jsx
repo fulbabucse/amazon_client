@@ -1,30 +1,11 @@
 import React from "react";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { AiOutlineStar } from "react-icons/ai";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 const PopularProductCard = ({ product }) => {
-  const { _id, title, price, rating, brand, images } = product;
+  const { _id, title, price, images } = product;
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const ratingStar = Array.from({ length: 5 }, (_, i) => {
-    let number = i + 0.5;
-
-    return (
-      <span key={i}>
-        {rating >= i + 1 ? (
-          <FaStar />
-        ) : rating >= number ? (
-          <FaStarHalfAlt />
-        ) : (
-          <AiOutlineStar className="text-[16px]" />
-        )}
-      </span>
-    );
-  });
 
   const goToSLide = (slideIndex) => {
     setCurrentIndex(slideIndex);
@@ -42,13 +23,15 @@ const PopularProductCard = ({ product }) => {
       )}
 
       <div className="w-[250px] lg:w-[240px] m-auto relative group">
-        <div className="h-[300px] rounded-t-md bg-center bg-cover duration-500">
-          <img
-            src={images[currentIndex]}
-            alt={title}
-            className="w-full h-full transition-transform ease-out duration-500 rounded-t-md"
-          />
-        </div>
+        <Link to={`/product/${_id}`}>
+          <div className="h-[300px] rounded-t-md bg-center bg-cover duration-500">
+            <img
+              src={images[currentIndex]}
+              alt={title}
+              className="w-full h-full transition-transform ease-out duration-500 rounded-t-md"
+            />
+          </div>
+        </Link>
 
         <div className="absolute bottom-3 right-0 left-0 hidden group-hover:block">
           <div className="flex items-center justify-center gap-1">

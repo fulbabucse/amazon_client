@@ -1,20 +1,19 @@
 import React from "react";
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
-import PopularProductCard from "../components/shared/PopularProductCard";
+import PopularProductCard from "./shared/PopularProductCard";
 
-const PopularPC = ({ data, products }) => {
+const Popular = ({ data, id, title }) => {
   const prevSlide = () => {
-    document.getElementById(products).scrollLeft -= 800;
+    document.getElementById(id).scrollLeft -= 800;
   };
   const nextSlide = () => {
-    document.getElementById(products).scrollLeft += 800;
+    document.getElementById(id).scrollLeft += 800;
   };
-
   return (
     <div className="lg:px-10">
-      <div className="bg-white p-3 relative group">
+      <div className="bg-white pt-3 px-3 relative group pb-5 hover:pb-[3px]">
         <h1 className="text-xl text-center lg:text-start font-medium text-primary">
-          Popular products in internationally
+          {title}
         </h1>
 
         <div className="hidden group-hover:block">
@@ -37,10 +36,10 @@ const PopularPC = ({ data, products }) => {
         </div>
 
         <div
-          id={products}
-          className="flex gap-4 overflow-x-auto mt-2 scroll-smooth"
+          id={id}
+          className="flex gap-4 group-hover:overflow-x-auto mt-2 scroll-smooth overflow-hidden transition-transform duration-500 ease-in-out"
         >
-          {data?.products?.slice(0, 15)?.map((product) => (
+          {data?.products?.slice(15, 30)?.map((product) => (
             <PopularProductCard product={product} key={product?._id} />
           ))}
         </div>
@@ -49,4 +48,4 @@ const PopularPC = ({ data, products }) => {
   );
 };
 
-export default PopularPC;
+export default Popular;

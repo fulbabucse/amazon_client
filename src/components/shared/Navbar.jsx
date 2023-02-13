@@ -68,7 +68,7 @@ const Navbar = () => {
       </div>
       <div className="hidden lg:block">
         <div className="bg-secondary w-full text-white hidden lg:block">
-          <div className="py-2 flex justify-between px-16 items-center border-b border-b-gray-500">
+          <div className="py-2 flex justify-between px-10 items-center border-b border-b-gray-500">
             <div>
               <h3 className="text-sm">
                 Free Shipping over $100 and Free returns
@@ -129,7 +129,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-between px-16 py-5">
+          <div className="flex items-center justify-between px-10 py-5">
             <div>
               <Link to="/" className="text-2xl font-semibold">
                 Crafty Commerce
@@ -181,7 +181,7 @@ const Navbar = () => {
                     <div className="w-52 mx-auto flex flex-col items-center justify-center">
                       {email && name ? (
                         <button
-                          className="block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
+                          className="block px-4 py-2 text-sm bg-[#FFC940] text-primary transition-colors font-medium duration-200 ease-in-out rounded-md text-center"
                           role="menuitem"
                           tabIndex="-1"
                           id="menu-item-0"
@@ -191,7 +191,7 @@ const Navbar = () => {
                       ) : (
                         <Link
                           to="/sign-in"
-                          className=" block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
+                          className=" block px-4 py-2 text-sm bg-[#FFC940] text-white transition-colors duration-200 ease-in-out rounded-md text-center"
                           role="menuitem"
                           tabIndex="-1"
                           id="menu-item-0"
@@ -203,7 +203,7 @@ const Navbar = () => {
                       {isAdmin && email && (
                         <Link to="/admin" className="mt-2">
                           <button
-                            className=" block px-4 py-2 text-sm bg-yellow-600 text-white transition-colors duration-200 ease-in-out rounded-md text-center"
+                            className=" block px-4 py-2 text-sm bg-[#FFC940] text-white transition-colors duration-200 ease-in-out rounded-md text-center"
                             role="menuitem"
                             tabIndex="-1"
                             id="menu-item-0"
@@ -229,7 +229,7 @@ const Navbar = () => {
                       <div className="mt-3">
                         <Link
                           to="/"
-                          className="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                          className="text-primary hover:text-[#C9563C] text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-[#C9563C]"
                           role="menuitem"
                           tabIndex="-1"
                           id="menu-item-2"
@@ -241,7 +241,7 @@ const Navbar = () => {
                             <button
                               onClick={() => handleSignOut()}
                               type="button"
-                              className="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                              className="text-primary hover:text-[#C9563C] text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-[#C9563C]"
                               role="menuitem"
                               tabIndex="-1"
                               id="menu-item-3"
@@ -255,7 +255,7 @@ const Navbar = () => {
                         <div className="flex flex-col">
                           <Link
                             to="/orders"
-                            className="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-1 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                            className="text-primary hover:text-[#C9563C] text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-[#C9563C]"
                             role="menuitem"
                             tabIndex="-1"
                             id="menu-item-2"
@@ -264,7 +264,7 @@ const Navbar = () => {
                           </Link>
                           <Link
                             to="/compare-product"
-                            className="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-1 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                            className="text-primary hover:text-[#C9563C] text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-[#C9563C]"
                             role="menuitem"
                             tabIndex="-1"
                             id="menu-item-2"
@@ -273,7 +273,7 @@ const Navbar = () => {
                           </Link>
                           <Link
                             to="/wishlist-product"
-                            className="text-gray-700 hover:text-yellow-600 text-start w-full px-4 py-1 text-sm hover:underline hover:underline-offset-4 hover:decoration-yellow-500"
+                            className="text-primary hover:text-[#C9563C] text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-[#C9563C]"
                             role="menuitem"
                             tabIndex="-1"
                             id="menu-item-2"
@@ -330,13 +330,13 @@ const Navbar = () => {
               {openCategory && (
                 <>
                   <div
-                    className={`absolute z-10 mt-5 w-full text-center origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-300 ease-in-out`}
+                    className={`absolute z-40 mt-5 w-full text-center origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-300 ease-in-out`}
                     aria-orientation="vertical"
                     aria-labelledby="menu-button"
                     tabIndex="-1"
                   >
                     <div
-                      className="lg:left-0 lg:block lg:fixed lg:top-[168px] lg:bottom-0 lg:overflow-y-auto lg:flex-row lg:flex-nowrap lg:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative lg:w-80 z-10 py-4 px-6 text-primary"
+                      className="lg:left-0 lg:block lg:fixed lg:top-[168px] lg:bottom-0 lg:overflow-y-auto lg:flex-row lg:flex-nowrap lg:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative lg:w-80 z-40 py-4 px-6 text-primary"
                       role="none"
                     >
                       <Fragment>
@@ -371,126 +371,6 @@ const Navbar = () => {
                             </Accordion>
                           )
                         )}
-                        {/* <Accordion open={open === 2} animate={customAnimation}>
-                          <AccordionHeader
-                            className="text-sm"
-                            onClick={() => handleOpen(2)}
-                          >
-                            Women's Fashion
-                          </AccordionHeader>
-                          <AccordionBody>
-                            We&apos;re not always in the position that we want
-                            to be at. We&apos;re constantly growing. We&apos;re
-                            constantly making mistakes. We&apos;re constantly
-                            trying to express ourselves and actualize our
-                            dreams.
-                          </AccordionBody>
-                        </Accordion>
-                        <Accordion open={open === 3} animate={customAnimation}>
-                          <AccordionHeader
-                            className="text-sm"
-                            onClick={() => handleOpen(3)}
-                          >
-                            Kid's Fashion
-                          </AccordionHeader>
-                          <AccordionBody>
-                            We&apos;re not always in the position that we want
-                            to be at. We&apos;re constantly growing. We&apos;re
-                            constantly making mistakes. We&apos;re constantly
-                            trying to express ourselves and actualize our
-                            dreams.
-                          </AccordionBody>
-                        </Accordion>
-                        <Accordion open={open === 4} animate={customAnimation}>
-                          <AccordionHeader
-                            className="text-sm"
-                            onClick={() => handleOpen(4)}
-                          >
-                            Girl's Fashion
-                          </AccordionHeader>
-                          <AccordionBody>
-                            We&apos;re not always in the position that we want
-                            to be at. We&apos;re constantly growing. We&apos;re
-                            constantly making mistakes. We&apos;re constantly
-                            trying to express ourselves and actualize our
-                            dreams.
-                          </AccordionBody>
-                        </Accordion>
-                        <Accordion open={open === 5} animate={customAnimation}>
-                          <AccordionHeader
-                            className="text-sm"
-                            onClick={() => handleOpen(5)}
-                          >
-                            Boy's Fashion
-                          </AccordionHeader>
-                          <AccordionBody>
-                            We&apos;re not always in the position that we want
-                            to be at. We&apos;re constantly growing. We&apos;re
-                            constantly making mistakes. We&apos;re constantly
-                            trying to express ourselves and actualize our
-                            dreams.
-                          </AccordionBody>
-                        </Accordion>
-                        <Accordion open={open === 6} animate={customAnimation}>
-                          <AccordionHeader
-                            className="text-sm"
-                            onClick={() => handleOpen(6)}
-                          >
-                            Home and Kitchen
-                          </AccordionHeader>
-                          <AccordionBody>
-                            We&apos;re not always in the position that we want
-                            to be at. We&apos;re constantly growing. We&apos;re
-                            constantly making mistakes. We&apos;re constantly
-                            trying to express ourselves and actualize our
-                            dreams.
-                          </AccordionBody>
-                        </Accordion>
-                        <Accordion open={open === 7} animate={customAnimation}>
-                          <AccordionHeader
-                            className="text-sm"
-                            onClick={() => handleOpen(7)}
-                          >
-                            Movies and Television
-                          </AccordionHeader>
-                          <AccordionBody>
-                            We&apos;re not always in the position that we want
-                            to be at. We&apos;re constantly growing. We&apos;re
-                            constantly making mistakes. We&apos;re constantly
-                            trying to express ourselves and actualize our
-                            dreams.
-                          </AccordionBody>
-                        </Accordion>
-                        <Accordion open={open === 8} animate={customAnimation}>
-                          <AccordionHeader
-                            className="text-sm"
-                            onClick={() => handleOpen(8)}
-                          >
-                            Electronics
-                          </AccordionHeader>
-                          <AccordionBody>
-                            We&apos;re not always in the position that we want
-                            to be at. We&apos;re constantly growing. We&apos;re
-                            constantly making mistakes. We&apos;re constantly
-                            trying to express ourselves and actualize our
-                            dreams.
-                          </AccordionBody>
-                        </Accordion>
-                        <Accordion open={open === 9} animate={customAnimation}>
-                          <AccordionHeader
-                            className="text-sm"
-                            onClick={() => handleOpen(9)}
-                          >
-                            Computers
-                          </AccordionHeader>
-                          <AccordionBody>
-                            We&apos;re not always in the position that we want
-                            to be at. We&apos;re constantly growing. We&apos;re
-                            constantly making mistakes. We&apos;re constantly
-                            trying to express ourselves and actualize our
-                            dreams.
-                          </AccordionBody>
-                        </Accordion> */}
                       </Fragment>
                     </div>
                   </div>
