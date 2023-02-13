@@ -43,11 +43,11 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="bg-white rounded-md relative group h-full">
-      <button className="absolute text-[#C9563C] font-normal top-2 right-2 hidden group-hover:block duration-300 ease-in-out">
+      <button className="absolute z-10 text-[#C9563C] font-normal top-2 right-2 hidden group-hover:block duration-300 ease-in-out">
         <MdFavoriteBorder size={25} />
       </button>
       {price > 300 && (
-        <div className="absolute bg-[#F8B567] text-primary top-3 left-3 rounded-full p-1 text-xs">
+        <div className="absolute z-10 bg-[#F8B567] text-primary top-3 left-3 rounded-full p-1 text-xs">
           {price > 300 && <p>-20%</p>}
         </div>
       )}

@@ -11,8 +11,8 @@ import { Link } from "react-router-dom";
 import ProductCard from "../components/shared/ProductCard";
 import { useGetProductsQuery } from "../features/products/productsApi";
 import Spinner from "../components/shared/Spinner";
-import { useDispatch } from "react-redux";
-import { filters } from "../features/products/filterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { filterBrands, filterRating } from "../features/products/filterSlice";
 import { BsCurrencyDollar, BsBorderAll } from "react-icons/bs";
 import { RxTriangleRight } from "react-icons/rx";
 import { FaBars, FaStar } from "react-icons/fa";
@@ -20,6 +20,7 @@ import { FaBars, FaStar } from "react-icons/fa";
 const OurShop = () => {
   const dispatch = useDispatch();
   const { data, isLoading, isError } = useGetProductsQuery();
+  const { filter } = useSelector((state) => state.filter);
 
   if (isLoading && !isError) {
     return <Spinner />;
@@ -32,8 +33,6 @@ const OurShop = () => {
       brands.push(product.brand);
     }
   });
-
-  const handleRatingStar = () => {};
 
   return (
     <div>
@@ -52,7 +51,12 @@ const OurShop = () => {
               <h1 className="text-xl font-semibold text-primary mb-3">Bands</h1>
               <div className="flex flex-col">
                 {brands?.map((brand) => (
-                  <Checkbox id={brand} label={brand} className="text-xs" />
+                  <Checkbox
+                    onClick={() => dispatch(filterBrands(brand))}
+                    id={brand}
+                    label={brand}
+                    className="text-xs"
+                  />
                 ))}
               </div>
             </div>
@@ -74,7 +78,7 @@ const OurShop = () => {
               <div className="flex flex-col space-y-2">
                 <div>
                   <button
-                    onClick={() => handleRatingStar(5)}
+                    onClick={() => dispatch(filterRating(5))}
                     className="flex text-yellow-300 gap-1 text-xl"
                   >
                     <FaStar />
@@ -86,7 +90,7 @@ const OurShop = () => {
                 </div>
                 <div>
                   <button
-                    onClick={() => handleRatingStar(4)}
+                    onClick={() => dispatch(filterRating(4))}
                     className="flex text-yellow-300 gap-1 text-xl"
                   >
                     <FaStar />
@@ -99,7 +103,7 @@ const OurShop = () => {
                 </div>
                 <div>
                   <button
-                    onClick={() => handleRatingStar(3)}
+                    onClick={() => dispatch(filterRating(3))}
                     className="flex text-yellow-300 gap-1 text-xl"
                   >
                     <FaStar />
@@ -112,7 +116,7 @@ const OurShop = () => {
                 </div>
                 <div>
                   <button
-                    onClick={() => handleRatingStar(2)}
+                    onClick={() => dispatch(filterRating(2))}
                     className="flex text-yellow-300 gap-1 text-xl"
                   >
                     <FaStar />
@@ -125,7 +129,7 @@ const OurShop = () => {
                 </div>
                 <div>
                   <button
-                    onClick={() => handleRatingStar(1)}
+                    onClick={() => dispatch(filterRating(1))}
                     className="flex text-yellow-300 gap-1 text-xl"
                   >
                     <FaStar />
@@ -186,18 +190,10 @@ const OurShop = () => {
                 <p className="text-sm">Sort By:</p>
                 <div className="w-40">
                   <Select size="md" label="Best Selling">
-                    <Option onClick={() => dispatch(filters("high"))}>
-                      Price low to high
-                    </Option>
-                    <Option onClick={() => dispatch(filters("low"))}>
-                      Price high to low
-                    </Option>
-                    <Option onClick={() => dispatch(filters("a"))}>
-                      A to Z
-                    </Option>
-                    <Option onClick={() => dispatch(filters("z"))}>
-                      Z to A
-                    </Option>
+                    <Option>Price low to high</Option>
+                    <Option>Price high to low</Option>
+                    <Option>A to Z</Option>
+                    <Option>Z to A</Option>
                   </Select>
                 </div>
               </div>
@@ -212,9 +208,29 @@ const OurShop = () => {
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2 mt-2">
-              {data?.products?.slice(10, 25)?.map((product) => (
-                <ProductCard key={product?._id} product={product} />
-              ))}
+              {data?.products
+                ?.slice(10, 25)
+                ?.filter((product) => {
+                  if (filter.brands.length) {
+                    return filter.brands.includes(product.brand);
+                  }
+                  return product;
+                })
+                ?.filter((product) => {
+                  if (filter.ratings === 5) {
+                    return product.rating > 4.5;
+                  } else if (filter.ratings === 4) {
+                    return product.rating > 3 && product.rating < 4.5;
+                  } else if (filter.ratings === 3) {
+                    return product.rating > 2 && product.rating <= 3;
+                  } else if (filter.ratings === 2) {
+                    return product.rating > 1;
+                  }
+                  return product;
+                })
+                ?.map((product) => (
+                  <ProductCard key={product?._id} product={product} />
+                ))}
             </div>
           </div>
         </div>
