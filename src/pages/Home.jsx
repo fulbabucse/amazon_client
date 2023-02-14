@@ -2,10 +2,10 @@ import React from "react";
 import Hero from "../components/Hero";
 import NewArrival from "../components/NewArrival";
 import Popular from "../components/Popular";
-import { useGetProductsQuery } from "../features/products/productsApi";
+import { useGetAllProductsQuery } from "../features/products/productsApi";
 
 const Home = () => {
-  const { data } = useGetProductsQuery();
+  const { data } = useGetAllProductsQuery();
 
   return (
     <div className="space-y-5">
