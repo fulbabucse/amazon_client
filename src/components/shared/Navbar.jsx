@@ -10,7 +10,7 @@ import {
   AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SmallNavbar from "../SmallNavbar";
 import {
   Accordion,
@@ -24,6 +24,7 @@ import { signOut } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../features/auth/authSlice";
+import { FaUserCircle, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
@@ -31,6 +32,8 @@ const Navbar = () => {
 
   const [open, setOpen] = useState(1);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -309,73 +312,74 @@ const Navbar = () => {
                 onClick={() => setOpenCategory(!openCategory)}
                 className="flex items-center gap-14"
               >
-                <div className="flex items-center gap-1 text-sm">
+                <div className="flex items-center gap-1 text-sm z-50">
                   <BiCategoryAlt className="text-white text-lg" />
                   <h1 className="uppercase font-radio-canada font-medium">
                     Shop Categories
                   </h1>
                 </div>
-                {openCategory ? (
-                  <>
-                    <MdOutlineKeyboardArrowUp className="text-white text-2xl transition-transform duration-300 ease-in-out" />
-                  </>
-                ) : (
-                  <>
-                    <MdOutlineKeyboardArrowDown className="text-white text-2xl transition-transform duration-300 ease-in-out" />
-                  </>
-                )}
               </button>
 
               {/* Drop */}
-              {openCategory && (
-                <>
-                  <div
-                    className={`absolute z-40 mt-5 w-full text-center origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-300 ease-in-out`}
-                    aria-orientation="vertical"
-                    aria-labelledby="menu-button"
-                    tabIndex="-1"
+
+              <div
+                className={`${
+                  openCategory
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-20 opacity-0"
+                } left-0 block fixed top-0 bottom-0 shadow-xl bg-white w-[350px] z-40 text-primary transition-all duration-700 ease-in-out`}
+              >
+                <div className="w-full flex justify-between items-center px-5 bg-primary text-white text-center relative">
+                  <button
+                    onClick={() => navigate("/sign-in")}
+                    className="w-full flex py-2 items-center gap-2 text-[22px] font-openSans font-semibold"
                   >
-                    <div
-                      className="lg:left-0 lg:block lg:fixed lg:top-[168px] lg:bottom-0 lg:overflow-y-auto lg:flex-row lg:flex-nowrap lg:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative lg:w-80 z-40 py-4 px-6 text-primary"
-                      role="none"
-                    >
-                      <Fragment>
-                        {categories?.map(
-                          ({ category_name, sub_category }, index) => (
-                            <Accordion
-                              key={index}
-                              open={open === index + 1}
-                              animate={customAnimation}
+                    <FaUserCircle size={25} />
+                    <span>Hello, Sign In</span>
+                  </button>
+                  <button
+                    onClick={() => setOpenCategory(!openCategory)}
+                    className="text-white absolute -right-10"
+                  >
+                    <FaTimes size={25} />
+                  </button>
+                </div>
+                <div className="left-0 block fixed top-12 bottom-0 shadow-xl bg-white w-[350px] py-4 px-6 text-primary transition-all duration-700 ease-in-out overflow-hidden flex-row flex-nowrap overflow-y-auto">
+                  <Fragment>
+                    <div className="space-y-3">
+                      {categories?.map(
+                        ({ category_name, sub_category }, index) => (
+                          <Accordion
+                            key={index}
+                            open={open === index + 1}
+                            animate={customAnimation}
+                          >
+                            <AccordionHeader
+                              className="text-sm"
+                              onClick={() => handleOpen(index + 1)}
                             >
-                              <AccordionHeader
-                                className="text-sm"
-                                onClick={() => handleOpen(index + 1)}
-                              >
-                                {category_name}
-                              </AccordionHeader>
-                              <AccordionBody>
-                                <div className="flex flex-col">
-                                  {sub_category?.map(
-                                    ({ name, link }, index) => (
-                                      <Link
-                                        key={index}
-                                        to={link}
-                                        className="transition-colors font-medium duration-300 transform hover:text-gray-900 dark:hover:text-gray-200 text-start capitalize"
-                                      >
-                                        {name}
-                                      </Link>
-                                    )
-                                  )}
-                                </div>
-                              </AccordionBody>
-                            </Accordion>
-                          )
-                        )}
-                      </Fragment>
+                              {category_name}
+                            </AccordionHeader>
+                            <AccordionBody>
+                              <div className="flex flex-col space-y-2">
+                                {sub_category?.map(({ name, link }, index) => (
+                                  <Link
+                                    key={index}
+                                    to={link}
+                                    className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
+                                  >
+                                    {name}
+                                  </Link>
+                                ))}
+                              </div>
+                            </AccordionBody>
+                          </Accordion>
+                        )
+                      )}
                     </div>
-                  </div>
-                </>
-              )}
+                  </Fragment>
+                </div>
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-8 border-l border-l-gray-400 pl-6">
@@ -414,3 +418,37 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+/*
+<Fragment>
+                      {categories?.map(
+                        ({ category_name, sub_category }, index) => (
+                          <Accordion
+                            key={index}
+                            open={open === index + 1}
+                            animate={customAnimation}
+                          >
+                            <AccordionHeader
+                              className="text-sm"
+                              onClick={() => handleOpen(index + 1)}
+                            >
+                              {category_name}
+                            </AccordionHeader>
+                            <AccordionBody>
+                              <div className="flex flex-col">
+                                {sub_category?.map(({ name, link }, index) => (
+                                  <Link
+                                    key={index}
+                                    to={link}
+                                    className="transition-colors font-medium duration-300 transform hover:text-gray-900 dark:hover:text-gray-200 text-start capitalize"
+                                  >
+                                    {name}
+                                  </Link>
+                                ))}
+                              </div>
+                            </AccordionBody>
+                          </Accordion>
+                        )
+                      )}
+                    </Fragment>
+*/
