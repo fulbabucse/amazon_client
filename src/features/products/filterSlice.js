@@ -3,7 +3,11 @@ const { createSlice } = require("@reduxjs/toolkit");
 const initialState = {
   filter: {
     brands: [],
-    ratings: 0,
+    ratings: 4,
+    startPrice: 1,
+    endPrice: 99,
+    stock: true,
+    sortPrice: 0,
   },
 };
 
@@ -23,9 +27,24 @@ const filterSlice = createSlice({
     filterRating: (state, { payload }) => {
       state.filter.ratings = payload;
     },
+    filterStartPrice: (state, { payload }) => {
+      state.filter.startPrice = payload;
+    },
+    filterEndPrice: (state, { payload }) => {
+      state.filter.endPrice = payload;
+    },
+    sortByPrice: (state, { payload }) => {
+      state.filter.sortPrice = payload;
+    },
   },
 });
 
-export const { filterBrands, filterRating } = filterSlice.actions;
+export const {
+  filterBrands,
+  filterRating,
+  filterStartPrice,
+  filterEndPrice,
+  sortByPrice,
+} = filterSlice.actions;
 
 export default filterSlice.reducer;
