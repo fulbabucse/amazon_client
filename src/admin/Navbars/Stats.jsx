@@ -62,7 +62,7 @@ const Stats = () => {
   return (
     <div className="grid grid-cols-4 gap-4 mt-6">
       {statisticsCardsData?.map(({ color, icon, title, value, footer }) => (
-        <Card>
+        <Card key={title}>
           <CardHeader
             variant="gradient"
             color={color}

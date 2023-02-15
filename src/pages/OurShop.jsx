@@ -10,7 +10,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "../components/shared/ProductCard";
 import { useGetProductsQuery } from "../features/products/productsApi";
-import Spinner from "../components/shared/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import {
   filterBrands,
@@ -22,25 +21,20 @@ import {
 import { BsCurrencyDollar, BsBorderAll } from "react-icons/bs";
 import { RxTriangleRight } from "react-icons/rx";
 import { FaBars, FaStar } from "react-icons/fa";
-// { start, end, page, size, rating, stock }
 const OurShop = () => {
   const dispatch = useDispatch();
   const { filter } = useSelector((state) => state.filter);
-  const { ratings, startPrice, endPrice, sortPrice, sortTitle } = filter;
+  const { ratings, startPrice, endPrice, sortPrice } = filter;
 
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(25);
-  const { data, isLoading, isError } = useGetProductsQuery({
+  const { data } = useGetProductsQuery({
     start: startPrice,
     end: endPrice,
     page,
     size,
     rating: ratings,
   });
-
-  // if (isLoading && !isError) {
-  //   return <Spinner />;
-  // }
 
   const pages = Math.ceil(data?.count / size);
 
