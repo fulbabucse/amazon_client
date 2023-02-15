@@ -21,11 +21,9 @@ import auth from "../../firebase/firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../features/auth/authSlice";
 import { FaUserCircle, FaTimes } from "react-icons/fa";
-import { useGetCategoriesQuery } from "../../features/categories/categoryApi";
 
 const Navbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
-  const { data } = useGetCategoriesQuery();
 
   const [open, setOpen] = useState(1);
   const dispatch = useDispatch();
@@ -39,11 +37,6 @@ const Navbar = () => {
   const {
     user: { email, name, photoURL, isAdmin },
   } = useSelector((state) => state.auth);
-
-  const customAnimation = {
-    mount: { scale: 1 },
-    unmount: { scale: 0.7 },
-  };
 
   const handleSignOut = () => {
     signOut(auth)

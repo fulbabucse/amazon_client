@@ -55,7 +55,7 @@ const OurShop = () => {
 
   return (
     <div>
-      <div className="flex justify-center h-16 items-center bg-white">
+      <div className="flex justify-center h-16 items-center bg-white mt-4 lg:mt-0">
         <Breadcrumbs className="flex items-center justify-center gap-1">
           <Link to="/" className="opacity-60">
             Home
@@ -215,8 +215,8 @@ const OurShop = () => {
               </div>
             </div>
           </div>
-          <div className="flex-1">
-            <div className="bg-white rounded-md py-2 px-4 flex flex-wrap lg:flex-nowrap justify-between items-center">
+          <div className="lg:flex-1 w-full">
+            <div className="bg-white rounded-md py-2 px-4 flex flex-wrap flex-col lg:flex-row lg:flex-nowrap lg:justify-between lg:items-center gap-4 lg:gap-0 w-full">
               <div className="flex items-center gap-6">
                 <p className="text-sm">Sort By:</p>
                 <div className="w-40">
@@ -230,7 +230,7 @@ const OurShop = () => {
                   </Select>
                 </div>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center justify-center lg:justify-start gap-1">
                 <p className="text-sm">
                   {data?.products?.length} products found
                 </p>
@@ -263,7 +263,7 @@ const OurShop = () => {
             </div>
 
             <nav
-              className="flex justify-between items-center my-4"
+              className="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-0 my-4"
               aria-label="Page navigation"
             >
               <div>
@@ -301,21 +301,23 @@ const OurShop = () => {
                     Prev
                   </button>
                 </li>
-                {pages &&
-                  [...Array(pages)?.keys()]?.map((index) => (
-                    <li key={index}>
-                      <button
-                        onClick={() => setPage(index)}
-                        className={`${
-                          page === index
-                            ? "h-10 px-5 text-white transition-colors duration-150 bg-indigo-600 focus:shadow-outline"
-                            : "h-10 px-5 text-indigo-600 transition-colors duration-150 bg-white focus:shadow-outline hover:bg-indigo-100"
-                        }`}
-                      >
-                        {index + 1}
-                      </button>
-                    </li>
-                  ))}
+                <div className="flex flex-wrap">
+                  {pages &&
+                    [...Array(pages)?.keys()]?.map((index) => (
+                      <li key={index}>
+                        <button
+                          onClick={() => setPage(index)}
+                          className={`${
+                            page === index
+                              ? "h-10 px-5 text-white transition-colors duration-150 bg-indigo-600 focus:shadow-outline"
+                              : "h-10 px-5 text-indigo-600 transition-colors duration-150 bg-white focus:shadow-outline hover:bg-indigo-100"
+                          }`}
+                        >
+                          {index + 1}
+                        </button>
+                      </li>
+                    ))}
+                </div>
                 <li>
                   <button
                     onClick={() => handleNext()}

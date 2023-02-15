@@ -52,7 +52,7 @@ const ProductCard = ({ product }) => {
         </div>
       )}
 
-      <div className="max-w-[640px] h-[250px] w-full m-auto relative group">
+      <div className="h-[250px] w-full m-auto relative group">
         <div className="w-full h-full rounded-t-md bg-center bg-cover duration-500">
           <img
             src={images[currentIndex]}
