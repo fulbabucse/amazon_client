@@ -220,7 +220,7 @@ const OurShop = () => {
               <div className="flex items-center gap-6">
                 <p className="text-sm">Sort By:</p>
                 <div className="w-40">
-                  <Select size="md" label="Best Selling">
+                  <Select defaultValue="" size="md" label="Best Selling">
                     <Option onClick={() => dispatch(sortByPrice(1))}>
                       Price low to high
                     </Option>

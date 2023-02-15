@@ -39,7 +39,7 @@ const Popular = ({ data, id, title }) => {
           id={id}
           className="flex gap-4 group-hover:overflow-x-auto mt-2 scroll-smooth overflow-hidden transition-transform duration-500 ease-in-out"
         >
-          {data?.products?.slice(15, 30)?.map((product) => (
+          {data?.slice(15, 30)?.map((product) => (
             <PopularProductCard product={product} key={product?._id} />
           ))}
         </div>

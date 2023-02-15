@@ -57,7 +57,7 @@ const ProductCard = ({ product }) => {
           <img
             src={images[currentIndex]}
             alt={title}
-            className="h-full transition-transform ease-out duration-500 rounded-t-md"
+            className="h-full w-full transition-transform ease-out duration-500 rounded-t-md"
           />
         </div>
 
@@ -80,6 +80,7 @@ const ProductCard = ({ product }) => {
           <div className="flex items-center justify-center gap-1">
             {images?.map((_, index) => (
               <button
+                key={index}
                 onClick={() => goToSLide(index)}
                 className={`transition-all w-2 h-2 bg-[#C9563C] rounded-full ${
                   currentIndex === index ? "p-1" : "bg-opacity-50"

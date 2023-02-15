@@ -1,6 +1,5 @@
 const { default: apiSlice } = require("../api/apiSlice");
 
-// http://localhost:5000/products?start=10&end=50&page=1&size=5&rating=4
 const productApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
@@ -13,7 +12,16 @@ const productApi = apiSlice.injectEndpoints({
         url: "/products/all",
       }),
     }),
+    getProductsByCategory: builder.query({
+      query: (category) => ({
+        url: `/products/all/${category}`,
+      }),
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useGetAllProductsQuery } = productApi;
+export const {
+  useGetProductsQuery,
+  useGetAllProductsQuery,
+  useGetProductsByCategoryQuery,
+} = productApi;

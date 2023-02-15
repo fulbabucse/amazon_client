@@ -14,6 +14,7 @@ import Favorite from "../pages/Favorite";
 import Home from "../pages/Home";
 import Orders from "../pages/Orders";
 import OurShop from "../pages/OurShop";
+import Products from "../pages/Products";
 import SignIn from "../pages/users/SignIn";
 import SignUp from "../pages/users/SignUp";
 import AdminRoute from "./AdminRoute";
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: "/our-shop", element: <OurShop /> },
       { path: "/blogs", element: <Blogs /> },
       { path: "/contact", element: <Contact /> },
+      { path: "/products/:category", element: <Products /> },
       { path: "/product/:id", element: <ProductDetails /> },
       {
         path: "/compare-product",
