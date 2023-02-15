@@ -1,9 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import {
-  MdOutlineLanguage,
-  MdOutlineKeyboardArrowDown,
-  MdOutlineKeyboardArrowUp,
-} from "react-icons/md";
+import { MdOutlineLanguage } from "react-icons/md";
 import {
   AiOutlineSearch,
   AiOutlineUserAdd,

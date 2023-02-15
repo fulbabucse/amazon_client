@@ -7,7 +7,7 @@ import auth from "../../firebase/firebase.config";
 
 const initialState = {
   user: { email: "", name: "", photoURL: "" },
-  isLoading: false,
+  isLoading: true,
   error: "",
   isAdmin: false,
 };

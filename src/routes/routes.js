@@ -1,6 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import Admin from "../admin/Admin";
+import AdminHome from "../admin/pages/AdminHome";
+import AdminProducts from "../admin/pages/AdminProducts";
+import Profile from "../admin/pages/Profile";
+import Users from "../admin/pages/Users";
 import ProductDetails from "../components/shared/ProductDetails";
+import Admin from "../layouts/Admin";
 import Root from "../layouts/Root";
 import Blogs from "../pages/Blogs";
 import Cart from "../pages/Cart";
@@ -68,6 +72,12 @@ const router = createBrowserRouter([
         <Admin />,
       </AdminRoute>
     ),
+    children: [
+      { path: "/admin", element: <AdminHome /> },
+      { path: "products", element: <AdminProducts /> },
+      { path: "users", element: <Users /> },
+      { path: "profile", element: <Profile /> },
+    ],
   },
 ]);
 
