@@ -56,6 +56,7 @@ const SignIn = () => {
               required: "Email is required",
             })}
             placeholder="Email"
+            defaultValue={"crafty@commerce.com"}
             className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-gray-100 rounded text-sm border-0 shadow focus:bg-white focus:ring-1 outline-none focus:outline-none w-full pl-10"
           />
           {errors.email && (

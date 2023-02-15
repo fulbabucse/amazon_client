@@ -206,7 +206,7 @@ const Navbar = () => {
                       {isAdmin && email && (
                         <Link to="/admin" className="mt-2">
                           <button
-                            className=" block px-4 py-2 text-sm bg-[#FFC940] text-white transition-colors duration-200 ease-in-out rounded-md text-center"
+                            className="block px-4 py-2 text-sm bg-indigo-500 text-white transition-colors hover:bg-opacity-80 font-medium duration-200 ease-in-out rounded-md text-center"
                             role="menuitem"
                             tabIndex="-1"
                             id="menu-item-0"
