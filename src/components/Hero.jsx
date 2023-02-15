@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
-import { RxDotFilled } from "react-icons/rx";
 import watch from "../assets/img/apple-watch.png";
 import laptop from "../assets/img/laptop.png";
 import box from "../assets/img/box.png";
