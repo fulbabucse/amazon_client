@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { BsFillCartCheckFill } from "react-icons/bs";
-import { AiOutlineHome, AiOutlineProject } from "react-icons/ai";
+import { AiOutlineProject } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
 
@@ -27,7 +27,7 @@ const Sidebar = () => {
     },
   ];
   return (
-    <div className="bg-primary w-full h-full rounded-md text-white m-3">
+    <div className="bg-gradient-to-br from-blue-gray-800 to-blue-gray-900 -translate-x-80 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 text-white">
       <li className="list-none flex justify-center items-center gap-1 px-3 pt-4">
         <BsFillCartCheckFill size={25} />
         <Link to="/admin" className="font-medium text-xl capitalize text-white">
