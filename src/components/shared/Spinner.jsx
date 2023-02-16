@@ -2,8 +2,15 @@ import React from "react";
 
 const Spinner = () => {
   return (
-    <div>
-      <h1 className="text-center text-primary text-xl">Loading...</h1>
+    <div className="relative min-h-screen">
+      <div className="spinner-container absolute top-10 left-[40%]">
+        <div className="spinner-sub-container">
+          <div></div>
+          <div>
+            <div></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

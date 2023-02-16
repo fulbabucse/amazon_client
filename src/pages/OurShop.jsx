@@ -21,6 +21,7 @@ import {
 import { BsCurrencyDollar, BsBorderAll } from "react-icons/bs";
 import { RxTriangleRight } from "react-icons/rx";
 import { FaBars, FaStar } from "react-icons/fa";
+import Spinner from "../components/shared/Spinner";
 const OurShop = () => {
   const dispatch = useDispatch();
   const { filter } = useSelector((state) => state.filter);
@@ -28,7 +29,7 @@ const OurShop = () => {
 
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(25);
-  const { data } = useGetProductsQuery({
+  const { data, isLoading } = useGetProductsQuery({
     start: startPrice,
     end: endPrice,
     page,
@@ -53,8 +54,12 @@ const OurShop = () => {
     setPage(page + 1);
   };
 
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
-    <div>
+    <div className="min-h-screen">
       <div className="flex justify-center h-16 items-center bg-white mt-4 lg:mt-0">
         <Breadcrumbs className="flex items-center justify-center gap-1">
           <Link to="/" className="opacity-60">
@@ -69,8 +74,9 @@ const OurShop = () => {
             <div className="bg-white p-3">
               <h1 className="text-xl font-semibold text-primary mb-3">Bands</h1>
               <div className="flex flex-col">
-                {brands?.map((brand) => (
+                {brands?.map((brand, index) => (
                   <Checkbox
+                    key={index}
                     onClick={() => dispatch(filterBrands(brand))}
                     id={brand}
                     label={brand}
@@ -221,10 +227,16 @@ const OurShop = () => {
                 <p className="text-sm">Sort By:</p>
                 <div className="w-40">
                   <Select defaultValue="" size="md" label="Best Selling">
-                    <Option onClick={() => dispatch(sortByPrice(1))}>
+                    <Option
+                      defaultValue=""
+                      onClick={() => dispatch(sortByPrice(1))}
+                    >
                       Price low to high
                     </Option>
-                    <Option onClick={() => dispatch(sortByPrice(0))}>
+                    <Option
+                      defaultValue=""
+                      onClick={() => dispatch(sortByPrice(0))}
+                    >
                       Price high to low
                     </Option>
                   </Select>

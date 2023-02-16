@@ -29,9 +29,7 @@ export const signInUser = createAsyncThunk(
 );
 
 export const getUser = createAsyncThunk("auth/getUser", async (email) => {
-  const res = await fetch(
-    `https://crafty-commerce-server.vercel.app/users?email=${email}`
-  );
+  const res = await fetch(`http://localhost:5000/users?email=${email}`);
   const user = await res.json();
 
   if (user?.status) {

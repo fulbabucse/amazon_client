@@ -20,8 +20,6 @@ const AllProducts = () => {
     setPage(page + 1);
   };
 
-  console.log(size);
-
   return (
     <div>
       <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md">
