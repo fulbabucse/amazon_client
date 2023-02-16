@@ -31,11 +31,7 @@ const SmallNavbar = () => {
             </Link>
           </div>
           <div className="flex items-center gap-2">
-            <Link
-              onClick={() => setOpenCategory(!openCategory)}
-              to="/sign-in"
-              className="flex items-center text-white"
-            >
+            <Link to="/sign-in" className="flex items-center text-white">
               <span className="text-sm font-openSans">Sign In</span>
               <AiOutlineUser size={30} />
             </Link>

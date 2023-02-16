@@ -5,9 +5,7 @@ const useToken = (email) => {
   const [token, setToken] = useState("");
   useEffect(() => {
     if (email) {
-      fetch(
-        `https://crafty-commerce-server.vercel.app/admin/jwt?email=${email}`
-      )
+      fetch(`http://localhost:5000/admin/jwt?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
           localStorage.setItem("cc_token", data.token);

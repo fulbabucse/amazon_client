@@ -13,7 +13,7 @@ const AddProduct = () => {
     });
 
     // if (images.length) {
-    //   fetch("https://crafty-commerce-server.vercel.app/admin/images", {
+    //   fetch("http://localhost:5000/admin/images", {
     //     method: "POST",
     //     headers: {
     //       "content-type": "application/json",
@@ -24,7 +24,7 @@ const AddProduct = () => {
     //     .catch((err) => console.log(err));
     // }
 
-    // const res = await fetch("https://crafty-commerce-server.vercel.app/admin/images", {
+    // const res = await fetch("http://localhost:5000/admin/images", {
     //   method: "POST",
     //   headers: {
     //     "content-type": "application/json",
@@ -36,7 +36,7 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    fetch("https://crafty-commerce-server.vercel.app/admin/images", {
+    fetch("http://localhost:5000/admin/images", {
       method: "POST",
       headers: {
         "content-type": "application/json",

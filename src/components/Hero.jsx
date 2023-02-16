@@ -95,11 +95,11 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="py-6 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-10">
+    <div className="lg:py-6 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:px-10">
       <div className="max-w-[640px] h-[380px] w-full m-auto relative group">
         <div
           style={{ backgroundImage: `url(${slides[currentIndex].image})` }}
-          className="w-full h-full rounded-md bg-center bg-cover duration-1000"
+          className="w-full h-full lg:rounded-md bg-center bg-cover duration-1000"
         >
           <div className="space-y-6 px-6 py-10 text-primary text-center">
             {slides[currentIndex].sub_heading}
@@ -139,11 +139,11 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4">
         {products?.map((item) => (
           <div
             key={item.id}
-            className="rounded-md bg-white flex justify-between items-center"
+            className="lg:rounded-md bg-white flex justify-between items-center"
           >
             <div className="px-3 py-6 space-y-2">
               <h4 className="text-red-500 text-xs">{item.sub_heading}</h4>
