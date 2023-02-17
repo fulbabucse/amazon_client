@@ -7,7 +7,7 @@ import { useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 const ProductCard = ({ product }) => {
-  const { _id, title, price, rating, brand, images } = product;
+  const { _id, title, price, rating, brand, images, category } = product;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const ratingStar = Array.from({ length: 5 }, (_, i) => {
@@ -91,7 +91,7 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
 
-      <Link to={`/product/${_id}`}>
+      <Link to={`/product/${category}/${_id}`}>
         <div className="p-3 space-y-3">
           <p className="text-xs text-red-500">{brand}</p>
           <h3 className="text-[16px] font-openSans text-primary font-medium group-hover:text-[#C9563C] leading-6 duration-500">

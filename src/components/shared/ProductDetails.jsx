@@ -1,4 +1,12 @@
-import { Option, Select } from "@material-tailwind/react";
+import {
+  Option,
+  Select,
+  Tab,
+  TabPanel,
+  Tabs,
+  TabsBody,
+  TabsHeader,
+} from "@material-tailwind/react";
 import React, { useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
 import { BsDot } from "react-icons/bs";
@@ -6,7 +14,10 @@ import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.min.css";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { useGetSingleProductQuery } from "../../features/products/productsApi";
+import Comments from "../ProductReviews/Comments";
+import Reviews from "../ProductReviews/Reviews";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -15,16 +26,14 @@ const ProductDetails = () => {
   const { data } = useGetSingleProductQuery(id);
 
   const {
-    _id,
     title,
-    thumbnail,
     price,
     rating,
     description,
     brand,
     category,
     images = [],
-    discountPercentage,
+    department,
   } = data || {};
 
   const ratingStar = Array.from({ length: 5 }, (_, i) => {
@@ -43,19 +52,30 @@ const ProductDetails = () => {
     );
   });
 
-  const desc = `The MEROKEETY lace cocktail dress is a classic piece that belongs in every woman’s closet. Whether you wear it to a wedding, a holiday party, or on a hot date. This dress you absolutely need for any cocktail party! Its also perfect for you brides out there and all those upcoming showers The all over lace design is fully lined and features a sleeveless design, a high neckline and knee length hem. The soft and stretchy material makes it comfortable to wear to any event while making you look fabulous! Simple wash the dress on a gentle cycle, tumble dry on low and prepare to wow at your next special occasion. Our classy cocktail dress is perfect for every occasion. Whether for prom, homecoming, or graduation, as a guest at a wedding or bridesmaid attire.`;
-
-  const splitDesc = desc.trim().split(".");
+  const splitDesc = description?.split("--");
 
   const discountedPrice = (price / 100) * (100 - 5);
+
+  const tabsData = [
+    {
+      label: "Review",
+      value: "review",
+      desc: <Reviews product={data} />,
+    },
+    {
+      label: "Comments",
+      value: "comments",
+      desc: <Comments />,
+    },
+  ];
 
   return (
     <div className="px-4 py-6 bg-white">
       <div className="flex flex-col lg:flex-row justify-between lg:gap-6 gap-0">
         <div className="lg:flex-1">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="flex gap-6">
-              <div className="flex flex-col gap-1">
+            <div className="flex gap-4">
+              <div className="flex flex-col gap-3">
                 {images?.map((image, index) => {
                   return (
                     <figure
@@ -66,7 +86,7 @@ const ProductDetails = () => {
                         className="w-20 h-20 object-cover object-center rounded hover:scale-110 transition-all duration-1000 ease-in-out transform-gpu"
                         src={image}
                         alt={title}
-                        onClick={() => setImageURL(image)}
+                        onMouseOver={() => setImageURL(image)}
                       />
                     </figure>
                   );
@@ -92,51 +112,77 @@ const ProductDetails = () => {
                 {title}
               </h1>
 
-              <div className="flex items-center gap-4">
-                <div className="flex text-[#C9563C] cursor-pointer">
-                  {ratingStar}
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
+                  <div className="flex text-[#C9563C] cursor-pointer">
+                    {ratingStar}
+                  </div>
+                  <p className="text-[#007185] hover:text-[#C9563C] hover:underline hover:underline-offset-4 hover:decoration-[#C9563C] cursor-pointer">
+                    {rating} ratings
+                  </p>
                 </div>
-                <p className="text-[#007185] hover:text-[#C9563C] hover:underline hover:underline-offset-4 hover:decoration-[#C9563C] cursor-pointer">
-                  {rating} ratings
-                </p>
+                <div className="border-l border-l-gray-400 pl-3">
+                  <p className="text-[#007185] hover:text-[#C9563C] hover:underline hover:underline-offset-4 hover:decoration-[#C9563C] cursor-pointer">
+                    {brand}
+                  </p>
+                </div>
               </div>
-              <p className="text-[#007185] hover:text-[#C9563C] hover:underline hover:underline-offset-4 hover:decoration-[#C9563C] cursor-pointer">
-                10 Answered Question
-              </p>
+
+              <div className="flex items-center gap-3">
+                <p className="text-[#007185] hover:text-[#C9563C] hover:underline hover:underline-offset-4 hover:decoration-[#C9563C] cursor-pointer">
+                  10 Answered Question
+                </p>
+                <div className="border-l border-l-gray-400 pl-3">
+                  <Link
+                    to={`/products/${category}`}
+                    className="text-[#007185] hover:text-[#C9563C] hover:underline hover:underline-offset-4 hover:decoration-[#C9563C] cursor-pointer capitalize"
+                  >
+                    {category?.split("-").join(" ")}
+                  </Link>
+                </div>
+              </div>
               <div className="text-gray-700 space-y-1">
                 <p>
                   Last Price: <del>${price}</del>
                 </p>
                 <p className="ml-9">
                   Price
-                  <span className="text-[#C9563C] font-medium ml-2">
-                    ${Math.floor(discountedPrice)}
+                  <span className="text-[#C9563C] font-medium ml-2 relative">
+                    <span className="text-3xl">$</span>
+                    <span className="text-3xl">
+                      {discountedPrice?.toFixed(2)?.split(".")[0]}
+                    </span>
+                    <span className="absolute -right-6 -top-5 text-lg">
+                      {discountedPrice?.toFixed(2)?.split(".")[1]}
+                    </span>
                   </span>
                 </p>
                 <p>
                   You Save:
                   <span className="text-[#C9563C] font-medium ml-2">
-                    ${Math.ceil((price / 100) * 5)} ({5}%)
+                    ${((price / 100) * 5)?.toFixed(2)} ({5}%)
                   </span>
                 </p>
               </div>
 
-              <div className="flex items-center gap-2 w-32">
-                <h3>Size:</h3>
-                <Select defaultValue="" size="md" label="Select Size">
-                  <Option>Small</Option>
-                  <Option>Medium</Option>
-                  <Option>Large</Option>
-                  <Option>X-Large</Option>
-                </Select>
-              </div>
+              {department === "fashions" && (
+                <div className="flex items-center gap-2 w-32">
+                  <h3>Size:</h3>
+                  <Select defaultValue="" size="md" label="Select Size">
+                    <Option>Small</Option>
+                    <Option>Medium</Option>
+                    <Option>Large</Option>
+                    <Option>X-Large</Option>
+                  </Select>
+                </div>
+              )}
               <div className="mt-3">
-                <h1 className="text-gray-800 font-openSans font-semibold text-xl">
-                  About this product:
+                <h1 className="text-gray-800 font-openSans font-bold text-lg">
+                  About this item:
                 </h1>
                 <div className="flex flex-col gap-1">
                   {splitDesc?.map((text, index) => (
-                    <div key={index} className="flex gap-3">
+                    <div key={index} className="flex gap-2">
                       <div>
                         <BsDot size={20} />
                       </div>
@@ -149,13 +195,48 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
+          <div className="mt-6">
+            <Tabs value="html">
+              <TabsHeader className="lg:w-96 w-full">
+                {tabsData?.map(({ label, value }) => (
+                  <Tab key={value} value={value}>
+                    {label}
+                  </Tab>
+                ))}
+              </TabsHeader>
+              <TabsBody>
+                {tabsData?.map(({ value, desc }) => (
+                  <TabPanel key={value} value={value}>
+                    {desc}
+                  </TabPanel>
+                ))}
+              </TabsBody>
+            </Tabs>
+          </div>
         </div>
         <div className="w-full lg:w-[300px] mt-4 lg:mt-0">
-          <div className="p-5 border border-gray-500 rounded-md text-center">
-            <p className="text-sm">
-              To buy, select <strong>size</strong>
-            </p>
-            <button className="w-full px-4 py-1 text-sm bg-[#FFC940] text-primary transition-colors hover:bg-opacity-80 font-medium duration-200 ease-in-out rounded-md text-center mt-2">
+          <div className="p-5 border border-gray-500 rounded-md">
+            <span className="text-primary font-medium ml-2 relative">
+              <span className="text-3xl">$</span>
+              <span className="text-3xl">
+                {discountedPrice?.toFixed(2)?.split(".")[0]}
+              </span>
+              <span className="absolute -right-6 -top-5 text-lg">
+                {discountedPrice?.toFixed(2)?.split(".")[1]}
+              </span>
+            </span>
+
+            <p className="text-lg text-[#007185]">In Stock</p>
+            <div className="mt-3">
+              <Select label="Quantity" size="sm">
+                {[...Array(10)]?.map((_, index) => (
+                  <Option key={index} className="overflow-y-scroll">
+                    {index + 1}
+                  </Option>
+                ))}
+              </Select>
+            </div>
+            <button className="w-full px-4 py-[6px] text-[14px] bg-[#FFA41C] text-primary transition-colors hover:bg-[#FA8900] font-medium duration-200 ease-in-out rounded-full text-center mt-2 ">
               Add to Cart
             </button>
             <div className="border-b border-b-gray-300 mt-2"></div>

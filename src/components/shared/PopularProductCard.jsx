@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const PopularProductCard = ({ product }) => {
-  const { _id, title, price, images } = product;
+  const { _id, title, price, images, category } = product;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToSLide = (slideIndex) => {
@@ -23,7 +23,7 @@ const PopularProductCard = ({ product }) => {
       )}
 
       <div className="w-[250px] lg:w-[240px] m-auto relative group">
-        <Link to={`/product/${_id}`}>
+        <Link to={`/product/${category}/${_id}`}>
           <div className="h-[300px] rounded-t-md bg-center bg-cover duration-500">
             <img
               src={images[currentIndex]}

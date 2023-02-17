@@ -237,7 +237,7 @@ const SmallNavbar = () => {
                           shoes
                         </Link>
                         <Link
-                          to={`/products/women-watches`}
+                          to={`/products/womens-watches`}
                           onClick={() => setOpenCategory(!openCategory)}
                           className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
                         >

@@ -133,3 +133,12 @@ code {
   backface-visibility: hidden;
   transform-origin: 0 0; /* see note above */
 }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

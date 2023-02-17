@@ -5,7 +5,7 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import AddProduct from "../components/AddProduct";
+import AddProduct from "../components/Form/AddProduct";
 import AllProducts from "../components/AllProducts";
 
 const AdminProducts = () => {

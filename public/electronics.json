@@ -1,0 +1,212 @@
+[
+  {
+    "createAt": 1674154854792,
+    "title": "Samsung S22 Ultra",
+    "description": "Galaxy S22 Ultra is an excellent phone--for those who want a premium mobile gaming experience--because it's equipped with a fast 4nm processor--long-lasting battery and large storage capabilities.",
+    "price": 888,
+    "discountPercentage": 0,
+    "electronics": "electronics",
+    "rating": 4.9,
+    "stock": 44,
+    "brand": "Samsung",
+    "category": "smartphones",
+    "thumbnail": "https://img.global.news.samsung.com/global/wp-content/uploads/2022/02/Galaxy_S22_Ultra_PR_main1F.jpg",
+    "images": [
+      "https://i.dummyjson.com/data/products/1/1.jpg",
+      "https://i.dummyjson.com/data/products/1/2.jpg",
+      "https://i.dummyjson.com/data/products/1/3.jpg",
+      "https://i.dummyjson.com/data/products/1/4.jpg",
+      "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+    ]
+  },
+  {
+    "createAt": 1674154774290,
+    "title": "OPPOF19",
+    "description": "OPPO F19 is officially announced on April 2021",
+    "price": 280,
+    "discountPercentage": 0,
+    "electronics": "electronics",
+    "rating": 4.3,
+    "stock": 123,
+    "brand": "OPPO",
+    "category": "smartphones",
+    "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+    "images": [
+      "https://i.dummyjson.com/data/products/4/1.jpg",
+      "https://i.dummyjson.com/data/products/4/2.jpg",
+      "https://i.dummyjson.com/data/products/4/3.jpg",
+      "https://i.dummyjson.com/data/products/4/4.jpg",
+      "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+    ]
+  },
+  {
+    "createAt": 1674154750491,
+    "title": "Huawei P30",
+    "description": "Huawei’s re-badged P30 Pro--New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
+    "price": 499,
+    "discountPercentage": 0,
+    "electronics": "electronics",
+    "rating": 4.09,
+    "stock": 32,
+    "brand": "Huawei",
+    "category": "smartphones",
+    "thumbnail": "https://i.dummyjson.com/data/products/5/thumbnail.jpg",
+    "images": [
+      "https://i.dummyjson.com/data/products/5/1.jpg",
+      "https://i.dummyjson.com/data/products/5/2.jpg",
+      "https://i.dummyjson.com/data/products/5/3.jpg"
+    ]
+  },
+  {
+    "createAt": 1674154854695,
+    "title": "iPhone X",
+    "description": "SIM-Free--Model A19211 6 5-inch Super Retina HD display with OLED technology A12 Bionic chip with",
+    "price": 899,
+    "discountPercentage": 0,
+    "electronics": "electronics",
+    "rating": 4.44,
+    "stock": 34,
+    "brand": "Apple",
+    "category": "smartphones",
+    "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+    "images": [
+      "https://i.dummyjson.com/data/products/2/1.jpg",
+      "https://i.dummyjson.com/data/products/2/2.jpg",
+      "https://i.dummyjson.com/data/products/2/3.jpg",
+      "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+    ]
+  },
+  {
+    "createAt": 1674154854749,
+    "title": "iPhone 9",
+    "description": "An apple mobile which is nothing like apple",
+    "price": 549,
+    "discountPercentage": 0,
+    "electronics": "electronics",
+    "rating": 4.69,
+    "stock": 94,
+    "brand": "Apple",
+    "category": "smartphones",
+    "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+    "images": [
+      "https://i.dummyjson.com/data/products/1/1.jpg",
+      "https://i.dummyjson.com/data/products/1/2.jpg",
+      "https://i.dummyjson.com/data/products/1/3.jpg",
+      "https://i.dummyjson.com/data/products/1/4.jpg",
+      "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+    ]
+  },
+  {
+    "createAt": 1674154854719,
+    "title": "Samsung Universe 9",
+    "description": "Samsung's new variant--which goes beyond Galaxy to the Universe",
+    "price": 1249,
+    "discountPercentage": 0,
+    "electronics": "electronics",
+    "rating": 4.09,
+    "stock": 36,
+    "brand": "Samsung",
+    "category": "smartphones",
+    "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+    "images": ["https://i.dummyjson.com/data/products/3/1.jpg"]
+  },
+  {
+    "createAt": 1674154854708,
+    "title": "Crystal chandelier maria theresa for 12 light",
+    "description": "Crystal chandelier--maria theresa for 12 light",
+    "price": 47,
+    "discountPercentage": 0,
+    "electronics": "electronics",
+    "rating": 4.74,
+    "stock": 133,
+    "brand": "YIOSI",
+    "category": "lighting",
+    "thumbnail": "https://i.dummyjson.com/data/products/100/thumbnail.jpg",
+    "images": [
+      "https://i.dummyjson.com/data/products/100/1.jpg",
+      "https://i.dummyjson.com/data/products/100/2.jpg",
+      "https://i.dummyjson.com/data/products/100/3.jpg",
+      "https://i.dummyjson.com/data/products/100/thumbnail.jpg"
+    ]
+  },
+  {
+    "createAt": 1674154854746,
+    "title": "lighting ceiling kitchen",
+    "description": "Wholesale slim hanging decorative--kid room lighting ceiling kitchen chandeliers pendant light modern",
+    "price": 30,
+    "discountPercentage": 0,
+    "electronics": "electronics",
+    "rating": 4.83,
+    "stock": 96,
+    "brand": "lightingbrilliance",
+    "category": "lighting",
+    "thumbnail": "https://i.dummyjson.com/data/products/96/thumbnail.jpg",
+    "images": [
+      "https://i.dummyjson.com/data/products/96/1.jpg",
+      "https://i.dummyjson.com/data/products/96/2.jpg",
+      "https://i.dummyjson.com/data/products/96/3.jpg",
+      "https://i.dummyjson.com/data/products/96/4.jpg",
+      "https://i.dummyjson.com/data/products/96/thumbnail.jpg"
+    ]
+  },
+  {
+    "createAt": 1674154854706,
+    "title": "3 lights lndenpant kitchen islang",
+    "description": "3 lights lndenpant kitchen island--dining room pendant rice paper chandelier contemporary led pendant light modern chandelier",
+    "price": 34,
+    "discountPercentage": 0,
+    "electronics": "electronics",
+    "rating": 4.99,
+    "stock": 44,
+    "brand": "DADAWU",
+    "category": "lighting",
+    "thumbnail": "https://i.dummyjson.com/data/products/98/thumbnail.jpg",
+    "images": [
+      "https://i.dummyjson.com/data/products/98/1.jpg",
+      "https://i.dummyjson.com/data/products/98/2.jpg",
+      "https://i.dummyjson.com/data/products/98/3.jpg",
+      "https://i.dummyjson.com/data/products/98/4.jpg",
+      "https://i.dummyjson.com/data/products/98/thumbnail.jpg"
+    ]
+  },
+  {
+    "createAt": 1674154854733,
+    "title": "American Vintage Wood Pendant Light",
+    "description": "American Vintage Wood Pendant Light--Farmhouse Antique Hanging Lamp Lampara Colgante",
+    "price": 46,
+    "discountPercentage": 0,
+    "electronics": "electronics",
+    "rating": 4.32,
+    "stock": 138,
+    "brand": "Ifei Home",
+    "category": "lighting",
+    "thumbnail": "https://i.dummyjson.com/data/products/99/thumbnail.jpg",
+    "images": [
+      "https://i.dummyjson.com/data/products/99/1.jpg",
+      "https://i.dummyjson.com/data/products/99/2.jpg",
+      "https://i.dummyjson.com/data/products/99/3.jpg",
+      "https://i.dummyjson.com/data/products/99/4.jpg",
+      "https://i.dummyjson.com/data/products/99/thumbnail.jpg"
+    ]
+  },
+  {
+    "createAt": 1674154854732,
+    "title": "Metal Ceramic Flower",
+    "description": "Metal Ceramic Flower Chandelier--Home Lighting American Vintage Hanging Lighting Pendant Lamp",
+    "price": 35,
+    "discountPercentage": 0,
+    "electronics": "electronics",
+    "rating": 4.93,
+    "stock": 146,
+    "brand": "Ifei Home",
+    "category": "lighting",
+    "thumbnail": "https://i.dummyjson.com/data/products/97/thumbnail.jpg",
+    "images": [
+      "https://i.dummyjson.com/data/products/97/1.jpg",
+      "https://i.dummyjson.com/data/products/97/2.jpg",
+      "https://i.dummyjson.com/data/products/97/3.jpg",
+      "https://i.dummyjson.com/data/products/97/4.webp",
+      "https://i.dummyjson.com/data/products/97/thumbnail.jpg"
+    ]
+  }
+]
