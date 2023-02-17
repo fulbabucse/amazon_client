@@ -27,9 +27,15 @@ const SignUp = () => {
 
   const [token] = useToken(email);
 
+  const join_date = new Date().toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
   const handleCreateUser = (data) => {
     dispatch(createUser({ email: data.email, password: data.password }));
-    saveToDB(data);
+    saveToDB({ ...data, join_date });
   };
 
   if (token) {

@@ -1,15 +1,32 @@
 import { Button, Input, Textarea } from "@material-tailwind/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { AiOutlineStar } from "react-icons/ai";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import {
+  useGetProductReviewsQuery,
+  usePostReviewMutation,
+} from "../../features/products/reviewApi";
+import SingleReviewCard from "../shared/SingleReviewCard";
 
 const Reviews = ({ product }) => {
   const {
-    user: { email },
+    user: { email, photoURL, name, join_date },
   } = useSelector((state) => state.auth);
-  const { rating, price } = product || {};
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const { rating, price, _id } = product || {};
+  const [images, setImages] = useState([]);
+  const [reviewData, setReviewData] = useState({});
+  const [postReviews] = usePostReviewMutation();
+  const { data: reviews } = useGetProductReviewsQuery(_id);
 
   const navigate = useNavigate();
 
@@ -37,8 +54,44 @@ const Reviews = ({ product }) => {
     { rating: 1, percent: 1 },
   ];
 
+  const handleReviewSubmit = (data) => {
+    if (data.rating > 5) {
+      toast.error("Rating out of 5");
+      return;
+    }
+
+    Array.from(data.images).forEach(async (image) => {
+      const base64 = await convertBase64(image);
+      setImages((prev) => [...prev, base64]);
+    });
+
+    const review = {
+      name,
+      email,
+      image: photoURL,
+      rating: data.rating,
+      join_date,
+      reviewed_date: new Date().toLocaleDateString("en-us", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      }),
+      message: data.message,
+      productId: _id,
+    };
+    setReviewData(review);
+  };
+
+  const review = { ...reviewData, images };
+  useEffect(() => {
+    if (images.length > 0) {
+      postReviews(review);
+      reset();
+    }
+  }, [postReviews, images]);
+
   return (
-    <div className="flex gap-10">
+    <div className="flex flex-wrap lg:gap-10">
       <div className="w-full lg:w-[350px]">
         <div class="flex items-center mb-3">
           <div className="flex text-[#C9563C] cursor-pointer text-[16px]">
@@ -77,9 +130,54 @@ const Reviews = ({ product }) => {
           </p>
         </div>
         {email && (
-          <form className="mt-4 space-y-3">
-            <Input label="Rating" type="number" max="5" />
-            <Textarea label="Message" />
+          <form
+            onSubmit={handleSubmit(handleReviewSubmit)}
+            className="mt-4 space-y-3"
+          >
+            <div>
+              <Input
+                {...register("rating", {
+                  required: "Rating is required. and up to 5",
+                })}
+                label="Rating"
+                type="number"
+                max="5"
+                step="0.01"
+              />
+              {errors.rating && (
+                <p className="text-red-400 text-xs font-medium">
+                  {errors.rating?.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <Input
+                {...register("images", {
+                  required: "Images is required.",
+                })}
+                label="Images"
+                type="file"
+                multiple
+              />
+              {errors.images && (
+                <p className="text-red-400 text-xs font-medium">
+                  {errors.images?.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <Textarea
+                {...register("message", {
+                  required: "Rating is required. and up to 5",
+                })}
+                label="Message"
+              />
+              {errors.message && (
+                <p className="text-red-400 text-xs font-medium">
+                  {errors.message?.message}
+                </p>
+              )}
+            </div>
             <Button type="submit" variant="outlined">
               Enter
             </Button>
@@ -98,13 +196,31 @@ const Reviews = ({ product }) => {
           </div>
         )}
       </div>
-      <div className="w-full lg:flex-1">
+      <div className="w-full lg:flex-1 mt-4 lg:mt-0">
         <h2 className="text-gray-800 font-openSans font-bold text-lg">
           Top Reviews
         </h2>
+        <div className="flex flex-col gap-4">
+          {reviews?.map((review) => (
+            <SingleReviewCard key={review?._id} review={review} />
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
 export default Reviews;
+
+const convertBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result);
+    };
+    fileReader.onerror = (err) => {
+      reject(err);
+    };
+  });
+};

@@ -3,16 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import ProductCard from "../components/shared/ProductCard";
 import { getCategoryProducts } from "../features/products/productSlice";
+import Spinner from "../components/shared/Spinner";
 
 const Products = () => {
   const { category } = useParams();
   const dispatch = useDispatch();
 
-  const { products } = useSelector((state) => state.products);
+  const { products, isLoading } = useSelector((state) => state.products);
 
   useEffect(() => {
     dispatch(getCategoryProducts({ category }));
   }, [category, dispatch]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="px-10 my-10 lg:min-h-[100vh]">

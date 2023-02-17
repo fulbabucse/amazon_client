@@ -18,12 +18,13 @@ import { Link } from "react-router-dom";
 import { useGetSingleProductQuery } from "../../features/products/productsApi";
 import Comments from "../ProductReviews/Comments";
 import Reviews from "../ProductReviews/Reviews";
+import Spinner from "./Spinner";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [imageURL, setImageURL] = useState("");
 
-  const { data } = useGetSingleProductQuery(id);
+  const { data, isLoading } = useGetSingleProductQuery(id);
 
   const {
     title,
@@ -68,6 +69,10 @@ const ProductDetails = () => {
       desc: <Comments />,
     },
   ];
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="px-4 py-6 bg-white">
@@ -204,7 +209,7 @@ const ProductDetails = () => {
                   </Tab>
                 ))}
               </TabsHeader>
-              <TabsBody>
+              <TabsBody className="w-full">
                 {tabsData?.map(({ value, desc }) => (
                   <TabPanel key={value} value={value}>
                     {desc}
