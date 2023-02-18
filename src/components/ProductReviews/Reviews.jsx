@@ -95,29 +95,29 @@ const Reviews = ({ product }) => {
   return (
     <div className="flex flex-wrap lg:gap-10">
       <div className="w-full lg:w-[350px]">
-        <div class="flex items-center mb-3">
+        <div className="flex items-center mb-3">
           <div className="flex text-[#C9563C] cursor-pointer text-[16px]">
             {ratingStar}
           </div>
-          <p class="ml-2 text-[16px] font-medium text-gray-800 dark:text-white">
+          <p className="ml-2 text-[16px] font-medium text-gray-800 dark:text-white">
             {rating} out of 5
           </p>
         </div>
-        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
           {price + 10} global ratings
         </p>
         {ratingData?.map((item, index) => (
-          <div key={index} class="flex items-center mt-2 group">
-            <span class="group-hover:text-[#C9563C] group-hover:underline group-hover:underline-offset-4 group-hover:decoration-[#C9563C] cursor-pointer text-sm font-medium text-[#007185]">
+          <div key={index} className="flex items-center mt-2 group">
+            <span className="group-hover:text-[#C9563C] group-hover:underline group-hover:underline-offset-4 group-hover:decoration-[#C9563C] cursor-pointer text-sm font-medium text-[#007185]">
               {item.rating} star
             </span>
-            <div class="group-hover:hover:text-[#C9563C] hover:underline hover:underline-offset-4 hover:decoration-[#C9563C] cursor-pointer w-2/4 h-5 mx-4 bg-[#F0F2F2] rounded dark:bg-gray-700 border border-[#FFA41C] border-opacity-50 group-hover:bg-[#FFF6E0] group-hover:border-opacity-90">
+            <div className="group-hover:hover:text-[#C9563C] hover:underline hover:underline-offset-4 hover:decoration-[#C9563C] cursor-pointer w-2/4 h-5 mx-4 bg-[#F0F2F2] rounded dark:bg-gray-700 border border-[#FFA41C] border-opacity-50 group-hover:bg-[#FFF6E0] group-hover:border-opacity-90">
               <div
-                class="h-[19px] bg-[#FFA41C] rounded-l-sm"
+                className="h-[19px] bg-[#FFA41C] rounded-l-sm"
                 style={{ width: `${item.percent}%` }}
               ></div>
             </div>
-            <span class="group-hover:text-[#C9563C] group-hover:underline group-hover:underline-offset-4 group-hover:decoration-[#C9563C] cursor-pointer text-sm font-medium text-[#007185]">
+            <span className="group-hover:text-[#C9563C] group-hover:underline group-hover:underline-offset-4 group-hover:decoration-[#C9563C] cursor-pointer text-sm font-medium text-[#007185]">
               {item.percent}%
             </span>
           </div>

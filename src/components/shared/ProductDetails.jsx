@@ -8,14 +8,16 @@ import {
   TabsHeader,
 } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { AiOutlineStar } from "react-icons/ai";
 import { BsDot } from "react-icons/bs";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.min.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { usePostCartMutation } from "../../features/products/cartApi";
 import { useGetSingleProductQuery } from "../../features/products/productsApi";
 import { getCategoryProducts } from "../../features/products/productSlice";
 import Comments from "../ProductReviews/Comments";
@@ -27,10 +29,14 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [imageURL, setImageURL] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [quantity, setQuantity] = useState(0);
 
   const { data, isLoading } = useGetSingleProductQuery(id);
+  const [postOrder, { isSuccess, data: orderResponse }] = usePostCartMutation();
 
   const {
+    _id,
     title,
     price,
     rating,
@@ -46,6 +52,9 @@ const ProductDetails = () => {
   }, [category, dispatch]);
 
   const { products } = useSelector((state) => state.products);
+  const {
+    user: { email },
+  } = useSelector((state) => state.auth);
 
   const ratingStar = Array.from({ length: 5 }, (_, i) => {
     let number = i + 0.5;
@@ -80,9 +89,30 @@ const ProductDetails = () => {
     },
   ];
 
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(orderResponse.message);
+      return;
+    }
+  }, [isSuccess, orderResponse]);
+
   if (isLoading) {
     return <Spinner />;
   }
+
+  const handleAddToCart = () => {
+    if (quantity <= 0 || quantity === undefined) {
+      toast.error("Select quantity");
+      return;
+    }
+    const product = {
+      productId: _id,
+      email,
+      price: discountedPrice,
+      quantity,
+    };
+    postOrder(product);
+  };
 
   return (
     <div className="px-4 py-6 bg-white">
@@ -245,15 +275,32 @@ const ProductDetails = () => {
             <div className="mt-3">
               <Select label="Quantity" size="sm">
                 {[...Array(10)]?.map((_, index) => (
-                  <Option key={index} className="overflow-y-scroll">
+                  <Option
+                    onClick={() => setQuantity(index + 1)}
+                    key={index}
+                    className="overflow-y-scroll"
+                  >
                     {index + 1}
                   </Option>
                 ))}
               </Select>
             </div>
-            <button className="w-full px-4 py-[6px] text-[14px] bg-[#FFA41C] text-primary transition-colors hover:bg-[#FA8900] font-medium duration-200 ease-in-out rounded-full text-center mt-2 ">
-              Add to Cart
-            </button>
+            {email ? (
+              <button
+                onClick={handleAddToCart}
+                className="w-full px-4 py-[6px] text-[14px] bg-[#FFA41C] text-primary transition-colors hover:bg-[#FA8900] font-medium duration-200 ease-in-out rounded-full text-center mt-2 "
+              >
+                Add to Cart
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate("/sign-in")}
+                className="w-full px-4 py-[6px] text-[14px] bg-[#FFA41C] text-primary transition-colors hover:bg-[#FA8900] font-medium duration-200 ease-in-out rounded-full text-center mt-2 "
+              >
+                Add to Cart
+              </button>
+            )}
+
             <div className="border-b border-b-gray-300 mt-2"></div>
             <button className="w-full px-4 py-1 text-sm text-primary transition-colors bg-opacity-20 font-medium duration-200 hover:bg-[#007185] hover:bg-opacity-10 ease-in-out rounded-md mt-2 border border-gray-500 text-start">
               Add to List
