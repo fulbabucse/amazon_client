@@ -2,12 +2,15 @@
   {
     "category_name": "Men's Fashion",
     "sub_category": [
-      { "name": "T-Shirt", "link": "t-shirt" },
-      { "name": "Jackets, Blazer & Coats", "link": "men-jackets-coats" },
-      { "name": "bags & backpack", "link": "men-bags-backpack" },
+      { "name": "T-Shirt", "link": "t-shirts" },
+      {
+        "name": "Jackets, Blazer & Coats",
+        "link": "mens-jackets-blazers-coats"
+      },
+      { "name": "bags & backpack", "link": "mens-bags-backpack" },
       { "name": "wallets", "link": "wallets" },
       { "name": "belts", "link": "belts" },
-      { "name": "Shoes", "link": "men-shoes" }
+      { "name": "Shoes", "link": "mens-shoes" }
     ]
   },
   {
@@ -17,16 +20,16 @@
         "name": "women kurtas kurtis suits",
         "link": "women-kurtas-kurtis-suits"
       },
-      { "name": "dress materials", "link": "dress-materials" },
-      { "name": "saree", "link": "saree" },
-      { "name": "lehenga cholis", "link": "lehenga" },
-      { "name": "jackets & Coats", "link": "women-jackets-coats" },
+      { "name": "dresses materials", "link": "womens-dresses" },
+      { "name": "sarees", "link": "sarees" },
+      { "name": "lehenga cholis", "link": "lehenga-cholis" },
+      { "name": "jackets & Coats", "link": "womens-jackets-coats" },
       { "name": "sleepwear", "link": "sleepwear" },
-      { "name": "shoes", "link": "women-shoes" },
-      { "name": "watches", "link": "women-watches" },
-      { "name": "bags & backpack", "link": "women-bags-backpack" },
+      { "name": "shoes", "link": "womens-shoes" },
+      { "name": "watches", "link": "womens-watches" },
+      { "name": "bags & backpack", "link": "womens-bags" },
       { "name": "tops", "link": "tops" },
-      { "name": "sunglasses", "link": "women-sunglasses" }
+      { "name": "sunglasses", "link": "sunglasses" }
     ]
   },
   {
@@ -41,8 +44,8 @@
     "sub_category": [
       { "name": "fragrances", "link": "fragrances" },
       { "name": "skincare", "link": "skincare" },
-      { "name": "sunglass", "link": "sunglass" },
-      { "name": "jewellery", "link": "jewellery" }
+      { "name": "sunglasses", "link": "sunglasses" },
+      { "name": "jewellery", "link": "womens-jewellery" }
     ]
   },
   {
@@ -58,6 +61,10 @@
       { "name": "furniture", "link": "furniture" },
       { "name": "home decoration", "link": "home-decoration" }
     ]
+  },
+  {
+    "category_name": "E-readers and Books",
+    "sub_category": [{ "name": "Books", "link": "books" }]
   },
   {
     "category_name": "Movies and Television",

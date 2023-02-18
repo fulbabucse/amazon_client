@@ -4,10 +4,19 @@ import NewArrival from "../components/NewArrival";
 import Popular from "../components/Popular";
 import PopularSmallDevice from "../components/PopularSmallColumn";
 import PopularSmallGrid from "../components/PopularSmallGrid";
-import { useGetAllProductsQuery } from "../features/products/productsApi";
+import Spinner from "../components/shared/Spinner";
+import {
+  useGetAllProductsQuery,
+  useGetBooksQuery,
+} from "../features/products/productsApi";
 
 const Home = () => {
-  const { data } = useGetAllProductsQuery();
+  const { data, isLoading } = useGetAllProductsQuery();
+  const { data: booksData } = useGetBooksQuery();
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="space-y-3">
@@ -19,7 +28,7 @@ const Home = () => {
           title="Popular products in internationally"
         />
         <Popular
-          data={data}
+          data={booksData}
           id={"books"}
           title="Top Sellers in Books for you"
         />

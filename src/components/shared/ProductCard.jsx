@@ -97,7 +97,7 @@ const ProductCard = ({ product }) => {
           <h3 className="text-[16px] font-openSans text-primary font-medium group-hover:text-[#C9563C] leading-6 duration-500">
             {title?.length > 35 ? `${title?.slice(0, 38)}...` : title}
           </h3>
-          <button className="flex items-center text-yellow-500 text-sm">
+          <button className="flex items-center text-[#C9563C] text-sm">
             {ratingStar} <span className="ml-1">({rating})</span>
           </button>
           <h3 className="text-sm flex items-center">

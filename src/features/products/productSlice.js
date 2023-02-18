@@ -9,9 +9,7 @@ const initialState = {
 export const getCategoryProducts = createAsyncThunk(
   "products/getCategoryProducts",
   async ({ category }) => {
-    const res = await fetch(
-      `https://crafty-commerce-server.vercel.app/products/all/${category}`
-    );
+    const res = await fetch(`http://localhost:5000/products/all/${category}`);
     const data = await res.json();
     return data;
   }

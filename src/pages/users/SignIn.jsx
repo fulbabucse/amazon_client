@@ -1,7 +1,6 @@
+import { Button, Input } from "@material-tailwind/react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { AiOutlineMail } from "react-icons/ai";
-import { BsFillLockFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signInUser } from "../../features/auth/authSlice";
@@ -41,23 +40,18 @@ const SignIn = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto my-10 p-4 rounded-md shadow-md">
+    <div className="max-w-md mx-auto my-10 p-4 rounded-md shadow-md bg-white">
       <h1 className="text-primary text-center text-2xl font-medium font-radio-canada mb-5">
         Sign in Account
       </h1>
       <form onSubmit={handleSubmit(handleSignUser)} className="space-y-4">
         <div className="relative flex w-full flex-wrap items-stretch">
-          <span className="z-10 h-full leading-snug font-normal text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
-            <AiOutlineMail />
-          </span>
-          <input
+          <Input
             type="email"
             {...register("email", {
               required: "Email is required",
             })}
-            placeholder="Email"
-            defaultValue={"crafty@commerce.com"}
-            className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-gray-100 rounded text-sm border-0 shadow focus:bg-white focus:ring-1 outline-none focus:outline-none w-full pl-10"
+            label="Email"
           />
           {errors.email && (
             <p className="text-red-400 text-xs font-medium">
@@ -66,16 +60,12 @@ const SignIn = () => {
           )}
         </div>
         <div className="relative flex w-full flex-wrap items-stretch">
-          <span className="z-10 h-full leading-snug font-normal text-center text-slate-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
-            <BsFillLockFill />
-          </span>
-          <input
+          <Input
             type="password"
-            placeholder="Password"
+            label="Password"
             {...register("password", {
               required: "Password is required",
             })}
-            className="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-gray-100 rounded text-sm border-0 shadow focus:bg-white focus:ring-1 outline-none focus:outline-none w-full pl-10"
           />
           {errors.password && (
             <p className="text-red-400 text-xs font-medium">
@@ -84,12 +74,13 @@ const SignIn = () => {
           )}
         </div>
         <div className="text-center">
-          <button
+          <Button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-medium font-radio-canada py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+            fullWidth
+            className="block px-4 py-2 text-sm bg-[#FFC940] text-primary transition-colors hover:bg-opacity-80 font-medium duration-200 ease-in-out rounded-md text-center"
           >
             Sign In
-          </button>
+          </Button>
         </div>
       </form>
 

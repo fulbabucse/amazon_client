@@ -7,22 +7,26 @@ import {
   TabsBody,
   TabsHeader,
 } from "@material-tailwind/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
 import { BsDot } from "react-icons/bs";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.min.css";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useGetSingleProductQuery } from "../../features/products/productsApi";
+import { getCategoryProducts } from "../../features/products/productSlice";
 import Comments from "../ProductReviews/Comments";
 import Reviews from "../ProductReviews/Reviews";
+import ProductCard from "./ProductCard";
 import Spinner from "./Spinner";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [imageURL, setImageURL] = useState("");
+  const dispatch = useDispatch();
 
   const { data, isLoading } = useGetSingleProductQuery(id);
 
@@ -36,6 +40,12 @@ const ProductDetails = () => {
     images = [],
     department,
   } = data || {};
+
+  useEffect(() => {
+    dispatch(getCategoryProducts({ category }));
+  }, [category, dispatch]);
+
+  const { products } = useSelector((state) => state.products);
 
   const ratingStar = Array.from({ length: 5 }, (_, i) => {
     let number = i + 0.5;
@@ -249,6 +259,23 @@ const ProductDetails = () => {
               Add to List
             </button>
           </div>
+        </div>
+      </div>
+      <div className="mt-7">
+        <h1 className="text-[#C9563C] text-[18px]">
+          Related products with standard delivery on eligible orders
+        </h1>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 mt-2">
+          {products
+            ?.filter((product) => {
+              const filteredProducts = product?._id !== id;
+              return filteredProducts;
+            })
+            ?.map((product) => (
+              <>
+                <ProductCard key={product?._id} product={product} />
+              </>
+            ))}
         </div>
       </div>
     </div>

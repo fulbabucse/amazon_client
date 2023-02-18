@@ -1,12 +1,18 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { BsFillCartCheckFill } from "react-icons/bs";
-import { AiOutlineProject } from "react-icons/ai";
+import { AiOutlineProject, AiOutlineHome } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
 
 const Sidebar = () => {
   const nav = [
+    {
+      id: 1,
+      name: "Home",
+      link: "/",
+      icon: <AiOutlineHome size={25} />,
+    },
     {
       id: 2,
       name: "Profile",

@@ -128,13 +128,13 @@ const Footer = () => {
                   to="/"
                   className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
-                  +880 768 473 4978
+                  +880 1736 5342 95
                 </Link>
                 <Link
                   to="/"
                   className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
                 >
-                  info@merakiui.com
+                  crafty@commerce.com
                 </Link>
               </div>
             </div>

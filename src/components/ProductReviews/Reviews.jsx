@@ -10,6 +10,7 @@ import {
   useGetProductReviewsQuery,
   usePostReviewMutation,
 } from "../../features/products/reviewApi";
+import convertBase64 from "../../utils/convertBase64";
 import SingleReviewCard from "../shared/SingleReviewCard";
 
 const Reviews = ({ product }) => {
@@ -87,6 +88,7 @@ const Reviews = ({ product }) => {
     if (images.length > 0) {
       postReviews(review);
       reset();
+      setImages([]);
     }
   }, [postReviews, images]);
 
@@ -111,7 +113,7 @@ const Reviews = ({ product }) => {
             </span>
             <div class="group-hover:hover:text-[#C9563C] hover:underline hover:underline-offset-4 hover:decoration-[#C9563C] cursor-pointer w-2/4 h-5 mx-4 bg-[#F0F2F2] rounded dark:bg-gray-700 border border-[#FFA41C] border-opacity-50 group-hover:bg-[#FFF6E0] group-hover:border-opacity-90">
               <div
-                class="h-5 bg-[#FFA41C]"
+                class="h-[19px] bg-[#FFA41C] rounded-l-sm"
                 style={{ width: `${item.percent}%` }}
               ></div>
             </div>
@@ -168,7 +170,7 @@ const Reviews = ({ product }) => {
             <div>
               <Textarea
                 {...register("message", {
-                  required: "Rating is required. and up to 5",
+                  required: "Message is required",
                 })}
                 label="Message"
               />
@@ -211,16 +213,3 @@ const Reviews = ({ product }) => {
 };
 
 export default Reviews;
-
-const convertBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      resolve(fileReader.result);
-    };
-    fileReader.onerror = (err) => {
-      reject(err);
-    };
-  });
-};
