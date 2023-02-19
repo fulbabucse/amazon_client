@@ -57,7 +57,7 @@ const Navbar = () => {
       </div>
       <div className="hidden lg:block">
         <div className="bg-secondary w-full text-white hidden lg:block">
-          <div className="py-2 flex justify-between px-10 items-center border-b border-b-gray-500">
+          <div className="py-2 flex justify-between px-4 items-center border-b border-b-gray-500">
             <div>
               <h3 className="text-sm">
                 Free Shipping over $100 and Free returns
@@ -124,7 +124,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-between px-10 py-5">
+          <div className="flex items-center justify-between px-4 py-5">
             <div>
               <Link to="/" className="text-2xl font-semibold">
                 Crafty Commerce

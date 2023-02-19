@@ -11,7 +11,7 @@ const PopularPC = ({ data, products }) => {
   };
 
   return (
-    <div className="lg:px-10">
+    <div className="lg:px-4">
       <div className="bg-white p-3 relative group">
         <h1 className="text-xl text-center lg:text-start font-medium text-primary">
           Popular products in internationally

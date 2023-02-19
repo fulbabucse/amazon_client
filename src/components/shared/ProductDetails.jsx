@@ -31,6 +31,7 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(0);
+  const [size, setSize] = useState("");
 
   const { data, isLoading } = useGetSingleProductQuery(id);
   const [postOrder, { isSuccess, data: orderResponse }] = usePostCartMutation();
@@ -105,11 +106,18 @@ const ProductDetails = () => {
       toast.error("Select quantity");
       return;
     }
+
+    if (size === "") {
+      toast.error("Select size");
+      return;
+    }
+
     const product = {
       productId: _id,
       email,
       price: discountedPrice,
       quantity,
+      size,
     };
     postOrder(product);
   };
@@ -213,11 +221,19 @@ const ProductDetails = () => {
               {department === "fashions" && (
                 <div className="flex items-center gap-2 w-32">
                   <h3>Size:</h3>
-                  <Select defaultValue="" size="md" label="Select Size">
-                    <Option>Small</Option>
-                    <Option>Medium</Option>
-                    <Option>Large</Option>
-                    <Option>X-Large</Option>
+                  <Select defaultValue="" label="Select Size">
+                    <Option value="sm" onClick={() => setSize("sm")}>
+                      Small
+                    </Option>
+                    <Option value="md" onClick={() => setSize("md")}>
+                      Medium
+                    </Option>
+                    <Option value="lg" onClick={() => setSize("lg")}>
+                      Large
+                    </Option>
+                    <Option value="xl" onClick={() => setSize("xl")}>
+                      X-Large
+                    </Option>
                   </Select>
                 </div>
               )}

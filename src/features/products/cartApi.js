@@ -9,7 +9,12 @@ const cartApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    getOrdersByEmail: builder.query({
+      query: (email) => ({
+        url: `/orders/${email}`,
+      }),
+    }),
   }),
 });
 
-export const { usePostCartMutation } = cartApi;
+export const { usePostCartMutation, useGetOrdersByEmailQuery } = cartApi;

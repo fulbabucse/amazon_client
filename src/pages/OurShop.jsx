@@ -68,7 +68,7 @@ const OurShop = () => {
           <Link to="/our-shop">Our Shop</Link>
         </Breadcrumbs>
       </div>
-      <div className="lg:px-10 mt-4">
+      <div className="lg:px-4 mt-4">
         <div className="flex flex-wrap gap-2">
           <div className="lg:max-w-[240px] my-3 lg:mt-0 w-full space-y-2">
             <div className="bg-white p-3">

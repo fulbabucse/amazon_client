@@ -10,7 +10,7 @@ const Popular = ({ data, id, title }) => {
     document.getElementById(id).scrollLeft += 800;
   };
   return (
-    <div className="lg:px-10">
+    <div className="lg:px-4">
       <div className="bg-white pt-3 px-3 relative group pb-5 hover:pb-[3px]">
         <h1 className="text-xl text-center lg:text-start font-medium text-primary">
           {title}
