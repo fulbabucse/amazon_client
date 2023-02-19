@@ -1,3 +1,5 @@
+import { baseURL } from "../utils/baseURL";
+
 const { useEffect } = require("react");
 const { useState } = require("react");
 
@@ -5,9 +7,7 @@ const useToken = (email) => {
   const [token, setToken] = useState("");
   useEffect(() => {
     if (email) {
-      fetch(
-        `https://crafty-commerce-server.vercel.app/admin/jwt?email=${email}`
-      )
+      fetch(`${baseURL}/admin/jwt?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
           localStorage.setItem("cc_token", data.token);

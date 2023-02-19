@@ -1,11 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { MdOutlineLanguage } from "react-icons/md";
-import {
-  AiOutlineSearch,
-  AiOutlineUserAdd,
-  AiOutlineShoppingCart,
-} from "react-icons/ai";
-import { BiCategoryAlt } from "react-icons/bi";
+import cartIcon from "../../assets/icons/cart.png";
+import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import SmallNavbar from "../SmallNavbar";
 import {
@@ -20,13 +16,18 @@ import { signOut } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../features/auth/authSlice";
-import { FaUserCircle, FaTimes } from "react-icons/fa";
+import { FaUserCircle, FaTimes, FaBars } from "react-icons/fa";
 import { useGetCategoriesQuery } from "../../features/categories/categoryApi";
+import { useGetOrdersByEmailQuery } from "../../features/products/cartApi";
 
 const Navbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
+  const {
+    user: { email, name, photoURL, isAdmin },
+  } = useSelector((state) => state.auth);
 
   const { data } = useGetCategoriesQuery();
+  const { data: orders } = useGetOrdersByEmailQuery(email);
 
   const [open, setOpen] = useState(1);
   const dispatch = useDispatch();
@@ -37,10 +38,6 @@ const Navbar = () => {
     setOpen(open === value ? 0 : value);
   };
 
-  const {
-    user: { email, name, photoURL, isAdmin },
-  } = useSelector((state) => state.auth);
-
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -49,6 +46,10 @@ const Navbar = () => {
       })
       .catch((err) => console.log(err));
   };
+
+  const quantity = orders?.reduce((total, current) => {
+    return parseFloat(total) + parseFloat(current.quantity);
+  }, 0);
 
   return (
     <div>
@@ -283,13 +284,21 @@ const Navbar = () => {
               </Menu>
 
               <Link to="/cart">
-                <div className="flex items-center gap-1">
-                  <AiOutlineShoppingCart className="text-3xl font-medium" />
-                  <h3 className="text-xs">
-                    <span className="bg-white text-primary h-5 w-5 rounded-full p-1">
-                      10
+                <div className="flex relative mr-8">
+                  <div>
+                    <img src={cartIcon} alt="" />
+                    <span
+                      className={`text-[#C9563C] font-roboto text-[15px] absolute font-bold ${
+                        quantity > 9
+                          ? "left-[11px] -top-[9px]"
+                          : "left-[17px] -top-2"
+                      }`}
+                    >
+                      {quantity}
                     </span>
-                    <br /> $500
+                  </div>
+                  <h3 className="text-[15px] font-semibold absolute -right-7 bottom-0">
+                    Cart
                   </h3>
                 </div>
               </Link>
@@ -297,17 +306,17 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="bg-primary w-full text-white py-3 flex items-center gap-6">
-          <div className="pl-20">
-            <div className="relative">
+        <div className="bg-primary w-full text-white py-[8px] flex items-center gap-2">
+          <div className="px-4">
+            <div className="relative group">
               <button
                 onClick={() => setOpenCategory(!openCategory)}
                 className="flex items-center gap-14"
               >
-                <div className="flex items-center gap-1 text-sm">
-                  <BiCategoryAlt className="text-white text-lg" />
-                  <h1 className="uppercase font-radio-canada font-medium">
-                    Shop Categories
+                <div className="flex items-center gap-1">
+                  <FaBars className="text-white text-lg group-hover:text-[#C9563C] duration-500 transition-all ease-in-out" />
+                  <h1 className="font-radio-canada font-medium group-hover:text-[#C9563C] duration-500 transition-all ease-in-out">
+                    All
                   </h1>
                 </div>
               </button>
@@ -391,31 +400,67 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-8 border-l border-l-gray-400 pl-6">
+          <div className="flex items-center gap-4">
             <Link
               to="/"
-              className="transition-colors duration-300 transform hover:text-yellow-500 uppercase font-radio-canada text-sm"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
             >
               Home
             </Link>
 
             <Link
               to="/our-shop"
-              className="transition-colors duration-300 transform hover:text-yellow-500 uppercase font-radio-canada text-sm"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
             >
               Our Shop
             </Link>
 
             <Link
               to="/blogs"
-              className="transition-colors duration-300 transform hover:text-yellow-500 uppercase font-radio-canada text-sm"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
             >
               Blogs
             </Link>
 
             <Link
+              to="/customer-service"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Customer service
+            </Link>
+            <Link
+              to="/best-sellers"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Best sellers
+            </Link>
+            <Link
+              to="/new-releases"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              New Releases
+            </Link>
+            <Link
+              to="/today-deals"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Today's Teals
+            </Link>
+            <Link
+              to="/books"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Books
+            </Link>
+            <Link
+              to="/fashion"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Fashion
+            </Link>
+            <Link
               to="/contact"
-              className="transition-colors duration-300 transform hover:text-yellow-500 uppercase font-radio-canada text-sm"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
             >
               Contact
             </Link>

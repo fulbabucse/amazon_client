@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { baseURL } from "../../utils/baseURL";
 
 const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://crafty-commerce-server.vercel.app",
+    baseUrl: baseURL,
   }),
-  tagTypes: ["Review", "Product"],
+  tagTypes: ["Review", "Product", "Orders"],
   endpoints: (builder) => ({}),
 });
 

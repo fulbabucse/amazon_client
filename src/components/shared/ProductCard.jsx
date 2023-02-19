@@ -103,7 +103,7 @@ const ProductCard = ({ product }) => {
           <h3 className="text-sm flex items-center">
             {price > 300 ? (
               <p className="text-red-500">
-                ${((price / 100) * 80).toFixed(2)}{" "}
+                ${((price / 100) * 80)?.toFixed(2)}{" "}
                 <del className="text-primary">${price}.00</del>
               </p>
             ) : (

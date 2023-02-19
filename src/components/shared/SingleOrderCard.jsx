@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import { Link } from "react-router-dom";
-import { getTotalPrice } from "../../features/products/productSlice";
+import { useUpdateQuantityMutation } from "../../features/products/cartApi";
 
 const SingleOrderCard = ({ order }) => {
-  const [productQty, setProductQty] = useState(0);
-  const dispatch = useDispatch();
+  const [updateQuantity] = useUpdateQuantityMutation();
   const {
+    _id,
     brand,
     category,
     productId,
@@ -18,14 +16,19 @@ const SingleOrderCard = ({ order }) => {
     department,
   } = order || {};
 
-  useEffect(() => {
-    dispatch(
-      getTotalPrice(productQty > 0 ? price * productQty : price * quantity)
-    );
-  }, [dispatch, price, productQty, quantity]);
+  const handleQuantity = (qty) => {
+    const data = {
+      productId: _id,
+      qty,
+      price: price * qty,
+    };
+    if (quantity > 0) {
+      updateQuantity(data);
+    }
+  };
 
   return (
-    <div className="pt-4 pb-8 pl-3 flex border-b border-b-gray-400">
+    <div className="py-4 pl-3 flex border-b border-b-gray-400">
       <div className="flex-1 flex gap-6">
         <div className="w-40 h-[200px]">
           <img src={image} alt={product_name} className="w-full h-full" />
@@ -37,10 +40,30 @@ const SingleOrderCard = ({ order }) => {
           >
             {product_name}
           </Link>
-          <p>{department}</p>
-          <p>{category?.split("-").join(" ")}</p>
-          <p>{brand}</p>
-          <small className="text-[#007600]">In Stock</small>
+          <p>
+            <span className="text-gray-700 text-[15px]">Department:</span>
+            <span className="text-[#007600] text-[15px] cursor-pointer hover:underline hover:underline-offset-4 hover:decoration-[#007600] ml-1.5 capitalize">
+              {department}
+            </span>
+          </p>
+          <p>
+            <span className="text-gray-700 text-[15px]">Category:</span>
+            <Link
+              to={`/products/${department}/${category}`}
+              className="text-[#007600] text-[15px] cursor-pointer hover:underline hover:underline-offset-4 hover:decoration-[#007600] ml-1.5 capitalize"
+            >
+              {category?.split("-").join(" ")}
+            </Link>
+          </p>
+          {brand && (
+            <p>
+              <span className="text-gray-700 text-[15px]">brand:</span>
+              <span className="text-[#007600] text-[15px] cursor-pointer hover:underline hover:underline-offset-4 hover:decoration-[#007600] ml-1.5 capitalize">
+                {brand}
+              </span>
+            </p>
+          )}
+          <small className="text-[#007600] font-bold">In Stock</small>
           <div className="flex items-center gap-4 mt-4">
             <div className="flex items-center rounded-lg gap-1 bg-[#F0F2F2] pl-2 cursor-pointer">
               <label className="text-[12px]" htmlFor="quantity">
@@ -48,7 +71,9 @@ const SingleOrderCard = ({ order }) => {
               </label>
               <select
                 id="quantity"
-                onChange={(e) => setProductQty(e.target.value)}
+                onChange={(e) => {
+                  handleQuantity(e.target.value);
+                }}
                 className="bg-transparent rounded-lg text-gray-600 h-10 w-10  hover:border-gray-400 focus:outline-none appearance-none text-center cursor-pointer py-0"
                 defaultValue={quantity}
               >
@@ -77,9 +102,7 @@ const SingleOrderCard = ({ order }) => {
         </div>
       </div>
       <div className="w-20">
-        <p className="text-end font-bold">
-          ${(productQty > 0 ? price * productQty : price * quantity).toFixed(2)}
-        </p>
+        <p className="text-end font-bold">${price?.toFixed(2)}</p>
       </div>
     </div>
   );

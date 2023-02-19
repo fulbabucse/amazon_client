@@ -8,6 +8,7 @@ import Admin from "../layouts/Admin";
 import Root from "../layouts/Root";
 import Blogs from "../pages/Blogs";
 import Cart from "../pages/Cart";
+import ComingSoon from "../pages/ComingSoon";
 import Compare from "../pages/Compare";
 import Contact from "../pages/Contact";
 import Favorite from "../pages/Favorite";
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       { path: "/products/:categoryName/:category", element: <Products /> },
       { path: "/products/:category", element: <Products /> },
       { path: "/product/:category/:id", element: <ProductDetails /> },
+      { path: "/:coming", element: <ComingSoon /> },
       {
         path: "/compare-product",
         element: (

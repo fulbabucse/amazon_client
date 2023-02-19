@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from "react";
-import { BsCart2 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import {
   Accordion,
@@ -8,9 +7,17 @@ import {
 } from "@material-tailwind/react";
 import { FaTimes, FaBars } from "react-icons/fa";
 import { AiOutlineSearch, AiOutlineUser } from "react-icons/ai";
+import { useGetOrdersByEmailQuery } from "../features/products/cartApi";
+import { useSelector } from "react-redux";
+import cartIcon from "../assets/icons/cart.png";
 
 const SmallNavbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
+
+  const {
+    user: { email, name, photoURL, isAdmin },
+  } = useSelector((state) => state.auth);
+  const { data: orders } = useGetOrdersByEmailQuery(email);
 
   const [open, setOpen] = useState(1);
 
@@ -18,15 +25,24 @@ const SmallNavbar = () => {
     setOpen(open === value ? 0 : value);
   };
 
+  const quantity = orders?.reduce((total, current) => {
+    return parseFloat(total) + parseFloat(current.quantity);
+  }, 0);
+
   return (
     <>
       <div className="relative">
         <div className="bg-primary p-4 flex justify-between items-center w-full">
-          <div className="flex items-center gap-3 text-white">
-            <button onClick={() => setOpenCategory(!openCategory)}>
-              <FaBars size={20} />
+          <div className="flex items-center gap-3 text-white relative group">
+            <button
+              onClick={() => setOpenCategory(!openCategory)}
+              className="flex items-center"
+            >
+              <div className="flex items-center gap-1">
+                <FaBars className="text-white text-lg group-hover:text-[#C9563C] duration-500 transition-all ease-in-out" />
+              </div>
             </button>
-            <Link to="/" className="text-[15px]">
+            <Link to="/" className="text-[17px] font-bold">
               Crafty Commerce
             </Link>
           </div>
@@ -36,7 +52,23 @@ const SmallNavbar = () => {
               <AiOutlineUser size={30} />
             </Link>
             <Link to="/cart">
-              <BsCart2 className="text-white" size={30} />
+              <div className="flex relative mr-8">
+                <div>
+                  <img src={cartIcon} alt="" />
+                  <span
+                    className={`text-[#C9563C] font-roboto text-[15px] absolute font-bold ${
+                      quantity > 9
+                        ? "left-[11px] -top-[9px]"
+                        : "left-[17px] -top-2"
+                    }`}
+                  >
+                    {quantity}
+                  </span>
+                </div>
+                <h3 className="text-[15px] font-semibold absolute -right-7 bottom-0 text-white">
+                  Cart
+                </h3>
+              </div>
             </Link>
           </div>
         </div>
@@ -53,34 +85,90 @@ const SmallNavbar = () => {
             </button>
           </form>
         </div>
-        <div className="bg-[#3A495D] flex items-center gap-4 text-white border-l border-l-gray-400 px-4 py-3">
-          <Link
-            to="/"
-            className="transition-colors duration-300 transform hover:text-yellow-500 capitalize font-openSans text-[16px]"
-          >
-            Home
-          </Link>
+        <div className="bg-[#3A495D] w-full flex items-center gap-4 text-white px-4 py-3 ">
+          <div>
+            <Link
+              to="/"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Home
+            </Link>
+          </div>
 
-          <Link
-            to="/our-shop"
-            className="transition-colors duration-300 transform hover:text-yellow-500 capitalize font-openSans text-[16px]"
-          >
-            Our Shop
-          </Link>
+          <div>
+            <Link
+              to="/our-shop"
+              className="block transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Our Shop
+            </Link>
+          </div>
 
-          <Link
-            to="/blogs"
-            className="transition-colors duration-300 transform hover:text-yellow-500 capitalize font-openSans text-[16px]"
-          >
-            Blogs
-          </Link>
+          <div>
+            <Link
+              to="/blogs"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Blogs
+            </Link>
+          </div>
 
-          <Link
-            to="/contact"
-            className="transition-colors duration-300 transform hover:text-yellow-500 capitalize font-openSans text-[16px]"
-          >
-            Contact
-          </Link>
+          {/* <li className="list-none">
+            <Link
+              to="/customer-service"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Customer service
+            </Link>
+          </li>
+          <div>
+            <Link
+              to="/best-sellers"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Best sellers
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/new-releases"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              New Releases
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/today-deals"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Today's Teals
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/books"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Books
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/fashion"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Fashion
+            </Link>
+          </div> */}
+          <div>
+            <Link
+              to="/contact"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Contact
+            </Link>
+          </div>
         </div>
 
         <div

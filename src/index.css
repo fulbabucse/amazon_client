@@ -49,6 +49,10 @@ code {
   font-family: "Source Sans Pro", sans-serif;
 }
 
+.font-roboto {
+  font-family: "Roboto", sans-serif;
+}
+
 ::-webkit-scrollbar {
   width: 1rem;
 }

@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
+import { baseURL } from "../../utils/baseURL";
 
 const initialState = {
   user: { email: "", name: "", photoURL: "" },
@@ -30,7 +31,7 @@ export const signInUser = createAsyncThunk(
 
 export const getUser = createAsyncThunk("auth/getUser", async (email) => {
   const res = await fetch(
-    `https://crafty-commerce-server.vercel.app/users?email=${email}`
+    `${baseURL}/users?email=${email}`
   );
   const user = await res.json();
 

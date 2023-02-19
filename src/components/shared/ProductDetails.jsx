@@ -107,9 +107,11 @@ const ProductDetails = () => {
       return;
     }
 
-    if (size === "") {
-      toast.error("Select size");
-      return;
+    if (department === "fashions") {
+      if (size === "") {
+        toast.error("Select size");
+        return;
+      }
     }
 
     const product = {

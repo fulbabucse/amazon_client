@@ -8,13 +8,27 @@ const cartApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Orders"],
     }),
     getOrdersByEmail: builder.query({
       query: (email) => ({
         url: `/orders/${email}`,
       }),
+      providesTags: ["Orders"],
+    }),
+    updateQuantity: builder.mutation({
+      query: (data) => ({
+        url: `/orders/update-quantity/${data.productId}`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Orders"],
     }),
   }),
 });
 
-export const { usePostCartMutation, useGetOrdersByEmailQuery } = cartApi;
+export const {
+  usePostCartMutation,
+  useGetOrdersByEmailQuery,
+  useUpdateQuantityMutation,
+} = cartApi;

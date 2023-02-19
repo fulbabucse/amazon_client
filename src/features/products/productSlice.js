@@ -1,18 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { baseURL } from "../../utils/baseURL";
 
 const initialState = {
   isLoading: false,
   products: [],
   error: "",
-  price: 0,
 };
 
 export const getCategoryProducts = createAsyncThunk(
   "products/getCategoryProducts",
   async ({ category }) => {
-    const res = await fetch(
-      `https://crafty-commerce-server.vercel.app/products/all/${category}`
-    );
+    const res = await fetch(`${baseURL}/products/all/${category}`);
     const data = await res.json();
     return data;
   }
@@ -21,11 +19,7 @@ export const getCategoryProducts = createAsyncThunk(
 const productSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {
-    getTotalPrice: (state, { payload }) => {
-      state.price += parseInt(payload);
-    },
-  },
+
   extraReducers: (builder) => {
     builder
       .addCase(getCategoryProducts.pending, (state, action) => {
@@ -45,7 +39,5 @@ const productSlice = createSlice({
       });
   },
 });
-
-export const { getTotalPrice } = productSlice.actions;
 
 export default productSlice.reducer;
