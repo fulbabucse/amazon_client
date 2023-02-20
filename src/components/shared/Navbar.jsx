@@ -416,6 +416,19 @@ const Navbar = () => {
             </Link>
 
             <Link
+              to="/books"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Books
+            </Link>
+            <Link
+              to="/fashions"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+            >
+              Fashions
+            </Link>
+
+            <Link
               to="/blogs"
               className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
             >
@@ -444,20 +457,9 @@ const Navbar = () => {
               to="/today-deals"
               className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
             >
-              Today's Teals
+              Today's Deals
             </Link>
-            <Link
-              to="/books"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
-            >
-              Books
-            </Link>
-            <Link
-              to="/fashion"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
-            >
-              Fashion
-            </Link>
+
             <Link
               to="/contact"
               className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"

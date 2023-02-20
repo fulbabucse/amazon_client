@@ -1,14 +1,16 @@
 import React from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { AiOutlineStar } from "react-icons/ai";
-import { MdFavoriteBorder } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import SmallTimer from "./SmallTimer";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, index }) => {
   const { _id, title, price, rating, brand, images, category } = product;
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const { pathname } = useLocation();
 
   const ratingStar = Array.from({ length: 5 }, (_, i) => {
     let number = i + 0.5;
@@ -43,21 +45,35 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="bg-white rounded-md relative group h-full">
-      <button className="absolute z-10 text-[#C9563C] font-normal top-2 right-2 hidden group-hover:block duration-300 ease-in-out">
-        <MdFavoriteBorder size={25} />
-      </button>
+      {pathname === "/best-sellers" && (
+        <button
+          className="text-white absolute z-10 w-12 bg-[#c45500] font-normal duration-300 ease-in-out"
+          style={{ clipPath: `polygon(0 0, 100% 0%, 84% 100%, 0% 100%)` }}
+        >
+          #{index + 1}
+        </button>
+      )}
+
+      {pathname === "/today-deals" && (
+        <button
+          className="text-white w-32 py-[2px] pl-1 absolute z-10 bg-[#c45500] font-normal duration-300 ease-in-out"
+          style={{ clipPath: `polygon(0 0, 100% 0%, 84% 100%, 0% 100%)` }}
+        >
+          <SmallTimer />
+        </button>
+      )}
       {price > 300 && (
-        <div className="absolute z-10 bg-[#F8B567] text-primary top-3 left-3 rounded-full p-1 text-xs">
+        <div className="absolute z-10 bg-[#F8B567] text-primary top-3 right-3 rounded-full p-1 text-xs">
           {price > 300 && <p>-20%</p>}
         </div>
       )}
 
       <div className="h-[250px] w-full m-auto relative group">
-        <div className="w-full h-full rounded-t-md bg-center bg-cover duration-500">
+        <div className="w-full h-full bg-center bg-cover duration-500">
           <img
             src={images[currentIndex]}
             alt={title}
-            className="h-full w-full transition-transform ease-out duration-500 rounded-t-md"
+            className="h-full w-full transition-transform ease-out duration-500"
           />
         </div>
 
@@ -94,7 +110,7 @@ const ProductCard = ({ product }) => {
       <Link to={`/product/${category}/${_id}`}>
         <div className="p-3 space-y-3">
           <p className="text-xs text-red-500">{brand}</p>
-          <h3 className="text-[16px] font-openSans text-primary font-medium group-hover:text-[#C9563C] leading-6 duration-500">
+          <h3 className="text-[16px] font-openSans text-[#007185] font-medium group-hover:text-[#C9563C] leading-6 duration-500 group-hover:underline group-hover:underline-offset-4 group-hover:decoration-[#C9563C]">
             {title?.length > 35 ? `${title?.slice(0, 38)}...` : title}
           </h3>
           <button className="flex items-center text-[#C9563C] text-sm">

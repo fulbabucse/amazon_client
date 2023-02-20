@@ -269,8 +269,8 @@ const OurShop = () => {
                     return b.price - a.price;
                   }
                 })
-                ?.map((product) => (
-                  <ProductCard key={product?._id} product={product} />
+                ?.map((product, index) => (
+                  <ProductCard key={product?._id} product={product} index={index}/>
                 ))}
             </div>
 

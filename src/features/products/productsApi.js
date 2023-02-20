@@ -36,6 +36,12 @@ const productApi = apiSlice.injectEndpoints({
       query: () => ({
         url: "/products/books/get",
       }),
+      providesTags: ["Product"],
+    }),
+    getFashionProducts: builder.query({
+      query: () => ({
+        url: "/products/fashions/get",
+      }),
     }),
   }),
 });
@@ -47,4 +53,5 @@ export const {
   useGetSingleProductQuery,
   usePostBookProductMutation,
   useGetBooksQuery,
+  useGetFashionProductsQuery,
 } = productApi;

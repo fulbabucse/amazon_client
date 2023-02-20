@@ -336,9 +336,9 @@ const ProductDetails = () => {
               const filteredProducts = product?._id !== id;
               return filteredProducts;
             })
-            ?.map((product) => (
+            ?.map((product, index) => (
               <>
-                <ProductCard key={product?._id} product={product} />
+                <ProductCard key={product?._id} product={product} index={index}/>
               </>
             ))}
         </div>

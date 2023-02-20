@@ -22,8 +22,8 @@ const Products = () => {
   return (
     <div className="px-4 my-10 lg:min-h-[100vh]">
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
-        {products?.map((product) => (
-          <ProductCard key={product?._id} product={product} />
+        {products?.map((product, index) => (
+          <ProductCard key={product?._id} product={product} index={index} />
         ))}
       </div>
     </div>
