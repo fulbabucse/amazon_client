@@ -19,6 +19,7 @@ import NewRelease from "../pages/NewRelease";
 import Orders from "../pages/Orders";
 import OurShop from "../pages/OurShop";
 import Products from "../pages/Products";
+import Search from "../pages/Search";
 import TodayDeals from "../pages/TodayDeals";
 import SignIn from "../pages/users/SignIn";
 import SignUp from "../pages/users/SignUp";
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       { path: "/products/:categoryName/:category", element: <Products /> },
       { path: "/products/:category", element: <Products /> },
       { path: "/product/:category/:id", element: <ProductDetails /> },
+      { path: "/search", element: <Search /> },
       { path: "/:coming", element: <ComingSoon /> },
       { path: "/books", element: <Books /> },
       { path: "/fashions", element: <Fashion /> },

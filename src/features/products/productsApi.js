@@ -43,6 +43,11 @@ const productApi = apiSlice.injectEndpoints({
         url: "/products/fashions/get",
       }),
     }),
+    getSearchProducts: builder.query({
+      query: (search) => ({
+        url: `products/search/get?dept=${search.dept}&key=${search.key}`,
+      }),
+    }),
   }),
 });
 
@@ -54,4 +59,5 @@ export const {
   usePostBookProductMutation,
   useGetBooksQuery,
   useGetFashionProductsQuery,
+  useGetSearchProductsQuery,
 } = productApi;

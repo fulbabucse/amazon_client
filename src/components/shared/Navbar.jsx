@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from "react";
-import { MdOutlineLanguage } from "react-icons/md";
 import cartIcon from "../../assets/icons/cart.png";
 import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,6 +18,7 @@ import { logOut } from "../../features/auth/authSlice";
 import { FaUserCircle, FaTimes, FaBars } from "react-icons/fa";
 import { useGetCategoriesQuery } from "../../features/categories/categoryApi";
 import { useGetOrdersByEmailQuery } from "../../features/products/cartApi";
+import { getSearchValue } from "../../features/products/searchSlice";
 
 const Navbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
@@ -51,6 +51,23 @@ const Navbar = () => {
     return parseFloat(total) + parseFloat(current.quantity);
   }, 0);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const category = form.category.value;
+    const searchValue = form.search.value;
+
+    dispatch(getSearchValue({ category, searchValue }));
+    navigate(
+      `/search?q_d=${category
+        ?.toLowerCase()
+        ?.split("'")
+        ?.join("_")
+        ?.split(" ")
+        ?.join("_")}&q_k=${searchValue}`
+    );
+  };
+
   return (
     <div>
       <div className="lg:hidden">
@@ -58,7 +75,7 @@ const Navbar = () => {
       </div>
       <div className="hidden lg:block">
         <div className="bg-secondary w-full text-white hidden lg:block">
-          <div className="py-2 flex justify-between px-4 items-center border-b border-b-gray-500">
+          {/* <div className="py-2 flex justify-between px-4 items-center border-b border-b-gray-500">
             <div>
               <h3 className="text-sm">
                 Free Shipping over $100 and Free returns
@@ -124,23 +141,54 @@ const Navbar = () => {
                 </select>
               </div>
             </div>
-          </div>
-          <div className="flex items-center justify-between px-4 py-5">
+          </div> */}
+          <div className="flex items-center justify-between px-4 py-2">
             <div>
               <Link to="/" className="text-2xl font-semibold">
                 Crafty Commerce
               </Link>
             </div>
             <div className="w-[640px]">
-              <form className="flex items-center">
+              <form onSubmit={handleSubmit} className="flex items-center group">
+                <div className="bg-gray-200 rounded-l-md">
+                  <select
+                    name="category"
+                    className="form-select appearance-none
+      block
+      w-32
+      px-3
+      py-[10px]
+      rounded-l-md
+      h-full
+      text-[14px]
+      font-normal
+      text-gray-700
+      bg-transparent
+ bg-clip-padding bg-no-repeat
+      transition
+      ease-in-out
+      m-0 focus:outline-none"
+                    aria-label="Default select example"
+                  >
+                    <option selected>All Department</option>
+                    {data?.map((category, index) => (
+                      <option key={index} value={category?.category_name}>
+                        {category?.category_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 <input
                   type="text"
                   name="search"
-                  className="w-full py-2 px-4 text-sm text-primary focus:outline-none rounded-l-md"
+                  className="w-full py-[10.4px] px-4 text-sm text-primary focus:outline-none"
                   placeholder="Search here..."
                 />
-                <button className="bg-yellow-400 hover:bg-yellow-500 text-xl text-primary py-2 px-4 rounded-r-md">
-                  <AiOutlineSearch />
+                <button
+                  type="submit"
+                  className="bg-[#febd69] text-primary py-2 px-4 rounded-r-md"
+                >
+                  <AiOutlineSearch size={25} />
                 </button>
               </form>
             </div>
@@ -165,9 +213,12 @@ const Navbar = () => {
                       ) : (
                         <AiOutlineUserAdd className="text-3xl font-medium" />
                       )}
-                      <h3 className="text-xs text-start">
-                        {email ? name?.split(" ")[0] : "Log In"} <br /> My
-                        Account
+                      <h3 className="text-sm text-start font-semibold font-openSans">
+                        {email
+                          ? `Hello, ${name?.split(" ")[0]}`
+                          : "Hello, Log In"}
+                        <br />{" "}
+                        <span className="font-bold">Account & Lists</span>
                       </h3>
                     </div>
                   </button>

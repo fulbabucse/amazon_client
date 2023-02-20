@@ -68,7 +68,11 @@ const ProductCard = ({ product, index }) => {
         </div>
       )}
 
-      <div className="h-[250px] w-full m-auto relative group">
+      <div
+        className={`${
+          pathname === "/our-shop" ? "h-[250px]" : "h-[300px]"
+        }  w-full m-auto relative group`}
+      >
         <div className="w-full h-full bg-center bg-cover duration-500">
           <img
             src={images[currentIndex]}
@@ -111,7 +115,9 @@ const ProductCard = ({ product, index }) => {
         <div className="p-3 space-y-3">
           <p className="text-xs text-red-500">{brand}</p>
           <h3 className="text-[16px] font-openSans text-[#007185] font-medium group-hover:text-[#C9563C] leading-6 duration-500 group-hover:underline group-hover:underline-offset-4 group-hover:decoration-[#C9563C]">
-            {title?.length > 35 ? `${title?.slice(0, 38)}...` : title}
+            {pathname === "/our-shop"
+              ? `${title?.length > 35 ? `${title?.slice(0, 38)}...` : title}`
+              : title}
           </h3>
           <button className="flex items-center text-[#C9563C] text-sm">
             {ratingStar} <span className="ml-1">({rating})</span>
