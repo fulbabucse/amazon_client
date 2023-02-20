@@ -8,6 +8,7 @@ const initialState = {
     endPrice: 99,
     stock: true,
     sortPrice: 0,
+    card: "grid",
   },
 };
 
@@ -36,6 +37,9 @@ const filterSlice = createSlice({
     sortByPrice: (state, { payload }) => {
       state.filter.sortPrice = payload;
     },
+    cardStyle: (state, { payload }) => {
+      state.filter.card = payload;
+    },
   },
 });
 
@@ -45,6 +49,7 @@ export const {
   filterStartPrice,
   filterEndPrice,
   sortByPrice,
+  cardStyle,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

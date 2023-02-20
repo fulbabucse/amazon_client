@@ -17,15 +17,17 @@ import {
   filterStartPrice,
   filterEndPrice,
   sortByPrice,
+  cardStyle,
 } from "../features/products/filterSlice";
 import { BsCurrencyDollar, BsBorderAll } from "react-icons/bs";
 import { RxTriangleRight } from "react-icons/rx";
 import { FaBars, FaStar } from "react-icons/fa";
 import Spinner from "../components/shared/Spinner";
+import ListCard from "../components/shared/ListCard";
 const OurShop = () => {
   const dispatch = useDispatch();
   const { filter } = useSelector((state) => state.filter);
-  const { ratings, startPrice, endPrice, sortPrice } = filter;
+  const { ratings, startPrice, endPrice, sortPrice, card } = filter;
 
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(25);
@@ -246,32 +248,70 @@ const OurShop = () => {
                 <p className="text-sm">
                   {data?.products?.length} products found
                 </p>
-                <button className="bg-primary text-white p-1 rounded-md">
+                <button
+                  onClick={() => dispatch(cardStyle("list"))}
+                  className="bg-primary text-white p-1 rounded-md"
+                >
                   <FaBars />
                 </button>
-                <button className="bg-primary text-white p-1 rounded-md">
+                <button
+                  onClick={() => dispatch(cardStyle("grid"))}
+                  className="bg-primary text-white p-1 rounded-md"
+                >
                   <BsBorderAll />
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2 mt-2">
-              {data?.products
-                ?.filter((product) => {
-                  if (filter?.brands?.length) {
-                    return filter?.brands?.includes(product.brand);
-                  }
-                  return product;
-                })
-                ?.sort((a, b) => {
-                  if (sortPrice === 1) {
-                    return a.price - b.price;
-                  } else {
-                    return b.price - a.price;
-                  }
-                })
-                ?.map((product, index) => (
-                  <ProductCard key={product?._id} product={product} index={index}/>
-                ))}
+            <div
+              className={`${
+                card === "grid"
+                  ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5"
+                  : "grid grid-cols-1"
+              } mt-2 gap-2`}
+            >
+              {card === "grid"
+                ? data?.products
+                    ?.filter((product) => {
+                      if (filter?.brands?.length) {
+                        return filter?.brands?.includes(product.brand);
+                      }
+                      return product;
+                    })
+                    ?.sort((a, b) => {
+                      if (sortPrice === 1) {
+                        return a.price - b.price;
+                      } else {
+                        return b.price - a.price;
+                      }
+                    })
+                    ?.map((product, index) => (
+                      <ProductCard
+                        key={product?._id}
+                        product={product}
+                        index={index}
+                      />
+                    ))
+                : data?.products
+                    ?.filter((product) => {
+                      if (filter?.brands?.length) {
+                        return filter?.brands?.includes(product.brand);
+                      }
+                      return product;
+                    })
+                    ?.sort((a, b) => {
+                      if (sortPrice === 1) {
+                        return a.price - b.price;
+                      } else {
+                        return b.price - a.price;
+                      }
+                    })
+                    ?.map((product, index) => (
+                      <ListCard
+                        key={product?._id}
+                        product={product}
+                        index={index}
+                      />
+                    ))}
             </div>
 
             <nav
