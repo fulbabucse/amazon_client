@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { useUpdateQuantityMutation } from "../../features/products/cartApi";
+import {
+  useRemoveFromCartMutation,
+  useUpdateQuantityMutation,
+} from "../../features/products/cartApi";
 
 const SingleOrderCard = ({ order }) => {
   const [updateQuantity] = useUpdateQuantityMutation();
+  const [removeCart, { isSuccess }] = useRemoveFromCartMutation();
   const {
     _id,
     brand,
@@ -25,6 +30,16 @@ const SingleOrderCard = ({ order }) => {
     if (quantity > 0) {
       updateQuantity(data);
     }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("One Item remove successfully !!");
+    }
+  }, [isSuccess]);
+
+  const handleRemove = () => {
+    removeCart(_id);
   };
 
   return (
@@ -89,7 +104,10 @@ const SingleOrderCard = ({ order }) => {
               </select>
             </div>
             <div className="border-l border-l-gray-400 pl-4">
-              <button className="text-[#007600] text-[14px] hover:underline hover:underline-offset-4 hover:decoration-[#007600]">
+              <button
+                onClick={handleRemove}
+                className="text-[#007600] text-[14px] hover:underline hover:underline-offset-4 hover:decoration-[#007600]"
+              >
                 Delete
               </button>
             </div>

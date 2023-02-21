@@ -1,1 +1,1 @@
-export const baseURL = "https://crafty-commerce-server.vercel.app";
+export const baseURL = "http://localhost:5000";

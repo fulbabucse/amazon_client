@@ -345,7 +345,7 @@ const Navbar = () => {
                           : "left-[17px] -top-2"
                       }`}
                     >
-                      {quantity}
+                      {email ? quantity : 0}
                     </span>
                   </div>
                   <h3 className="text-[15px] font-semibold absolute -right-7 bottom-0">

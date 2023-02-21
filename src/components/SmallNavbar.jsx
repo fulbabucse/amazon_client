@@ -10,14 +10,16 @@ import { AiOutlineSearch, AiOutlineUser } from "react-icons/ai";
 import { useGetOrdersByEmailQuery } from "../features/products/cartApi";
 import { useSelector } from "react-redux";
 import cartIcon from "../assets/icons/cart.png";
+import { useGetCategoriesQuery } from "../features/categories/categoryApi";
 
 const SmallNavbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
 
   const {
-    user: { email, name, photoURL, isAdmin },
+    user: { email },
   } = useSelector((state) => state.auth);
   const { data: orders } = useGetOrdersByEmailQuery(email);
+  const { data } = useGetCategoriesQuery();
 
   const [open, setOpen] = useState(1);
 
@@ -62,7 +64,7 @@ const SmallNavbar = () => {
                         : "left-[17px] -top-2"
                     }`}
                   >
-                    {quantity}
+                    {email ? quantity : 0}
                   </span>
                 </div>
                 <h3 className="text-[15px] font-semibold absolute -right-7 bottom-0 text-white">
@@ -208,7 +210,7 @@ const SmallNavbar = () => {
               </button>
             </div>
             <div className="left-0 block fixed top-32 bottom-0 shadow-xl bg-white w-[280px] py-4 px-6 text-primary transition-all duration-700 ease-in-out overflow-hidden flex-row flex-nowrap overflow-y-auto z-40">
-              <Fragment>
+              {/* <Fragment>
                 <div className="space-y-1">
                   <Accordion open={open === 1}>
                     <AccordionHeader
@@ -614,6 +616,38 @@ const SmallNavbar = () => {
                       </div>
                     </AccordionBody>
                   </Accordion>
+                </div>
+              </Fragment> */}
+
+              <Fragment>
+                <div className="space-y-3">
+                  {data?.map(({ category_name, sub_category }, index) => (
+                    <Accordion key={index} open={open === index + 1}>
+                      <AccordionHeader
+                        className="text-[17px]"
+                        onClick={() => handleOpen(index + 1)}
+                      >
+                        {category_name}
+                      </AccordionHeader>
+                      <AccordionBody>
+                        <div className="flex flex-col space-y-2">
+                          {sub_category?.map(({ name, link }, index) => (
+                            <Link
+                              key={index}
+                              to={`/products/${category_name
+                                .split(" ")
+                                .join("-")
+                                .toLowerCase()}/${link}`}
+                              onClick={() => setOpenCategory(!openCategory)}
+                              className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
+                            >
+                              {name}
+                            </Link>
+                          ))}
+                        </div>
+                      </AccordionBody>
+                    </Accordion>
+                  ))}
                 </div>
               </Fragment>
 

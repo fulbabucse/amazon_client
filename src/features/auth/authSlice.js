@@ -30,9 +30,7 @@ export const signInUser = createAsyncThunk(
 );
 
 export const getUser = createAsyncThunk("auth/getUser", async (email) => {
-  const res = await fetch(
-    `${baseURL}/users?email=${email}`
-  );
+  const res = await fetch(`${baseURL}/users?email=${email}`);
   const user = await res.json();
 
   if (user?.status) {
@@ -50,7 +48,7 @@ const authSlice = createSlice({
       state.isLoading = false;
     },
     logOut: (state) => {
-      state.user.email = "";
+      state.user = {};
     },
   },
   extraReducers: (builder) => {

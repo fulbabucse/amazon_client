@@ -44,6 +44,7 @@ const router = createBrowserRouter([
       { path: "/best-sellers", element: <BestSeller /> },
       { path: "/new-releases", element: <NewRelease /> },
       { path: "/today-deals", element: <TodayDeals /> },
+
       {
         path: "/compare-product",
         element: (
@@ -76,8 +77,6 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      { path: "/sign-in", element: <SignIn /> },
-      { path: "/sign-up", element: <SignUp /> },
     ],
   },
   {
@@ -94,6 +93,8 @@ const router = createBrowserRouter([
       { path: "profile", element: <Profile /> },
     ],
   },
+  { path: "/sign-in", element: <SignIn /> },
+  { path: "/sign-up", element: <SignUp /> },
 ]);
 
 export default router;

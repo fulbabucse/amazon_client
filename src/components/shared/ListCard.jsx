@@ -22,8 +22,6 @@ const ListCard = ({ product }) => {
     );
   });
 
-  console.log(product);
-
   const discountedPrice = (price / 100) * (100 - 5);
   return (
     <Link

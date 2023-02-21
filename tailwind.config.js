@@ -17,6 +17,9 @@ module.exports = withMT({
         base: "#FFFFFF",
         danger: "#FF385C",
       },
+      boxShadow: {
+        inputShadow: "0 0 6px 0 rgb(231,118, 0)",
+      },
     },
   },
   plugins: [],

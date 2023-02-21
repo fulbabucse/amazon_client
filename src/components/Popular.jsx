@@ -18,7 +18,7 @@ const Popular = ({ data, id, title }) => {
 
         <div className="hidden group-hover:block">
           <div
-            className={`absolute left-3 right-3 top-[${50}%] flex justify-between items-center z-10 `}
+            className={`absolute left-3 right-3 top-[45%] flex justify-between items-center z-10 `}
           >
             <button
               onClick={prevSlide}
