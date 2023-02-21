@@ -29,7 +29,7 @@ const SignIn = () => {
     dispatch(signInUser({ email: data.email, password: data.password }));
   };
 
-  if (token) {
+  if (token && email) {
     return navigate("/");
   }
 
@@ -51,8 +51,8 @@ const SignIn = () => {
           <form onSubmit={handleSubmit(handleSignUser)} className="space-y-4">
             <div>
               <label
-                class="block text-gray-700 text-[13px] font-bold mb-1"
-                for="email"
+                className="block text-gray-700 text-[13px] font-bold mb-1"
+                htmlFor="email"
               >
                 Email
               </label>
@@ -72,8 +72,8 @@ const SignIn = () => {
             </div>
             <div>
               <label
-                class="text-gray-700 text-[13px] font-bold mb-1"
-                for="password"
+                className="text-gray-700 text-[13px] font-bold mb-1"
+                htmlFor="password"
               >
                 Password
               </label>
@@ -132,7 +132,7 @@ const SignIn = () => {
             </div>
           </form>
 
-          <div className="flex items-center justify-center gap-1 mt-4 text-sm">
+          <div className="flex items-center justify-center gap-1 my-4 text-sm">
             <p className="text-red-500 text-center text-xs">{setError}</p>
           </div>
         </div>
@@ -154,13 +154,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
-/**
- * <button className="text-end text-blue-800 text-[13px] hover:text-[#C9563C] hover:underline hover:underline-offset-4 hover:decoration-[#C9563C">
-                Forgot your password?
-              </button>
-
-              <Link to="/sign-up" className="text-blue-500 hover:underline">
-          Start here
-        </Link>
- */
