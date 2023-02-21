@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { useUpdateQuantityMutation } from "../../features/products/cartApi";
+import {
+  useRemoveFromCartMutation,
+  useUpdateQuantityMutation,
+} from "../../features/products/cartApi";
 
 const SmallOrderCard = ({ order }) => {
   const [updateQuantity] = useUpdateQuantityMutation();
+  const [removeCart, { isSuccess }] = useRemoveFromCartMutation();
   const {
     _id,
     brand,
@@ -25,6 +30,16 @@ const SmallOrderCard = ({ order }) => {
     if (quantity > 0) {
       updateQuantity(data);
     }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("One Item remove successfully !!");
+    }
+  }, [isSuccess]);
+
+  const handleRemove = () => {
+    removeCart(_id);
   };
   return (
     <div key={_id} className="m-3 bg-[#F7F9FA] px-2 py-3 rounded-[5px]">
@@ -101,7 +116,10 @@ const SmallOrderCard = ({ order }) => {
           </select>
         </div>
         <div className="">
-          <button className="bg-white text-[#5E5F5F] px-4 py-2 rounded-md shadow-sm border border-[#5E5F5F] border-opacity-30 text-[14px]">
+          <button
+            onClick={handleRemove}
+            className="bg-white text-[#5E5F5F] px-4 py-2 rounded-md shadow-sm border border-[#5E5F5F] border-opacity-30 text-[14px]"
+          >
             Delete
           </button>
         </div>

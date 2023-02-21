@@ -34,7 +34,8 @@ const ProductDetails = () => {
   const [size, setSize] = useState("");
 
   const { data, isLoading } = useGetSingleProductQuery(id);
-  const [postOrder, { isSuccess, data: orderResponse }] = usePostCartMutation();
+  const [postOrder, { isSuccess, data: orderResponse, error, isError }] =
+    usePostCartMutation();
 
   const {
     _id,
@@ -95,7 +96,12 @@ const ProductDetails = () => {
       toast.success(orderResponse.message);
       return;
     }
-  }, [isSuccess, orderResponse]);
+
+    if (isError) {
+      toast.success(error?.data?.message);
+      return;
+    }
+  }, [isSuccess, orderResponse, error, isError]);
 
   if (isLoading) {
     return <Spinner />;
@@ -338,7 +344,11 @@ const ProductDetails = () => {
             })
             ?.map((product, index) => (
               <>
-                <ProductCard key={product?._id} product={product} index={index}/>
+                <ProductCard
+                  key={product?._id}
+                  product={product}
+                  index={index}
+                />
               </>
             ))}
         </div>

@@ -18,6 +18,7 @@ import Home from "../pages/Home";
 import NewRelease from "../pages/NewRelease";
 import Orders from "../pages/Orders";
 import OurShop from "../pages/OurShop";
+import Billing from "../pages/payments/Billing";
 import Products from "../pages/Products";
 import Search from "../pages/Search";
 import TodayDeals from "../pages/TodayDeals";
@@ -95,6 +96,7 @@ const router = createBrowserRouter([
   },
   { path: "/sign-in", element: <SignIn /> },
   { path: "/sign-up", element: <SignUp /> },
+  { path: "/billing_address", element: <Billing /> },
 ]);
 
 export default router;

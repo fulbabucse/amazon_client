@@ -19,6 +19,7 @@ module.exports = withMT({
       },
       boxShadow: {
         inputShadow: "0 0 6px 0 rgb(231,118, 0)",
+        selectShadow: "0 0 6px 0 rgb(0,113, 133)",
       },
     },
   },

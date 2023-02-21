@@ -7,6 +7,9 @@ const cartApi = apiSlice.injectEndpoints({
         url: "/orders",
         method: "POST",
         body: data,
+        headers: {
+          "content-type": "application/json",
+        },
       }),
       invalidatesTags: ["Orders"],
     }),
@@ -21,6 +24,9 @@ const cartApi = apiSlice.injectEndpoints({
         url: `/orders/update-quantity/${data.productId}`,
         method: "PATCH",
         body: data,
+        headers: {
+          "content-type": "application/json",
+        },
       }),
       invalidatesTags: ["Orders"],
     }),
