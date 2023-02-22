@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import SingleOrderCard from "../components/shared/SingleOrderCard";
 import SmallOrderCard from "../components/shared/SmallOrderCard";
+import SmallSpinner from "../components/shared/SmallSpinner";
 import { useGetOrdersByEmailQuery } from "../features/products/cartApi";
 
 const Cart = () => {
-  const navigate = useNavigate();
   const {
     user: { email },
   } = useSelector((state) => state.auth);
-  const { data } = useGetOrdersByEmailQuery(email);
+  const { data, isLoading } = useGetOrdersByEmailQuery(email);
+
+  useEffect(() => {
+    if (isLoading) {
+      <SmallSpinner />;
+    }
+  }, [isLoading]);
 
   const price = data?.reduce((total, current) => {
     return parseFloat(total) + parseFloat(current.price);
@@ -73,16 +79,16 @@ const Cart = () => {
                 <div className="bg-white p-4 space-y-3">
                   <div className="leading-[22px]">
                     <h3 className="text-[18px]">
-                      Subtotal ({quantity} items):{" "}
+                      Subtotal ({quantity} items):
                       <span className="font-bold">${price?.toFixed(2)}</span>
                     </h3>
                   </div>
-                  <button
-                    onClick={() => navigate("/billing_address")}
+                  <Link
+                    to={`/billing_address?order_sum&email=${email}&t_m=${Date.now().toLocaleString()}&yr=${new Date().getFullYear()}`}
                     className="block px-4 py-2 w-full text-sm bg-[#FFC940] text-primary transition-colors hover:bg-opacity-80 font-medium duration-200 ease-in-out rounded-md text-center"
                   >
                     Proceed to checkout
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -94,12 +100,12 @@ const Cart = () => {
             Your Cart is Empty !!
           </h1>
           <div>
-            <button
-              onClick={() => navigate("/")}
+            <Link
+              to="/"
               className="block px-4 py-2 w-full text-sm bg-[#FFC940] text-primary transition-colors hover:bg-opacity-80 font-medium duration-200 ease-in-out rounded-md text-center"
             >
               Back to Shopping
-            </button>
+            </Link>
           </div>
         </div>
       )}
