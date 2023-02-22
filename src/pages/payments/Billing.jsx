@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import SmallSpinner from "../../components/shared/SmallSpinner";
+import { useCreatePaymentSessionMutation } from "../../features/payments/paymentsApi";
 import {
   useGetBillingAddressQuery,
   usePostBillingMutation,
@@ -24,8 +25,12 @@ const Billing = () => {
   } = useSelector((state) => state.auth);
 
   const { data, isLoading } = useGetOrdersByEmailQuery(email);
+  const [postPayment, { data: paymentsData, isSuccess: paymentsSuccess }] =
+    useCreatePaymentSessionMutation();
+
   const [postBillingAddress, { isError, error, isSuccess, data: postSuccess }] =
     usePostBillingMutation();
+
   const { data: billingAddresses, isLoading: billingLoading } =
     useGetBillingAddressQuery(email);
 
@@ -43,6 +48,16 @@ const Billing = () => {
   const quantity = data?.reduce((total, current) => {
     return parseFloat(total) + parseFloat(current.quantity);
   }, 0);
+
+  const handlePayment = () => {
+    postPayment(billingAddresses);
+  };
+
+  useEffect(() => {
+    if (paymentsSuccess) {
+      window.location = paymentsData.url;
+    }
+  }, [paymentsSuccess, paymentsData]);
 
   const handleSaveAddress = (data) => {
     setMessage("");
@@ -333,7 +348,8 @@ const Billing = () => {
 
             <div className="mt-5 flex justify-end">
               <button
-                type="submit"
+                type="button"
+                onClick={handlePayment}
                 style={{ fontSize: "13px", fontWeight: "500" }}
                 className="py-[3px] bg-[#FFD814] hover:bg-[#F7CA00] focus:bg-[#F0b800] capitalize border-[1px] border-[#F2C200] px-3 text-base rounded-[10px] outline-none focus-within:border-[#008296] focus-within:shadow-selectShadow duration-100 text-black"
               >

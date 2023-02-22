@@ -19,6 +19,8 @@ import NewRelease from "../pages/NewRelease";
 import Orders from "../pages/Orders";
 import OurShop from "../pages/OurShop";
 import Billing from "../pages/payments/Billing";
+import Cancel from "../pages/payments/Cancel";
+import Success from "../pages/payments/Success";
 import Products from "../pages/Products";
 import Search from "../pages/Search";
 import TodayDeals from "../pages/TodayDeals";
@@ -45,6 +47,8 @@ const router = createBrowserRouter([
       { path: "/best-sellers", element: <BestSeller /> },
       { path: "/new-releases", element: <NewRelease /> },
       { path: "/today-deals", element: <TodayDeals /> },
+      { path: "/payments/success", element: <Success /> },
+      { path: "/payments/cancel", element: <Cancel /> },
 
       {
         path: "/compare-product",
