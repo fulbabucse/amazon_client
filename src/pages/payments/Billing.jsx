@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import {  useNavigate } from "react-router";
 import SmallSpinner from "../../components/shared/SmallSpinner";
 import { useCreatePaymentSessionMutation } from "../../features/payments/paymentsApi";
 import {
@@ -50,6 +51,11 @@ const Billing = () => {
   }, 0);
 
   const handlePayment = () => {
+    if (!billingAddresses?.email) {
+      toast.error("Complete the Shipping Address before !!");
+      return;
+    }
+
     postPayment(billingAddresses);
   };
 
@@ -350,6 +356,7 @@ const Billing = () => {
               <button
                 type="button"
                 onClick={handlePayment}
+                // disabled={!billingAddresses?.email}
                 style={{ fontSize: "13px", fontWeight: "500" }}
                 className="py-[3px] bg-[#FFD814] hover:bg-[#F7CA00] focus:bg-[#F0b800] capitalize border-[1px] border-[#F2C200] px-3 text-base rounded-[10px] outline-none focus-within:border-[#008296] focus-within:shadow-selectShadow duration-100 text-black"
               >
