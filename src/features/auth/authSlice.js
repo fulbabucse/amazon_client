@@ -8,7 +8,7 @@ import { baseURL } from "../../utils/baseURL";
 
 const initialState = {
   user: { email: "", name: "", photoURL: "" },
-  isLoading: true,
+  isLoading: false,
   error: "",
   isAdmin: false,
 };

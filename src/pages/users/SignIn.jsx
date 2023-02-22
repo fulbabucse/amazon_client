@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signInUser } from "../../features/auth/authSlice";
 import useToken from "../../hooks/useToken";
 import styles from "./signIn.module.css";
@@ -17,6 +17,8 @@ const SignIn = () => {
   } = useForm();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const {
     user: { email },
@@ -30,7 +32,7 @@ const SignIn = () => {
   };
 
   if (token && email) {
-    return navigate("/");
+    return navigate(from, { replace: true });
   }
 
   let setError;
