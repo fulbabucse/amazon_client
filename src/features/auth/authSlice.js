@@ -8,7 +8,7 @@ import { baseURL } from "../../utils/baseURL";
 
 const initialState = {
   user: { email: "", name: "", photoURL: "" },
-  isLoading: false,
+  isLoading: true,
   error: "",
   isAdmin: false,
 };
@@ -49,6 +49,9 @@ const authSlice = createSlice({
     },
     logOut: (state) => {
       state.user = {};
+    },
+    removeLoading: (state) => {
+      state.isLoading = false;
     },
   },
   extraReducers: (builder) => {
@@ -105,6 +108,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, logOut } = authSlice.actions;
+export const { setUser, logOut, removeLoading } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -5,7 +5,7 @@ import { FaBars } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import ListCard from "../components/shared/ListCard";
 import ProductCard from "../components/shared/ProductCard";
-import Spinner from "../components/shared/Spinner";
+import SmallSpinner from "../components/shared/SmallSpinner";
 import {
   cardStyle,
   filterBrands,
@@ -21,7 +21,7 @@ const Search = () => {
   const dispatch = useDispatch();
 
   if (isLoading) {
-    return <Spinner />;
+    return <SmallSpinner />;
   }
 
   let brands = [];
@@ -33,10 +33,10 @@ const Search = () => {
   });
 
   return (
-    <div className="p-4 lg:min-h-[100vh]">
+    <div className="px-3 pt-0 pb-3 lg:min-h-[100vh]">
       {data?.length > 0 ? (
-        <div className="lg:px-4 mt-4">
-          <div className="flex flex-wrap gap-2">
+        <div className="lg:px-4 lg:mt-4">
+          <div className="flex flex-wrap flex-col-reverse lg:flex-row gap-2">
             <div className="lg:max-w-[240px] my-3 lg:mt-0 w-full space-y-2">
               <div className="bg-white p-3">
                 <h1 className="text-xl font-semibold text-primary mb-3">
@@ -55,7 +55,7 @@ const Search = () => {
                 </div>
               </div>
             </div>
-            <div className="lg:flex-1 w-full">
+            <div className="lg:flex-1 w-full pt-3 lg:pt-0">
               <div className="bg-white rounded-md py-2 px-4 flex flex-wrap flex-col lg:flex-row lg:flex-nowrap lg:justify-between lg:items-center gap-4 lg:gap-0 w-full">
                 <div className="flex items-center gap-6">
                   <p className="text-sm">Sort By:</p>

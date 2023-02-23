@@ -23,7 +23,7 @@ import { getCategoryProducts } from "../../features/products/productSlice";
 import Comments from "../ProductReviews/Comments";
 import Reviews from "../ProductReviews/Reviews";
 import ProductCard from "./ProductCard";
-import Spinner from "./Spinner";
+import SmallSpinner from "./SmallSpinner";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -104,7 +104,7 @@ const ProductDetails = () => {
   }, [isSuccess, orderResponse, error, isError]);
 
   if (isLoading) {
-    return <Spinner />;
+    return <SmallSpinner />;
   }
 
   const handleAddToCart = () => {

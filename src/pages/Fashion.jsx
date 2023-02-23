@@ -1,13 +1,13 @@
 import React from "react";
 import ProductCard from "../components/shared/ProductCard";
-import Spinner from "../components/shared/Spinner";
+import SmallSpinner from "../components/shared/SmallSpinner";
 import { useGetFashionProductsQuery } from "../features/products/productsApi";
 
 const Fashion = () => {
   const { data, isLoading } = useGetFashionProductsQuery();
 
   if (isLoading) {
-    return <Spinner />;
+    return <SmallSpinner />;
   }
   return (
     <div className="p-4">

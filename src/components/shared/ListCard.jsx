@@ -26,19 +26,23 @@ const ListCard = ({ product }) => {
   return (
     <Link
       to={`/product/${category}/${_id}`}
-      className="flex justify-center items-center gap-4 group bg-white rounded-md"
+      className="flex justify-center items-center gap-2 lg:gap-4 group bg-white rounded-md"
     >
-      <div className="w-64 rounded-l-md">
+      <div className="w-40 lg:w-64 h-[250px] rounded-l-md">
         <img
           src={thumbnail}
           alt={title}
-          className="w-full h-[250px] rounded-l-md"
+          className="w-full h-full lg:h-[250px] rounded-l-md"
         />
       </div>
-      <div className="flex-1 py-4">
+      <div className="flex-1 lg:py-4 py-2 pr-1">
         <div>
-          <h1 className="text-[18px] lg:text-[22px] font-openSans text-[#007185] font-medium group-hover:text-[#C9563C] leading-[24px] duration-500 ">
+          <h1 className="hidden lg:block text-[18px] lg:text-[22px] font-openSans text-[#007185] font-medium group-hover:text-[#C9563C] leading-[24px] duration-500 ">
             {title}
+          </h1>
+
+          <h1 className="lg:hidden text-[18px] lg:text-[22px] font-openSans text-[#007185] font-medium group-hover:text-[#C9563C] leading-[24px] duration-500 ">
+            {title?.length > 30 ? `${title?.slice(0, 30)}...` : title}
           </h1>
           <button className="flex items-center text-[#C9563C] text-sm lg:text-xl">
             {ratingStar} <span className="ml-1">({rating})</span>

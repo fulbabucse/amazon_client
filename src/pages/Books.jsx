@@ -1,13 +1,13 @@
 import React from "react";
 import ProductCard from "../components/shared/ProductCard";
-import Spinner from "../components/shared/Spinner";
+import SmallSpinner from "../components/shared/SmallSpinner";
 import { useGetBooksQuery } from "../features/products/productsApi";
 
 const Books = () => {
   const { data, isLoading } = useGetBooksQuery();
 
   if (isLoading) {
-    return <Spinner />;
+    return <SmallSpinner />;
   }
 
   return (

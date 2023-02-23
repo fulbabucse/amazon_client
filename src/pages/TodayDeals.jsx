@@ -1,13 +1,13 @@
 import React from "react";
 import ProductCard from "../components/shared/ProductCard";
-import Spinner from "../components/shared/Spinner";
+import SmallSpinner from "../components/shared/SmallSpinner";
 import { useGetAllProductsQuery } from "../features/products/productsApi";
 
 const TodayDeals = () => {
   const { data, isLoading } = useGetAllProductsQuery();
 
   if (isLoading) {
-    return <Spinner />;
+    return <SmallSpinner />;
   }
 
   return (

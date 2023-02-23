@@ -47,8 +47,22 @@ const router = createBrowserRouter([
       { path: "/best-sellers", element: <BestSeller /> },
       { path: "/new-releases", element: <NewRelease /> },
       { path: "/today-deals", element: <TodayDeals /> },
-      { path: "/payments/success", element: <Success /> },
-      { path: "/payments/cancel", element: <Cancel /> },
+      {
+        path: "/payments/success",
+        element: (
+          <PrivateRoute>
+            <Success />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/payments/cancel",
+        element: (
+          <PrivateRoute>
+            <Cancel />
+          </PrivateRoute>
+        ),
+      },
 
       {
         path: "/compare-product",
@@ -100,7 +114,14 @@ const router = createBrowserRouter([
   },
   { path: "/sign-in", element: <SignIn /> },
   { path: "/sign-up", element: <SignUp /> },
-  { path: "/billing_address", element: <Billing /> },
+  {
+    path: "/billing_address",
+    element: (
+      <PrivateRoute>
+        <Billing />
+      </PrivateRoute>
+    ),
+  },
 ]);
 
 export default router;

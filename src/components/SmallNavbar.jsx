@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Accordion,
   AccordionBody,
@@ -8,15 +8,18 @@ import {
 import { FaTimes, FaBars } from "react-icons/fa";
 import { AiOutlineSearch, AiOutlineUser } from "react-icons/ai";
 import { useGetOrdersByEmailQuery } from "../features/products/cartApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import cartIcon from "../assets/icons/cart.png";
 import { useGetCategoriesQuery } from "../features/categories/categoryApi";
+import { getSearchValue } from "../features/products/searchSlice";
 
 const SmallNavbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
-    user: { email },
+    user: { email, name },
   } = useSelector((state) => state.auth);
   const { data: orders } = useGetOrdersByEmailQuery(email);
   const { data } = useGetCategoriesQuery();
@@ -31,35 +34,61 @@ const SmallNavbar = () => {
     return parseFloat(total) + parseFloat(current.quantity);
   }, 0);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const category = form.category.value;
+    const searchValue = form.search.value;
+
+    dispatch(getSearchValue({ category, searchValue }));
+    navigate(
+      `/search?q_d=${category
+        ?.toLowerCase()
+        ?.split("'")
+        ?.join("_")
+        ?.split(" ")
+        ?.join("_")}&q_k=${searchValue}`
+    );
+  };
+
   return (
     <>
       <div className="relative">
         <div className="bg-primary p-4 flex justify-between items-center w-full">
-          <div className="flex items-center gap-3 text-white relative group">
+          <div className="flex items-center gap-3 text-white relative">
             <button
               onClick={() => setOpenCategory(!openCategory)}
               className="flex items-center"
             >
               <div className="flex items-center gap-1">
-                <FaBars className="text-white text-lg group-hover:text-[#C9563C] duration-500 transition-all ease-in-out" />
+                <FaBars className="text-white text-lg duration-500 transition-all ease-in-out" />
               </div>
             </button>
             <Link to="/" className="text-[17px] font-bold">
-              Crafty Commerce
+              Crafty
             </Link>
           </div>
           <div className="flex items-center gap-2">
-            <Link to="/sign-in" className="flex items-center text-white">
-              <span className="text-sm font-openSans">Sign In</span>
-              <AiOutlineUser size={30} />
-            </Link>
+            {email ? (
+              <Link to="/account" className="flex items-center text-white">
+                <span className="text-sm font-openSans">
+                  {name?.split(" ")[0]}
+                </span>
+                <AiOutlineUser size={30} />
+              </Link>
+            ) : (
+              <Link to="/sign-in" className="flex items-center text-white">
+                <span className="text-sm font-openSans">Sign In</span>
+                <AiOutlineUser size={30} />
+              </Link>
+            )}
             <Link to="/cart">
               <div className="flex relative mr-8">
                 <div>
                   <img src={cartIcon} alt="" />
                   <span
                     className={`text-[#C9563C] font-roboto text-[15px] absolute font-bold ${
-                      quantity > 9
+                      quantity > 9 && email
                         ? "left-[11px] -top-[9px]"
                         : "left-[17px] -top-2"
                     }`}
@@ -75,50 +104,92 @@ const SmallNavbar = () => {
           </div>
         </div>
         <div className="bg-primary px-4 pb-4">
-          <form className="flex items-center">
+          <form onSubmit={handleSubmit} className="flex items-center">
+            <div className="bg-gray-200 rounded-l-md">
+              <select
+                name="category"
+                className="form-select appearance-none
+      block
+      w-10
+      px-3
+      py-[7.5px]
+      rounded-l-md
+      h-full
+      text-[14px]
+      font-normal
+      text-gray-700
+      bg-transparent
+ bg-clip-padding bg-no-repeat
+      transition
+      ease-in-out
+      m-0 focus:outline-none"
+                aria-label="Default select example"
+              >
+                <option selected>All Department</option>
+                {data?.map((category, index) => (
+                  <option key={index} value={category?.category_name}>
+                    {category?.category_name}
+                  </option>
+                ))}
+              </select>
+            </div>
             <input
               type="text"
               name="search"
-              className="w-full py-2 px-4 text-sm text-primary focus:outline-none rounded-l-md"
+              className="w-full py-2 px-4 text-sm text-primary focus:outline-none"
               placeholder="Search here..."
             />
-            <button className="bg-yellow-400 hover:bg-yellow-500 text-xl text-primary py-2 px-4 rounded-r-md">
+            <button className="bg-[#febd69] hover:bg-opacity-95 text-xl text-primary py-2 px-4 rounded-r-md">
               <AiOutlineSearch />
             </button>
           </form>
         </div>
-        <div className="bg-[#3A495D] w-full flex items-center gap-4 text-white px-4 py-3 ">
-          <div>
-            <Link
-              to="/"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
-            >
-              Home
-            </Link>
-          </div>
-
+        <div className="bg-[#3A495D] overflow-x-auto w-full flex items-center gap-[10px] text-white px-4 py-1.5 ">
           <div>
             <Link
               to="/our-shop"
-              className="block transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="block transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
             >
               Our Shop
             </Link>
           </div>
-
+          <div className="inline-block">
+            <Link
+              to="/best-sellers"
+              className="block transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
+            >
+              Best sellers
+            </Link>
+          </div>
           <div>
             <Link
-              to="/blogs"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              to="/today-deals"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
             >
-              Blogs
+              Today's Deals
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/books"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
+            >
+              Books
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/fashions"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
+            >
+              Fashions
             </Link>
           </div>
 
           {/* <li className="list-none">
             <Link
               to="/customer-service"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
             >
               Customer service
             </Link>
@@ -126,7 +197,7 @@ const SmallNavbar = () => {
           <div>
             <Link
               to="/best-sellers"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
             >
               Best sellers
             </Link>
@@ -134,7 +205,7 @@ const SmallNavbar = () => {
           <div>
             <Link
               to="/new-releases"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
             >
               New Releases
             </Link>
@@ -142,7 +213,7 @@ const SmallNavbar = () => {
           <div>
             <Link
               to="/today-deals"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
             >
               Today's Teals
             </Link>
@@ -150,7 +221,7 @@ const SmallNavbar = () => {
           <div>
             <Link
               to="/books"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
             >
               Books
             </Link>
@@ -158,19 +229,11 @@ const SmallNavbar = () => {
           <div>
             <Link
               to="/fashion"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
             >
               Fashion
             </Link>
           </div> */}
-          <div>
-            <Link
-              to="/contact"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
-            >
-              Contact
-            </Link>
-          </div>
         </div>
 
         <div
@@ -184,14 +247,27 @@ const SmallNavbar = () => {
             <div className="w-full h-[130px] flex justify-between items-center px-5 bg-primary text-white text-center relative z-40">
               <div className="w-full">
                 <div className="absolute top-5 right-5">
-                  <Link
-                    onClick={() => setOpenCategory(!openCategory)}
-                    to="/sign-in"
-                    className="flex items-center text-white"
-                  >
-                    <span className="text-sm font-openSans">Sign In</span>
-                    <AiOutlineUser size={25} />
-                  </Link>
+                  {email ? (
+                    <Link
+                      to="/account"
+                      onClick={() => setOpenCategory(!openCategory)}
+                      className="flex items-center text-white"
+                    >
+                      <span className="text-sm font-openSans">
+                        Your Account
+                      </span>
+                      <AiOutlineUser size={30} />
+                    </Link>
+                  ) : (
+                    <Link
+                      to="/sign-in"
+                      onClick={() => setOpenCategory(!openCategory)}
+                      className="flex items-center text-white"
+                    >
+                      <span className="text-sm font-openSans">Sign In</span>
+                      <AiOutlineUser size={30} />
+                    </Link>
+                  )}
                 </div>
                 <div className="text-white absolute left-4 bottom-4 text-start leading-[8px]">
                   <h3 className="font-medium">Browse</h3>
@@ -210,415 +286,6 @@ const SmallNavbar = () => {
               </button>
             </div>
             <div className="left-0 block fixed top-32 bottom-0 shadow-xl bg-white w-[280px] py-4 px-6 text-primary transition-all duration-700 ease-in-out overflow-hidden flex-row flex-nowrap overflow-y-auto z-40">
-              {/* <Fragment>
-                <div className="space-y-1">
-                  <Accordion open={open === 1}>
-                    <AccordionHeader
-                      onClick={() => handleOpen(1)}
-                      className="text-[15px]"
-                    >
-                      Men's Fashion
-                    </AccordionHeader>
-                    <AccordionBody>
-                      <div className="flex flex-col gap-2">
-                        <Link
-                          to={`/products/t-shirts`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300
-                                hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          T-Shirt
-                        </Link>
-                        <Link
-                          to={`/products/mens-jackets-blazers-coats`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          Jackets, Blazer & Coats
-                        </Link>
-                        <Link
-                          to={`/products/mens-bags-backpack`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          bags & backpack
-                        </Link>
-                        <Link
-                          to={`/products/wallets`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          wallets
-                        </Link>
-                        <Link
-                          to={`/products/belts`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          belts
-                        </Link>
-                        <Link
-                          to={`/products/mens-shoes`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          Shoes
-                        </Link>
-                      </div>
-                    </AccordionBody>
-                  </Accordion>
-                  <Accordion open={open === 2}>
-                    <AccordionHeader
-                      onClick={() => handleOpen(2)}
-                      className="text-[15px]"
-                    >
-                      Women's Fashion
-                    </AccordionHeader>
-                    <AccordionBody>
-                      <div className="flex flex-col gap-2">
-                        <Link
-                          to={`/products/women-kurtas-kurtis-suits`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300
-                                hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          women kurtas kurtis suits
-                        </Link>
-                        <Link
-                          to={`/products/womens-dresses`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          dress materials
-                        </Link>
-                        <Link
-                          to={`/products/sarees`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          sarees
-                        </Link>
-                        <Link
-                          to={`/products/lehenga-cholis`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          lehenga cholis
-                        </Link>
-                        <Link
-                          to={`/products/womens-jackets-coats`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          jackets & Coats
-                        </Link>
-                        <Link
-                          to={`/products/sleepwear`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          sleepwear
-                        </Link>
-                        <Link
-                          to={`/products/womens-shoes`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          shoes
-                        </Link>
-                        <Link
-                          to={`/products/womens-watches`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          watches
-                        </Link>
-                        <Link
-                          to={`/products/womens-bags`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          bags & backpack
-                        </Link>
-                        <Link
-                          to={`/products/tops`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          tops
-                        </Link>
-                        <Link
-                          to={`/products/sunglasses`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          sunglasses
-                        </Link>
-                      </div>
-                    </AccordionBody>
-                  </Accordion>
-                  <Accordion open={open === 3}>
-                    <AccordionHeader
-                      onClick={() => handleOpen(3)}
-                      className="text-[15px]"
-                    >
-                      Kid's Fashion
-                    </AccordionHeader>
-                    <AccordionBody>
-                      <div className="flex flex-col gap-2">
-                        <Link
-                          to={`/products/diapering`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300
-                                hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          diapering
-                        </Link>
-                        <Link
-                          to={`/products/feeding`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          feeding
-                        </Link>
-                      </div>
-                    </AccordionBody>
-                  </Accordion>
-                  <Accordion open={open === 4}>
-                    <AccordionHeader
-                      onClick={() => handleOpen(4)}
-                      className="text-[15px]"
-                    >
-                      Cosmetics
-                    </AccordionHeader>
-                    <AccordionBody>
-                      <div className="flex flex-col gap-2">
-                        <Link
-                          to={`/products/fragrances`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300
-                                hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          fragrances
-                        </Link>
-                        <Link
-                          to={`/products/skincare`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          skincare
-                        </Link>
-                        <Link
-                          to={`/products/sunglasses`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          sunglasses
-                        </Link>
-                        <Link
-                          to={`/products/womens-jewellery`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          jewellery
-                        </Link>
-                      </div>
-                    </AccordionBody>
-                  </Accordion>
-                  <Accordion open={open === 5}>
-                    <AccordionHeader
-                      onClick={() => handleOpen(5)}
-                      className="text-[15px]"
-                    >
-                      Automotive
-                    </AccordionHeader>
-                    <AccordionBody>
-                      <div className="flex flex-col gap-2">
-                        <Link
-                          to={`/products/automotive`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300
-                                hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          Automotive
-                        </Link>
-                        <Link
-                          to={`/products/motorcycle`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          motorcycle
-                        </Link>
-                      </div>
-                    </AccordionBody>
-                  </Accordion>
-                  <Accordion open={open === 6}>
-                    <AccordionHeader
-                      onClick={() => handleOpen(6)}
-                      className="text-[15px]"
-                    >
-                      Home and Kitchen
-                    </AccordionHeader>
-                    <AccordionBody>
-                      <div className="flex flex-col gap-2">
-                        <Link
-                          to={`/products/furniture`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300
-                                hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          furniture
-                        </Link>
-                        <Link
-                          to={`/products/home-decoration`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          home decoration
-                        </Link>
-                      </div>
-                    </AccordionBody>
-                  </Accordion>
-                  <Accordion open={open === 7}>
-                    <AccordionHeader
-                      onClick={() => handleOpen(7)}
-                      className="text-[15px]"
-                    >
-                      Movies and Television
-                    </AccordionHeader>
-                    <AccordionBody>
-                      <div className="flex flex-col gap-2">
-                        <Link
-                          to={`/products/movies`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300
-                                hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          movies
-                        </Link>
-                        <Link
-                          to={`/products/tv-shows`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          tv shows
-                        </Link>
-                        <Link
-                          to={`/products/best-sellers`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          best sellers
-                        </Link>
-                      </div>
-                    </AccordionBody>
-                  </Accordion>
-                  <Accordion open={open === 8}>
-                    <AccordionHeader
-                      onClick={() => handleOpen(8)}
-                      className="text-[15px]"
-                    >
-                      Electronics
-                    </AccordionHeader>
-                    <AccordionBody>
-                      <div className="flex flex-col gap-2">
-                        <Link
-                          to={`/products/smartphones`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300
-                                hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          Smartphones
-                        </Link>
-                        <Link
-                          to={`/products/lighting`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          lighting
-                        </Link>
-                        <Link
-                          to={`/products/home-audio`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          home audio
-                        </Link>
-                        <Link
-                          to={`/products/camera-photo`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          camera photo
-                        </Link>
-                        <Link
-                          to={`/products/security-and-surveillance`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          security and surveillance
-                        </Link>
-                      </div>
-                    </AccordionBody>
-                  </Accordion>
-                  <Accordion open={open === 9}>
-                    <AccordionHeader
-                      onClick={() => handleOpen(9)}
-                      className="text-[15px]"
-                    >
-                      Computers
-                    </AccordionHeader>
-                    <AccordionBody>
-                      <div className="flex flex-col gap-2">
-                        <Link
-                          to={`/products/computer accessories`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300
-                                hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          computer accessories
-                        </Link>
-                        <Link
-                          to={`/products/laptops`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          laptops
-                        </Link>
-                        <Link
-                          to={`/products/laptop-accessories`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          laptop accessories
-                        </Link>
-                        <Link
-                          to={`/products/monitors`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          monitors
-                        </Link>
-                        <Link
-                          to={`/products/printers`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          printers
-                        </Link>
-                        <Link
-                          to={`/products/scanners`}
-                          onClick={() => setOpenCategory(!openCategory)}
-                          className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                        >
-                          scanners
-                        </Link>
-                      </div>
-                    </AccordionBody>
-                  </Accordion>
-                </div>
-              </Fragment> */}
-
               <Fragment>
                 <div className="space-y-3">
                   {data?.map(({ category_name, sub_category }, index) => (

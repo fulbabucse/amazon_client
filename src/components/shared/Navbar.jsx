@@ -75,73 +75,6 @@ const Navbar = () => {
       </div>
       <div className="hidden lg:block">
         <div className="bg-secondary w-full text-white hidden lg:block">
-          {/* <div className="py-2 flex justify-between px-4 items-center border-b border-b-gray-500">
-            <div>
-              <h3 className="text-sm">
-                Free Shipping over $100 and Free returns
-              </h3>
-            </div>
-            <div className="flex justify-between items-center gap-2">
-              <div className="flex justify-between items-center gap-2 text-sm border-r border-r-gray-300 pr-4">
-                <p>Hotline (+880)</p>
-                <a href="tel:01736534295">1736534295</a>
-                <a href="tel:01840095590">1840095590</a>
-              </div>
-              <div className="flex items-center">
-                <MdOutlineLanguage />
-                <select
-                  defaultValue="EN"
-                  className="text-white bg-transparent text-sm focus-visible:outline-none text-center rounded-none"
-                >
-                  <option
-                    selected
-                    value="EN"
-                    className="text-primary text-center rounded-none"
-                  >
-                    English
-                  </option>
-                  <option
-                    value="BN"
-                    className="text-primary text-center rounded-none"
-                  >
-                    Bangla
-                  </option>
-                  <option
-                    value="SP"
-                    className="text-primary text-center rounded-none"
-                  >
-                    Spanish
-                  </option>
-                </select>
-              </div>
-              <div>
-                <select
-                  defaultValue="USD"
-                  className="text-white bg-transparent text-sm focus-visible:outline-none text-center rounded-none"
-                >
-                  <option
-                    selected
-                    value="USD"
-                    className="text-primary flex items-center text-center rounded-none"
-                  >
-                    USD
-                  </option>
-                  <option
-                    value="BDT"
-                    className="text-primary text-center rounded-none"
-                  >
-                    BDT
-                  </option>
-                  <option
-                    value="EURO"
-                    className="text-primary text-center rounded-none"
-                  >
-                    EURO
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div> */}
           <div className="flex items-center justify-between px-4 py-2">
             <div>
               <Link to="/" className="text-2xl font-semibold">
@@ -217,7 +150,7 @@ const Navbar = () => {
                         {email
                           ? `Hello, ${name?.split(" ")[0]}`
                           : "Hello, Log In"}
-                        <br />{" "}
+                        <br />
                         <span className="font-bold">Account & Lists</span>
                       </h3>
                     </div>
@@ -340,7 +273,7 @@ const Navbar = () => {
                     <img src={cartIcon} alt="" />
                     <span
                       className={`text-[#C9563C] font-roboto text-[15px] absolute font-bold ${
-                        quantity > 9
+                        quantity > 9 && email
                           ? "left-[11px] -top-[9px]"
                           : "left-[17px] -top-2"
                       }`}

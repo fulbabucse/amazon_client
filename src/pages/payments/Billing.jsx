@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
-import {  useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import SmallSpinner from "../../components/shared/SmallSpinner";
 import { useCreatePaymentSessionMutation } from "../../features/payments/paymentsApi";
 import {
@@ -43,7 +43,7 @@ const Billing = () => {
   }, []);
 
   const price = data?.reduce((total, current) => {
-    return parseFloat(total) + parseFloat(current.price);
+    return Math.ceil(total) + Math.ceil(current.price);
   }, 0);
 
   const quantity = data?.reduce((total, current) => {
@@ -85,9 +85,9 @@ const Billing = () => {
     return <SmallSpinner />;
   }
 
-  const shipping = billingAddresses?.country === "Bangladesh" ? 3.0 : 17.0;
+  const shipping = billingAddresses?.country === "Bangladesh" ? 3 : 17;
   const totalWithOutTax = price + shipping;
-  const tax = billingAddresses?.country === "Bangladesh" ? 1.0 : 7.0;
+  const tax = billingAddresses?.country === "Bangladesh" ? 1 : 7;
 
   const total = totalWithOutTax + tax;
 
@@ -97,14 +97,14 @@ const Billing = () => {
         <div className="text-center">
           <button
             onClick={() => navigate("/cart")}
-            className="text-[24px] font-medium"
+            className="text-xl lg:text-[24px] font-medium"
             title="Back to Cart"
           >
             Checkout ( <span className="text-[#008296]">{quantity} items</span>)
           </button>
         </div>
       </div>
-      <div className="flex gap-4 max-w-screen-lg mx-auto mt-3">
+      <div className="flex flex-wrap gap-4 lg:max-w-screen-lg mx-auto mt-3 px-4">
         <div className="flex-1 w-full">
           <h1 className="text-xl font-semibold text-[#C9563C]">
             {billingAddresses?.email === email
@@ -322,7 +322,7 @@ const Billing = () => {
             )}
           </div>
         </div>
-        <div className="w-80">
+        <div className="w-full lg:w-80">
           <div className="border border-gray-300 p-5 rounded-[10px]">
             <h1 className="text-gray-800 font-semibold text-xl">
               Order Summary
@@ -334,10 +334,10 @@ const Billing = () => {
                 <span>${price?.toFixed(2)}</span>
               </p>
               <p className="flex justify-between items-center text-[14px] text-gray-800">
-                <span>Shipping:</span>
-                <span>${shipping}.00</span>
+                <span>Shipping + tax:</span>
+                <span>${shipping + tax}.00</span>
               </p>
-              <div className="border-b border-b-gray-300 mb-1.5 w-20 ml-auto"></div>
+              {/* <div className="border-b border-b-gray-300 mb-1.5 w-20 ml-auto"></div>
               <p className="flex justify-between items-center text-[14px] text-gray-800">
                 <span>Total before tax:</span>
                 <span>{totalWithOutTax}</span>
@@ -345,11 +345,11 @@ const Billing = () => {
               <p className="flex justify-between items-center text-[14px] text-gray-800">
                 <span>Estimate tax to be collect:</span>
                 <span>${tax}.00</span>
-              </p>
+              </p> */}
             </div>
             <div className="border-b border-b-gray-300 mb-1.5"></div>
             <h1 className="flex justify-between items-center text-lg font-[500] text-[#C9563C]">
-              <span>Total:</span>${total}
+              <span>Total:</span>${Math.ceil(total)}.00
             </h1>
 
             <div className="mt-5 flex justify-end">

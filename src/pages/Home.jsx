@@ -4,7 +4,7 @@ import NewArrival from "../components/NewArrival";
 import Popular from "../components/Popular";
 import PopularSmallDevice from "../components/PopularSmallColumn";
 import PopularSmallGrid from "../components/PopularSmallGrid";
-import Spinner from "../components/shared/Spinner";
+import SmallSpinner from "../components/shared/SmallSpinner";
 import {
   useGetAllProductsQuery,
   useGetBooksQuery,
@@ -15,7 +15,7 @@ const Home = () => {
   const { data: booksData } = useGetBooksQuery();
 
   if (isLoading) {
-    return <Spinner />;
+    return <SmallSpinner />;
   }
 
   return (

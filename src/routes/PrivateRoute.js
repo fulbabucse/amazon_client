@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router";
-import Spinner from "../components/shared/Spinner";
+import SmallSpinner from "../components/shared/SmallSpinner";
 
 const PrivateRoute = ({ children }) => {
   const {
@@ -12,7 +12,7 @@ const PrivateRoute = ({ children }) => {
   const location = useLocation();
 
   if (isLoading) {
-    return <Spinner />;
+    return <SmallSpinner />;
   }
 
   if (email) {

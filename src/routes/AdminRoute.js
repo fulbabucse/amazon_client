@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Spinner from "../components/shared/Spinner";
+import SmallSpinner from "../components/shared/SmallSpinner";
 
 const AdminRoute = ({ children }) => {
   const {
@@ -11,7 +11,7 @@ const AdminRoute = ({ children }) => {
   const location = useLocation();
 
   if (isLoading) {
-    return <Spinner />;
+    return <SmallSpinner />;
   }
 
   if (email && isAdmin) {

@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 import NewArrival from "./NewArrival";
-// import watch from "../assets/img/apple-watch.png";
-// import laptop from "../assets/img/laptop.png";
-// import box from "../assets/img/box.png";
-// import headphone from "../assets/img/headphone.png";
 
 const Hero = () => {
   const slides = [
@@ -47,41 +43,82 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative">
-      <div className="min-h-[120vh] w-full relative group">
-        <div
-          style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(245, 246, 252, 0), rgba(243, 245, 242, 1)), url(${slides[currentIndex].image})`,
-          }}
-          className="w-full min-h-[120vh] lg:rounded-md bg-center bg-cover duration-1000"
-        >
-          <div className="space-y-6 px-6 pt-28 text-[#C9563C] ml-16">
-            <h1 className="text-4xl uppercase font-playfair font-black">
-              {slides[currentIndex].heading}
-            </h1>
-            <button className="bg-[#C9563C] hover:bg-opacity-90 text-white font-medium font-radio-canada text-sm py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
-              Shop Now
+    <div>
+      <div className="hidden lg:block">
+        <div className="relative">
+          <div className="min-h-[105vh] w-full relative group">
+            <div
+              style={{
+                backgroundImage: `linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(245, 246, 252, 0), rgba(243, 245, 242, 1)), url(${slides[currentIndex].image})`,
+              }}
+              className="w-full min-h-[100vh] lg:rounded-md bg-center bg-cover duration-1000"
+            >
+              <div className="space-y-6 px-6 pt-28 text-[#C9563C] ml-16">
+                <h1 className="text-4xl uppercase font-playfair font-black">
+                  {slides[currentIndex].heading}
+                </h1>
+                <button className="bg-[#C9563C] hover:bg-opacity-90 text-white font-medium font-radio-canada text-sm py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
+                  Shop Now
+                </button>
+              </div>
+            </div>
+
+            <button
+              onClick={prevSlide}
+              className="hidden group-hover:block absolute top-0 -translate-x-0 left-0 rounded-md p-2 bg-transparent text-[#C9563C] h-[41.5vh] cursor-pointer focus:border-2 focus:border-[#C9563C]"
+            >
+              <BsChevronLeft size={50} />
             </button>
+            <div>
+              <button
+                onClick={nextSlide}
+                className="hidden group-hover:block absolute top-0 -translate-x-0 right-0 rounded-md p-2 bg-transparent text-[#C9563C] h-[41.5vh] cursor-pointer focus:border-2 focus:border-[#C9563C]"
+              >
+                <BsChevronRight size={50} />
+              </button>
+            </div>
+          </div>
+          <div className="absolute bottom-0">
+            <NewArrival />
           </div>
         </div>
-
-        <button
-          onClick={prevSlide}
-          className="hidden group-hover:block absolute top-0 -translate-x-0 left-0 rounded-md p-2 bg-transparent text-[#C9563C] h-[56.2vh] cursor-pointer focus:border-2 focus:border-[#C9563C]"
-        >
-          <BsChevronLeft size={50} />
-        </button>
-        <div>
-          <button
-            onClick={nextSlide}
-            className="hidden group-hover:block absolute top-0 -translate-x-0 right-0 rounded-md p-2 bg-transparent text-[#C9563C] h-[56.2vh] cursor-pointer focus:border-2 focus:border-[#C9563C]"
-          >
-            <BsChevronRight size={50} />
-          </button>
-        </div>
       </div>
-      <div className="absolute bottom-0">
-        <NewArrival />
+      <div className="lg:hidden">
+        <div className="relative">
+          <div className="w-full min-h-[300px] relative group">
+            <div
+              style={{
+                backgroundImage: `linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(245, 246, 252, 0), rgba(243, 245, 242, 1)), url(${slides[currentIndex].image})`,
+              }}
+              className="w-full min-h-[300px] bg-center bg-cover duration-1000"
+            >
+              <div className="space-y-2 px-6 text-[#C9563C] ml-16 pt-4">
+                <h1 className="text-xl uppercase font-playfair font-black">
+                  {slides[currentIndex].heading}
+                </h1>
+                <button className="bg-[#C9563C] hover:bg-opacity-90 text-white font-medium font-radio-canada text-sm py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
+                  Shop Now
+                </button>
+              </div>
+            </div>
+
+            <button
+              onClick={prevSlide}
+              className="hidden group-hover:block absolute top-4 -translate-x-0 left-0 rounded-md p-1 bg-transparent text-[#C9563C] h-[100px] cursor-pointer focus:border-2 focus:border-[#C9563C]"
+            >
+              <BsChevronLeft size={25} />
+            </button>
+            <div>
+              <button
+                onClick={nextSlide}
+                className="hidden group-hover:block absolute top-4 -translate-x-0 right-0 rounded-md p-1 bg-transparent text-[#C9563C] h-[100px] cursor-pointer focus:border-2 focus:border-[#C9563C]"
+              >
+                <BsChevronRight size={25} />
+              </button>
+            </div>
+          </div>
+          <div className="absolute bottom-0">{/* <NewArrival /> */}</div>
+        </div>
       </div>
     </div>
   );

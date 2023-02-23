@@ -19,7 +19,7 @@ const Cart = () => {
   }, [isLoading]);
 
   const price = data?.reduce((total, current) => {
-    return parseFloat(total) + parseFloat(current.price);
+    return Math.ceil(total) + Math.ceil(current.price);
   }, 0);
 
   const quantity = data?.reduce((total, current) => {
@@ -35,15 +35,16 @@ const Cart = () => {
               <div className="bg-white p-4 space-y-2">
                 <div className="leading-[22px]">
                   <h1 className="flex justify-between">
-                    <span>Shipping fee</span> <span>$10</span>
-                  </h1>
-                  <h1 className="flex justify-between">
-                    <span>Total</span> <span>${(price + 10)?.toFixed(2)}</span>
+                    <span>Subtotal</span>
+                    <span>${price?.toFixed(2)}</span>
                   </h1>
                 </div>
-                <button className="block px-4 py-2.5 w-full text-[16px] bg-[#FFD814] text-primary transition-colors hover:bg-opacity-80 border-2 border-[#FFD814] focus:border-2 focus:border-[#008296] duration-200 ease-in-out rounded-md text-center focus:button-shadow ">
+                <Link
+                  to={`/billing_address?order_sum&email=${email}&t_m=${Date.now().toLocaleString()}&yr=${new Date().getFullYear()}`}
+                  className="block px-4 py-2.5 w-full text-[16px] bg-[#FFD814] text-primary transition-colors hover:bg-opacity-80 border-2 border-[#FFD814] focus:border-2 focus:border-[#008296] duration-200 ease-in-out rounded-md text-center focus:button-shadow "
+                >
                   Proceed to checkout ({quantity} items)
-                </button>
+                </Link>
               </div>
             </div>
 

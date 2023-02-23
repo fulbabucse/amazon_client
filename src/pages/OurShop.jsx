@@ -22,8 +22,8 @@ import {
 import { BsCurrencyDollar, BsBorderAll } from "react-icons/bs";
 import { RxTriangleRight } from "react-icons/rx";
 import { FaBars, FaStar } from "react-icons/fa";
-import Spinner from "../components/shared/Spinner";
 import ListCard from "../components/shared/ListCard";
+import SmallSpinner from "../components/shared/SmallSpinner";
 const OurShop = () => {
   const dispatch = useDispatch();
   const { filter } = useSelector((state) => state.filter);
@@ -57,7 +57,7 @@ const OurShop = () => {
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return <SmallSpinner />;
   }
 
   return (
@@ -70,8 +70,8 @@ const OurShop = () => {
           <Link to="/our-shop">Our Shop</Link>
         </Breadcrumbs>
       </div>
-      <div className="lg:px-4 mt-4">
-        <div className="flex flex-wrap gap-2">
+      <div className="px-3 lg:px-4 mt-4">
+        <div className="flex flex-col-reverse lg:flex-row flex-wrap gap-2">
           <div className="lg:max-w-[240px] my-3 lg:mt-0 w-full space-y-2">
             <div className="bg-white p-3">
               <h1 className="text-xl font-semibold text-primary mb-3">Bands</h1>
