@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import brandLogo from "../assets/icons/amazon_logo_white.png";
 import {
   Accordion,
   AccordionBody,
@@ -64,9 +65,11 @@ const SmallNavbar = () => {
                 <FaBars className="text-white text-lg duration-500 transition-all ease-in-out" />
               </div>
             </button>
-            <Link to="/" className="text-[17px] font-bold">
-              Crafty
-            </Link>
+            <div className="w-20 mt-2">
+              <Link to="/">
+                <img src={brandLogo} alt="Amazon" className="w-full" />
+              </Link>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             {email ? (
@@ -272,7 +275,7 @@ const SmallNavbar = () => {
                 <div className="text-white absolute left-4 bottom-4 text-start leading-[8px]">
                   <h3 className="font-medium">Browse</h3>
                   <h1 className="text-xl font-semibold font-openSans">
-                    Crafty Commerce
+                    Amazon
                   </h1>
                 </div>
               </div>

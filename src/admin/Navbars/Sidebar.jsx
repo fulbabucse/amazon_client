@@ -37,7 +37,7 @@ const Sidebar = () => {
       <li className="list-none flex justify-center items-center gap-1 px-3 pt-4">
         <BsFillCartCheckFill size={25} />
         <Link to="/admin" className="font-medium text-xl capitalize text-white">
-          Crafty Commerce
+          Amazon
         </Link>
       </li>
       <hr className="my-6" />

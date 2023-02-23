@@ -1,1 +1,1 @@
-export const baseURL = "https://crafty-commerce-server.vercel.app";
+export const baseURL = "https://amazon-server-alpha.vercel.app";

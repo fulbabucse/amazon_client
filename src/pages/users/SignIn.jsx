@@ -140,7 +140,7 @@ const SignIn = () => {
         </div>
         <div className="flex items-center justify-center gap-1 mt-4 text-sm">
           <p className="h-[1px] lg:w-[103px] w-[50px] bg-gray-300"></p>
-          <p className="text-[#565959]">New to Crafty Commerce?</p>
+          <p className="text-[#565959]">New to Amazon?</p>
           <p className="h-[1px] lg:w-[103px] w-[50px] bg-gray-300"></p>
         </div>
         <div>

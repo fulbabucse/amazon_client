@@ -91,7 +91,7 @@ const Hero = () => {
               style={{
                 backgroundImage: `linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(245, 246, 252, 0), rgba(243, 245, 242, 1)), url(${slides[currentIndex].image})`,
               }}
-              className="w-full min-h-[350px] bg-center bg-cover duration-1000"
+              className="w-full min-h-[350px] bg-center bg-cover duration-1000 "
             >
               <div className="space-y-2 px-6 text-[#C9563C] ml-16 pt-4">
                 <h1 className="text-xl uppercase font-playfair font-black">

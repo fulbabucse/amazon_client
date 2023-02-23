@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import cartIcon from "../../assets/icons/cart.png";
+import brandLogo from "../../assets/icons/amazon_logo_white.png";
 import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import SmallNavbar from "../SmallNavbar";
@@ -76,9 +77,9 @@ const Navbar = () => {
       <div className="hidden lg:block">
         <div className="bg-secondary w-full text-white hidden lg:block">
           <div className="flex items-center justify-between px-4 py-2">
-            <div>
-              <Link to="/" className="text-2xl font-semibold">
-                Crafty Commerce
+            <div className="w-28">
+              <Link to="/">
+                <img src={brandLogo} alt="Amazon" className="w-full" />
               </Link>
             </div>
             <div className="w-[640px]">
