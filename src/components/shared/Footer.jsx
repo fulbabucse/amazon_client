@@ -4,153 +4,704 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div>
-      <footer className="bg-[#131A22] text-white">
-        <div className="container px-6 py-12 mx-auto">
-          <div className="md:flex md:-mx-3 md:items-center md:justify-between">
-            <h1 className="text-lg font-semibold tracking-tight text-white md:mx-3 xl:text-2xl ">
-              Subscribe our newsletter to get update.
-            </h1>
-
-            <div className="mt-6 md:mx-3 shrink-0 md:mt-0 md:w-auto">
-              <Link
-                to="/sign-up"
-                className="flex items-center gap-2 px-4 py-2 text-sm bg-[#FFC940] text-primary transition-colors hover:bg-opacity-80 font-medium duration-200 ease-in-out rounded-md text-center"
-              >
-                <span>Sign Up Now</span>
-
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-5 h-5"
+      <div class="w-full bg-[#232F3E] py-10">
+        <div class="max-w-5xl mx-auto text-gray-300">
+          <div class="w-full grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 place-items-center items-start px-6 gap-5">
+            <div class="w-full">
+              <h3 to="/" class="text-white text-base font-semibold mb-3">
+                Get to Know Us
+              </h3>
+              <ul class="flex flex-col gap-2 font-radio-canada">
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                  />
-                </svg>
+                  Careers
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Blog
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  About Amazon
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Investor Relations
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Amazon Devices
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Amazon Science
+                </Link>
+              </ul>
+            </div>
+            <div class="w-full">
+              <h3 class="font-titleFont text-white text-base font-semibold mb-3">
+                Make Money with Us
+              </h3>
+              <ul class="flex flex-col gap-2 font-radio-canada">
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Sell products on Amazon
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Sell on Amazon Business
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Sell apps on Amazon
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Become an Affiliate
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Advertise Your Products
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Sell Product with Us
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Host an Amazon Hub
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  See More Make Money with Us
+                </Link>
+              </ul>
+            </div>
+            <div class="w-full">
+              <h3 class="font-titleFont text-white text-base font-semibold mb-3">
+                Amazon Payment Products
+              </h3>
+              <ul class="flex flex-col gap-2 font-radio-canada">
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Amazon Business Card
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Shop with Points
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Reload Your Balance
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Amazon Currency Converter
+                </Link>
+              </ul>
+            </div>
+            <div class="w-full">
+              <h3 class="font-titleFont text-white text-base font-semibold mb-3">
+                Let Us Help You
+              </h3>
+              <ul class="flex flex-col gap-2 font-radio-canada">
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Amazon and COVID-19
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Your Account
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Your Orders
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Shipping Rates &amp; Policies
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Returns &amp; Replacements
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Manage Your Content and Devices
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  Amazon Assistant
+                </Link>
+                <Link
+                  to="/"
+                  className="hover:underline text-[14px] text-[#ddd]"
+                >
+                  FAQ &amp; Help
+                </Link>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-full bg-secondary py-8">
+        <div class="max-w-5xl mx-auto">
+          <div class="w-full grid grid-cols-3 md:grid-cols-5 lgl:grid-cols-7 gap-3 px-6 place-content-center items-start text-gray-400">
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Amazon Music
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Stream millions of songs
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Amazon Advertising
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Find, attract, and engage customers
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Amazon Drive
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Cloud storage from Amazon
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                6pm
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Score deals on fashion brands
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                AbeBooks
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Books, art &amp; collectibles
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                ACX
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Audio book Publishing Made Easy
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Sell on Amazon
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Start a Selling Account
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Amazon Business
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Everything For Your Business
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                AmazonGlobal
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Ship Orders Internationally
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Home Services
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Experienced Pros appiness Guarantee
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Amazon Ignite
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Sell your original Digital Educational Resources
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Amazon Web Services
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Scalable Cloud Computing Services
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Audible
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Listen to Books &amp; Original Audio Performances
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Book Depository
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Books With Free Delivery Worldwide
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Box Office Mojo
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Find Movie Box Office Data
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                ComiXology
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Thousands of Digital Comics
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                DPReview
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Digital Photography
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Fabric
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Sewing, Quilting &amp; Knitting
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Goodreads
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Book reviews &amp; recommendations
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                IMDb
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Movies, TV &amp; Celebrities
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                {" "}
+                IMDbPro
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Get Info Entertainment Professionals Need
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Kindle Direct Publishing
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Indie Digital &amp; Print Publishing Made Easy
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Prime Video Direct
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Video Distribution Made Easy
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Shopbop
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Designer Fashion Brands
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Woot!
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Deals and Shenanigans
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Zappos
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Shoes &amp; Clothing
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Ring
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Smart Home Security Systems
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                eero WiFi
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Stream 4K Video in Every Room
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Blink
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Smart Security for Every Home
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Neighbors App
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Real-Time Crime &amp; Safety Alerts
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                Amazon Subscription Boxes
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Top subscription boxes - right to your doo
+              </Link>
+            </div>
+            <div class="group cursor-pointer leading-[14px]">
+              <Link
+                to="/"
+                class="text-[13px] font-medium text-[#ddd] group-hover:underline w-3/4"
+              >
+                PillPack
+              </Link>
+              <br />
+              <Link
+                to="/"
+                class="text-[12px] group-hover:underline text-[#999] w-3/5"
+              >
+                Pharmacy Simplified
               </Link>
             </div>
           </div>
-
-          <hr className="my-6 border-gray-100 md:my-10" />
-
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            <div>
-              <p className="font-semibold text-white dark:text-white">
-                Quick Link
-              </p>
-
-              <div className="flex flex-col items-start mt-5 space-y-2">
-                <Link
-                  to="/"
-                  className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
-                >
-                  Home
-                </Link>
-                <Link
-                  to="/"
-                  className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
-                >
-                  Who We Are
-                </Link>
-                <Link
-                  to="/"
-                  className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
-                >
-                  Our Philosophy
-                </Link>
-              </div>
-            </div>
-
-            <div>
-              <p className="font-semibold text-white dark:text-white">
-                Industries
-              </p>
-
-              <div className="flex flex-col items-start mt-5 space-y-2">
-                <Link
-                  to="/"
-                  className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
-                >
-                  Retail & E-Commerce
-                </Link>
-                <Link
-                  to="/"
-                  className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
-                >
-                  Information Technology
-                </Link>
-                <Link
-                  to="/"
-                  className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
-                >
-                  Finance & Insurance
-                </Link>
-              </div>
-            </div>
-
-            <div>
-              <p className="font-semibold text-white">Services</p>
-
-              <div className="flex flex-col items-start mt-5 space-y-2">
-                <Link
-                  to="/"
-                  className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
-                >
-                  Translation
-                </Link>
-                <Link
-                  to="/"
-                  className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
-                >
-                  Proofreading & Editing
-                </Link>
-                <Link
-                  to="/"
-                  className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
-                >
-                  Content Creation
-                </Link>
-              </div>
-            </div>
-
-            <div>
-              <p className="font-semibold text-white dark:text-white">
-                Contact Us
-              </p>
-
-              <div className="flex flex-col items-start mt-5 space-y-2">
-                <Link
-                  to="/"
-                  className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
-                >
-                  +880 1736 5342 95
-                </Link>
-                <Link
-                  to="/"
-                  className="text-white transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-[#C9563C] text-sm"
-                >
-                  crafty@commerce.com
-                </Link>
-              </div>
-            </div>
+        </div>
+        <div class="flex flex-col justify-center items-center px-4">
+          <div>
+            <ul class="text-gray-300 text-sm gap-2 md:gap-4 py-2 mt-4 flex">
+              <li class="font-normal text-[12px] hover:underline cursor-pointer text-[#DDD] leading-3">
+                Conditions of Use
+              </li>
+              <li class="font-normal text-[12px] hover:underline cursor-pointer text-[#DDD] leading-3">
+                Privacy Notice
+              </li>
+              <li class="font-normal text-[12px] hover:underline cursor-pointer text-[#DDD] leading-3">
+                Your Ads Privacy Choices
+              </li>
+            </ul>
           </div>
-
-          <hr className="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
-
-          <div className="flex flex-col items-center justify-between sm:flex-row">
-            <Link to="/">Crafty Commerce</Link>
-
-            <p className="mt-4 text-sm text-white sm:mt-0 dark:text-gray-300">
-              © Copyright {new Date().getFullYear()}. All Rights Reserved.
+          <div>
+            <p class="font-normal text-[12px] text-[#DDD] leading-3">
+              © 1996-{new Date().getFullYear()},{" "}
+              <Link to="/">craftyCommerce.com</Link>, Inc. or its affiliates
             </p>
           </div>
         </div>
-      </footer>
+      </div>
     </div>
   );
 };

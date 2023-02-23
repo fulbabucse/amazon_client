@@ -100,7 +100,7 @@ const Home = () => {
 
       <a
         href="#"
-        className="h-12 text-white w-full bg-primary hover:bg-opacity-95 transition-opacity duration-300 ease-in-out flex justify-center items-center cursor-pointer text-sm"
+        className="h-12 text-white w-full bg-[#37475A] hover:bg-opacity-95 transition-opacity duration-300 ease-in-out flex justify-center items-center cursor-pointer text-sm"
       >
         Back to Top
       </a>

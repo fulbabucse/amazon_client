@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
+import HeroProducts from "./HeroProducts";
 import NewArrival from "./NewArrival";
 
 const Hero = () => {
@@ -83,14 +84,14 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="lg:hidden">
+      <div className="lg:hidden overflow-hidden">
         <div className="relative">
-          <div className="w-full min-h-[300px] relative group">
+          <div className="w-full min-h-[350px] relative group">
             <div
               style={{
                 backgroundImage: `linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(245, 246, 252, 0), rgba(243, 245, 242, 1)), url(${slides[currentIndex].image})`,
               }}
-              className="w-full min-h-[300px] bg-center bg-cover duration-1000"
+              className="w-full min-h-[350px] bg-center bg-cover duration-1000"
             >
               <div className="space-y-2 px-6 text-[#C9563C] ml-16 pt-4">
                 <h1 className="text-xl uppercase font-playfair font-black">
@@ -117,7 +118,9 @@ const Hero = () => {
               </button>
             </div>
           </div>
-          <div className="absolute bottom-0">{/* <NewArrival /> */}</div>
+          <div className="absolute bottom-0 overflow-x-auto">
+            <HeroProducts />
+          </div>
         </div>
       </div>
     </div>
