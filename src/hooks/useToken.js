@@ -10,7 +10,7 @@ const useToken = (email) => {
       fetch(`${baseURL}/admin/jwt?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
-          localStorage.setItem("cc_token", data.token);
+          localStorage.setItem("amazon_token", data.token);
           setToken(data.token);
         })
         .catch((err) => console.error(err));

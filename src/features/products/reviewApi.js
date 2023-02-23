@@ -6,6 +6,9 @@ const productApi = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `products/review`,
         method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+        },
         body: data,
       }),
       invalidatesTags: ["Review"],
@@ -13,6 +16,9 @@ const productApi = apiSlice.injectEndpoints({
     getProductReviews: builder.query({
       query: (id) => ({
         url: `products/review/${id}`,
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+        },
       }),
       providesTags: ["Review"],
     }),

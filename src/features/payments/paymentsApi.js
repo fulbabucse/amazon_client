@@ -6,6 +6,9 @@ const paymentsApi = apiSlice.injectEndpoints({
       query: (data) => ({
         url: "/payments/create-checkout-session",
         method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+        },
         body: data,
       }),
     }),

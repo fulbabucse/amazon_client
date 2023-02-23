@@ -28,6 +28,9 @@ const productApi = apiSlice.injectEndpoints({
       query: (data) => ({
         url: "/products/book/post",
         method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+        },
         body: data,
       }),
       invalidatesTags: ["Product"],

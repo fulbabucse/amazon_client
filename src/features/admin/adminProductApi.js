@@ -5,6 +5,9 @@ const adminProductApi = apiSlice.injectEndpoints({
     getAdminAllProducts: builder.query({
       query: ({ page, size }) => ({
         url: `products/admin/all?page=${page}&size=${size}`,
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+        },
       }),
     }),
   }),

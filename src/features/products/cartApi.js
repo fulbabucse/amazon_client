@@ -6,16 +6,20 @@ const cartApi = apiSlice.injectEndpoints({
       query: (data) => ({
         url: "/orders",
         method: "POST",
-        body: data,
         headers: {
           "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
         },
+        body: data,
       }),
       invalidatesTags: ["Orders"],
     }),
     getOrdersByEmail: builder.query({
       query: (email) => ({
         url: `/orders/${email}`,
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+        },
       }),
       providesTags: ["Orders"],
     }),
@@ -26,6 +30,7 @@ const cartApi = apiSlice.injectEndpoints({
         body: data,
         headers: {
           "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
         },
       }),
       invalidatesTags: ["Orders"],
@@ -34,6 +39,9 @@ const cartApi = apiSlice.injectEndpoints({
       query: (id) => ({
         url: `/orders/${id}`,
         method: "DELETE",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+        },
       }),
       invalidatesTags: ["Orders"],
     }),
@@ -41,6 +49,9 @@ const cartApi = apiSlice.injectEndpoints({
       query: (email) => ({
         url: `/orders/after-purchase/${email}`,
         method: "DELETE",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+        },
       }),
       invalidatesTags: ["Orders"],
     }),

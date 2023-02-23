@@ -6,50 +6,20 @@ import {
   TabsHeader,
 } from "@material-tailwind/react";
 import React from "react";
-import Automotive from "./Automotives";
+import AllType from "./AllType";
 import Books from "./Books";
-import Computers from "./Computers";
-import Decoration from "./Decoration";
-import Electronics from "./Electronics";
-import Medias from "./Medias";
-import Wear from "./Wear";
 
 const AddProduct = () => {
   const data = [
     {
-      label: "Wear",
-      value: "wear",
-      desc: <Wear />,
-    },
-    {
-      label: "Computers",
-      value: "computers",
-      desc: <Computers />,
-    },
-    {
-      label: "Electronics",
-      value: "electronics",
-      desc: <Electronics />,
-    },
-    {
-      label: "Medias",
-      value: "medias",
-      desc: <Medias />,
-    },
-    {
-      label: "Decoration",
-      value: "decoration",
-      desc: <Decoration />,
+      label: "All Type",
+      value: "all_type",
+      desc: <AllType />,
     },
     {
       label: "Books",
       value: "books",
       desc: <Books />,
-    },
-    {
-      label: "Automotive",
-      value: "automotive",
-      desc: <Automotive />,
     },
   ];
   return (

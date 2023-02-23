@@ -3,7 +3,6 @@ import { useGetAdminAllProductsQuery } from "../../features/admin/adminProductAp
 import { AiFillDelete } from "react-icons/ai";
 import { MdOutlineEditNote } from "react-icons/md";
 import { IconButton } from "@material-tailwind/react";
-import Skeleton from "react-loading-skeleton";
 
 const AllProducts = () => {
   const [page, setPage] = useState(0);
@@ -57,18 +56,14 @@ const AllProducts = () => {
                     </div>
                     <div className="text-sm">
                       <div className="font-medium text-gray-700 capitalize text-xs">
-                        {title.length > 20
-                          ? title.slice(0, 20)
-                          : title || <Skeleton />}
+                        {title.length > 20 ? title.slice(0, 20) : title}
                       </div>
-                      <div className="text-gray-400 cap">
-                        {brand || <Skeleton />}
-                      </div>
+                      <div className="text-gray-400 cap">{brand}</div>
                     </div>
                   </th>
                   <td className="px-3 py-2">
                     <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">
-                      {stock || <Skeleton />}
+                      {stock}
                     </span>
                   </td>
                   <td className="px-3 py-2">{category}</td>

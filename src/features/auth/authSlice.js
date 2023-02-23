@@ -30,7 +30,11 @@ export const signInUser = createAsyncThunk(
 );
 
 export const getUser = createAsyncThunk("auth/getUser", async (email) => {
-  const res = await fetch(`${baseURL}/users?email=${email}`);
+  const res = await fetch(`${baseURL}/users?email=${email}`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+    },
+  });
   const user = await res.json();
 
   if (user?.status) {

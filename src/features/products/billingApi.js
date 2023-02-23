@@ -6,6 +6,9 @@ const billingApi = apiSlice.injectEndpoints({
       query: (data) => ({
         url: "/orders/billings",
         method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+        },
         body: data,
       }),
       invalidatesTags: ["Billing"],
@@ -13,6 +16,9 @@ const billingApi = apiSlice.injectEndpoints({
     getBillingAddress: builder.query({
       query: (email) => ({
         url: `/orders/billings/${email}`,
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+        },
       }),
       providesTags: ["Billing"],
     }),
