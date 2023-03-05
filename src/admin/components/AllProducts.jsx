@@ -3,12 +3,14 @@ import { useGetAdminAllProductsQuery } from "../../features/admin/adminProductAp
 import { AiFillDelete } from "react-icons/ai";
 import { MdOutlineEditNote } from "react-icons/md";
 import { IconButton } from "@material-tailwind/react";
+import { useDeleteProductMutation } from "../../features/products/productsApi";
 
 const AllProducts = () => {
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(25);
 
   const { data } = useGetAdminAllProductsQuery({ page, size });
+  const [deleteProduct] = useDeleteProductMutation();
 
   const pages = Math.ceil(data?.count / size);
 
@@ -17,6 +19,10 @@ const AllProducts = () => {
   };
   const handleNext = () => {
     setPage(page + 1);
+  };
+
+  const handleDeleteProduct = (id) => {
+    deleteProduct(id);
   };
 
   return (
@@ -76,9 +82,11 @@ const AllProducts = () => {
                   </td>
                   <td className="px-3 py-2">
                     <div className="flex justify-start gap-4">
-                      <IconButton color="red">
-                        <AiFillDelete size={20} />
-                      </IconButton>
+                      <button onClick={() => handleDeleteProduct(_id)}>
+                        <IconButton color="red">
+                          <AiFillDelete size={20} />
+                        </IconButton>
+                      </button>
                       <IconButton>
                         <MdOutlineEditNote size={20} />
                       </IconButton>

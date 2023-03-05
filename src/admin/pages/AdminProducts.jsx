@@ -5,15 +5,16 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import AddProduct from "../components/Form/AddProduct";
+// import AddProduct from "../components/Form/AddProduct";
 import AllProducts from "../components/AllProducts";
+import AllType from "../components/Form/AllType";
 
 const AdminProducts = () => {
   const data = [
     {
       label: "Add Product",
       value: "add-product",
-      desc: <AddProduct />,
+      desc: <AllType />,
     },
     {
       label: "All Products",

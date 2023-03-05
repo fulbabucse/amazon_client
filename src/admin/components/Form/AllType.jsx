@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useGetCategoriesQuery } from "../../../features/categories/categoryApi";
-import { usePostBookProductMutation } from "../../../features/products/productsApi";
+import { usePostProductMutation } from "../../../features/products/productsApi";
 import convertBase64 from "../../../utils/convertBase64";
 
 const AllType = () => {
   const { data: categories } = useGetCategoriesQuery();
-  const [postProduct, { isSuccess }] = usePostBookProductMutation();
+  const [postProduct, { isSuccess }] = usePostProductMutation();
   const [images, setImages] = useState([]);
-  const [bookData, setBookData] = useState({});
+  const [productData, setProductData] = useState({});
   const {
     register,
     handleSubmit,
@@ -19,12 +19,11 @@ const AllType = () => {
   } = useForm();
 
   const handleProductPost = (data) => {
-    // Array.from(data.images).forEach(async (image) => {
-    //   const base64 = await convertBase64(image);
-    //   setImages((prev) => [...prev, base64]);
-    // });
-    // setBookData({ ...data });
-    console.log(data);
+    Array.from(data.images).forEach(async (image) => {
+      const base64 = await convertBase64(image);
+      setImages((prev) => [...prev, base64]);
+    });
+    setProductData({ ...data });
   };
 
   const category = [];
@@ -35,11 +34,11 @@ const AllType = () => {
     });
   });
 
-  const productInfo = { ...bookData, images };
+  const productInfo = { ...productData, images };
   useEffect(() => {
     if (images.length > 0) {
       postProduct(productInfo);
-      reset();
+      // reset();
       setImages([]);
     }
 
@@ -52,14 +51,13 @@ const AllType = () => {
     <div>
       <form onSubmit={handleSubmit(handleProductPost)} className="w-full">
         <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3">
+          <div className="w-full md:w-1/3 px-3">
             <Input
               {...register("title", {
-                required: "Product Name is required",
+                required: "Title is required",
               })}
-              id="product_name"
               type="text"
-              label="Book Name: Clean Code"
+              label="Title"
             />
             {errors.title && (
               <p className="text-red-400 text-xs font-medium">
@@ -67,20 +65,150 @@ const AllType = () => {
               </p>
             )}
           </div>
-          <div className="w-full md:w-1/2 px-3">
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("author")} type="text" label="Author" />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("model")} type="text" label="Model" />
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/3 px-3">
             <Input
-              {...register("author", {
-                required: "Author is required",
-              })}
+              {...register("color")}
+              id="color"
+              type="text"
+              label="Color"
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input
+              {...register("connectivity_tech")}
+              type="text"
+              label="Connectivity Tech"
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("size")} type="text" label="Size" />
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("style")} type="text" label="Style" />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("voltage")} type="text" label="Voltage" />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("capacity")} type="text" label="Capacity" />
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/3 px-3">
+            <Input
+              {...register("hd_interface")}
+              type="text"
+              label="HD Interface"
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input
+              {...register("compatible_device")}
+              type="text"
+              label="Compatible"
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input
+              {...register("printing_tech")}
+              type="text"
+              label="Printing Technology"
+            />
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/3 px-3">
+            <Input
+              {...register("special_features")}
+              type="text"
+              label="Special Features"
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input
+              {...register("screen_size")}
+              type="text"
+              label="Screen Size"
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("ram")} type="text" label="RAM" />
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("os")} type="text" label="Operating System" />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input
+              {...register("graphics_coprocessor")}
+              type="text"
+              label="Graphics Coprocessor"
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("resolution")} type="text" label="Resolution" />
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("materials")} type="text" label="Materials" />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input
+              {...register("material_dimension")}
+              type="text"
+              label="Material Dimension WxH"
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("item_weight")} type="text" label="Weight" />
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/3 px-3">
+            <Input
+              {...register("power_source")}
+              id="product_name"
+              type="text"
+              label="Power Source"
+            />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input
+              {...register("refresh_rate")}
               id="product_brand"
               type="text"
-              label="Author: Robert C. Martin"
+              label="Refresh Rate"
             />
-            {errors.author && (
-              <p className="text-red-400 text-xs font-medium">
-                {errors.author?.message}
-              </p>
-            )}
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input
+              {...register("connector_type")}
+              type="text"
+              label="Connector Type"
+            />
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("age")} type="text" label="Age" />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("theme")} type="text" label="Theme" />
+          </div>
+          <div className="w-full md:w-1/3 px-3">
+            <Input {...register("brand")} type="text" label="Brand" />
           </div>
         </div>
 
@@ -135,49 +263,26 @@ const AllType = () => {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/3 px-3">
             <Input
-              {...register("book_page_length", {
-                required: "Page length is required",
-              })}
-              id="book_page_length"
-              type="text"
-              label="Page length: 150 pages"
+              {...register("book_page_length")}
+              type="number"
+              label="Page length"
             />
-            {errors.book_page_length && (
-              <p className="text-red-400 text-xs font-medium">
-                {errors.book_page_length?.message}
-              </p>
-            )}
           </div>
           <div className="w-full md:w-1/3 px-3">
             <Input
-              {...register("language", {
-                required: "Language is required",
-              })}
+              {...register("language")}
               id="language"
               type="text"
-              label="Language: English"
+              label="Language"
             />
-            {errors.language && (
-              <p className="text-red-400 text-xs font-medium">
-                {errors.language?.message}
-              </p>
-            )}
           </div>
 
           <div className="w-full md:w-1/3 px-3">
             <Input
-              {...register("publication_date", {
-                required: "Publication date is required",
-              })}
-              id="publication_date"
+              {...register("publication_date")}
               type="text"
               label="Publication date: August 1, 2008"
             />
-            {errors.publication_date && (
-              <p className="text-red-400 text-xs font-medium">
-                {errors.publication_date?.message}
-              </p>
-            )}
           </div>
         </div>
 
@@ -234,24 +339,17 @@ const AllType = () => {
         <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full md:w-1/3 px-3">
             <Input
-              {...register("paper_type", {
-                required: "Paper type is required",
-              })}
+              {...register("paper_type")}
               type="text"
               label="Paper type: Hardcover"
             />
-            {errors.paper_type && (
-              <p className="text-red-400 text-xs font-medium">
-                {errors.paper_type?.message}
-              </p>
-            )}
           </div>
           <div className="w-full md:w-1/3 px-3">
             <div className="relative">
               <select
                 label="Select Department"
                 {...register("department", {
-                  required: "Category Name is required",
+                  required: "Department Name is required",
                 })}
                 // onClick={(e) => setDepartment(e.target.value)}
                 name="department"
@@ -276,27 +374,20 @@ const AllType = () => {
                   books
                 </option>
               </select>
+              {errors.department && (
+                <p className="text-red-400 text-xs font-medium">
+                  {errors.department?.message}
+                </p>
+              )}
             </div>
-            {errors.department && (
-              <p className="text-red-400 text-xs font-medium">
-                {errors.department?.message}
-              </p>
-            )}
           </div>
 
           <div className="w-full md:w-1/3 px-3">
             <Input
-              {...register("isbn", {
-                required: "ISBN is required",
-              })}
+              {...register("isbn")}
               type="text"
               label="ISBN: 9780132350884"
             />
-            {errors.isbn && (
-              <p className="text-red-400 text-xs font-medium">
-                {errors.isbn?.message}
-              </p>
-            )}
           </div>
         </div>
 

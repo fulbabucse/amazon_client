@@ -24,9 +24,9 @@ const productApi = apiSlice.injectEndpoints({
         url: `/products/${id}`,
       }),
     }),
-    postBookProduct: builder.mutation({
+    postProduct: builder.mutation({
       query: (data) => ({
-        url: "/products/book/post",
+        url: "/products/product/post",
         method: "POST",
         headers: {
           authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
@@ -51,6 +51,13 @@ const productApi = apiSlice.injectEndpoints({
         url: `products/search/get?dept=${search.dept}&key=${search.key}`,
       }),
     }),
+    deleteProduct: builder.mutation({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Product"],
+    }),
   }),
 });
 
@@ -59,8 +66,9 @@ export const {
   useGetAllProductsQuery,
   useGetProductsByCategoryQuery,
   useGetSingleProductQuery,
-  usePostBookProductMutation,
+  usePostProductMutation,
   useGetBooksQuery,
   useGetFashionProductsQuery,
   useGetSearchProductsQuery,
+  useDeleteProductMutation,
 } = productApi;
