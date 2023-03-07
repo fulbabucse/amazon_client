@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const PopularSmallColumn = ({ data, cardTitle }) => {
-  const products = data?.slice(10, 13);
+  const products = data?.slice(0, 3);
   return (
     <div className="bg-white p-3">
       <h1 className="text-[18px] font-openSans font-bold">{cardTitle}</h1>

@@ -15,7 +15,10 @@ import {
 const Home = () => {
   const { data, isLoading } = useGetAllProductsQuery();
   const { data: toys } = useGetProductsByCategoryQuery("toys");
+  const { data: womensShoes } = useGetProductsByCategoryQuery("womens-shoes");
+  const { data: camera } = useGetProductsByCategoryQuery("camera-photo");
   const { data: computers } = useGetProductByDepartmentQuery("computers");
+  const { data: electronics } = useGetProductByDepartmentQuery("electronics");
   const { data: decoration } = useGetProductByDepartmentQuery("decoration");
   const { data: cosmetics } = useGetProductByDepartmentQuery("cosmetics");
   const { data: booksData } = useGetBooksQuery();
@@ -79,17 +82,23 @@ const Home = () => {
           data={data}
           cardTitle="Popular Item in this Session"
         />
-        <PopularSmallGrid data={data} cardTitle="Women's fashion sneakers" />
+        <PopularSmallGrid
+          data={womensShoes}
+          cardTitle="Women's fashion sneakers"
+        />
 
         <PopularSmallDevice
-          data={data}
+          data={computers}
           cardTitle="Popular products in wireless internationally"
         />
-        <PopularSmallGrid data={data} cardTitle="Discount Electronics" />
+        <PopularSmallGrid data={electronics} cardTitle="Discount Electronics" />
         <PopularSmallGrid data={data} cardTitle="Tablets under $100" />
-        <PopularSmallGrid data={data} cardTitle="Best Seller in Electronics" />
-        <PopularSmallGrid data={data} cardTitle="Popular gifts in Camera" />
-        <PopularSmallGrid data={data} cardTitle="Our favorite Toys" />
+        <PopularSmallGrid
+          data={electronics}
+          cardTitle="Best Seller in Electronics"
+        />
+        <PopularSmallGrid data={camera} cardTitle="Popular gifts in Camera" />
+        <PopularSmallGrid data={toys} cardTitle="Our favorite Toys" />
 
         <PopularSmallDevice data={data} cardTitle="International top sellers" />
         <PopularSmallGrid data={data} cardTitle="Must have Baby products" />
@@ -97,14 +106,17 @@ const Home = () => {
           data={data}
           cardTitle="Popular products in Beauty internationally"
         />
-        <PopularSmallGrid data={data} cardTitle="Girl's everyday essentials" />
+        <PopularSmallGrid
+          data={cosmetics}
+          cardTitle="Girl's everyday essentials"
+        />
 
         <PopularSmallDevice
-          data={data}
+          data={computers}
           cardTitle="Popular products in PC internationally"
         />
         <PopularSmallDevice
-          data={data}
+          data={decoration}
           cardTitle="International top seller in Kitchen"
         />
       </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const PopularSmallGrid = ({ data, cardTitle }) => {
-  const products = data?.slice(10, 14);
+  const products = data?.slice(0, 4);
   return (
     <div className="bg-white p-3 space-y-2">
       <h1 className="text-[18px] font-openSans font-bold">{cardTitle}</h1>
