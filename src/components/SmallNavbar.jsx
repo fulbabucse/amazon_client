@@ -16,6 +16,7 @@ import { getSearchValue } from "../features/products/searchSlice";
 
 const SmallNavbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
+  const [subCategory, setSubCategory] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

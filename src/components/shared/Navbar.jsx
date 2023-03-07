@@ -1,28 +1,24 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import cartIcon from "../../assets/icons/cart.png";
 import brandLogo from "../../assets/icons/amazon_logo_white.png";
 import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import SmallNavbar from "../SmallNavbar";
-import {
-  Accordion,
-  AccordionBody,
-  AccordionHeader,
-  Menu,
-  MenuHandler,
-  MenuList,
-} from "@material-tailwind/react";
+import { Menu, MenuHandler, MenuList } from "@material-tailwind/react";
 import { signOut } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../features/auth/authSlice";
 import { FaUserCircle, FaTimes, FaBars } from "react-icons/fa";
+import { BsArrowLeft } from "react-icons/bs";
+import { MdKeyboardArrowRight } from "react-icons/md";
 import { useGetCategoriesQuery } from "../../features/categories/categoryApi";
 import { useGetOrdersByEmailQuery } from "../../features/products/cartApi";
 import { getSearchValue } from "../../features/products/searchSlice";
 
 const Navbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
+  const [subCategory, setSubCategory] = useState({});
   const {
     user: { email, name, photoURL, isAdmin },
   } = useSelector((state) => state.auth);
@@ -30,14 +26,9 @@ const Navbar = () => {
   const { data } = useGetCategoriesQuery();
   const { data: orders } = useGetOrdersByEmailQuery(email);
 
-  const [open, setOpen] = useState(1);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-
-  const handleOpen = (value) => {
-    setOpen(open === value ? 0 : value);
-  };
 
   const handleSignOut = () => {
     signOut(auth)
@@ -83,7 +74,7 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="w-[640px]">
-              <form onSubmit={handleSubmit} className="flex items-center group">
+              <form onSubmit={handleSubmit} className="flex items-center">
                 <div className="bg-gray-200 rounded-l-md">
                   <select
                     name="category"
@@ -311,11 +302,11 @@ const Navbar = () => {
               <div
                 className={`${
                   openCategory
-                    ? "translate-x-0 opacity-100 z-40 ease-linear"
-                    : "-translate-x-[9999px] opacity-0 z-40 ease-out"
-                } left-0 flex fixed top-0 bottom-0 shadow-xl w-full text-primary transition-opacity duration-1000`}
+                    ? "translate-x-0 opacity-100"
+                    : "opacity-0 -translate-x-full"
+                } left-0 inset-x-0 z-20 flex fixed top-0 bottom-0 shadow-xl w-full text-primary transition-all duration-500 ease-in-out`}
               >
-                <div className="w-[350px]">
+                <div className="w-[350px] h-screen bg-gray-100">
                   <div className="w-full flex justify-between items-center px-5 bg-primary text-white text-center relative">
                     <button
                       onClick={() => {
@@ -336,50 +327,103 @@ const Navbar = () => {
                       <FaTimes size={25} />
                     </button>
                   </div>
-                  <div className="left-0 block fixed top-12 bottom-0 shadow-xl bg-white w-[350px] py-4 px-6 text-primary transition-all duration-700 ease-in-out overflow-hidden flex-row flex-nowrap overflow-y-auto">
-                    <Fragment>
-                      <div className="space-y-3">
-                        {data?.map(({ category_name, sub_category }, index) => (
-                          <Accordion key={index} open={open === index + 1}>
-                            <AccordionHeader
-                              className="text-[17px]"
-                              onClick={() => handleOpen(index + 1)}
-                            >
-                              {category_name}
-                            </AccordionHeader>
-                            <AccordionBody>
-                              <div className="flex flex-col space-y-2">
-                                {sub_category?.map(({ name, link }, index) => (
+                  <div class="font-roboto font-[400] left-0 block fixed top-12 bottom-0 shadow-xl bg-white w-[350px] text-primary transition-all duration-700 ease-in-out overflow-hidden flex-row flex-nowrap overflow-y-auto">
+                    <div
+                      className={`${
+                        !subCategory?.sub_category?.length > 0 &&
+                        "border-b border-b-gray-400"
+                      } pb-2 relative`}
+                    >
+                      <ul class="text-sm leading-4 relative">
+                        {!subCategory?.sub_category?.length > 0 && (
+                          <div>
+                            <h1 className="text-xl px-6 my-1.5 text-primary font-semibold">
+                              Shop by Department
+                            </h1>
+                            {data?.map(({ category_name, sub_category }) => (
+                              <li
+                                onClick={() =>
+                                  setSubCategory({
+                                    category_name,
+                                    sub_category,
+                                  })
+                                }
+                                class="flex items-center justify-between hover:bg-gray-300 px-6 py-[7px] text-[14px] cursor-pointer font-inherit"
+                              >
+                                {category_name}
+                                <span>
+                                  <MdKeyboardArrowRight
+                                    size={25}
+                                    className="text-gray-700"
+                                  />
+                                </span>
+                              </li>
+                            ))}
+                          </div>
+                        )}
+                        {subCategory && (
+                          <div
+                            className={`${
+                              !subCategory?.sub_category?.length > 0 &&
+                              "opacity-0 translate-x-full"
+                            } inset-x-0 transition-all duration-300 ease-in-out w-full`}
+                          >
+                            {subCategory?.sub_category?.length > 0 && (
+                              <button
+                                class="flex items-center gap-1 w-full hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer uppercase font-roboto font-semibold border-b border-b-gray-400 text-gray-800"
+                                onClick={() => {
+                                  setSubCategory({});
+                                }}
+                              >
+                                <BsArrowLeft size={20} />
+                                <span>Main Menu</span>
+                              </button>
+                            )}
+                            <h1 className="leading-3">
+                              <p className="text-lg px-6 my-1.5 text-primary font-medium">
+                                {subCategory?.category_name}
+                              </p>
+                              {subCategory?.sub_category?.map(
+                                ({ name, link }) => (
                                   <Link
-                                    key={index}
-                                    to={`/products/${category_name
-                                      .split(" ")
-                                      .join("-")
-                                      .toLowerCase()}/${link}`}
-                                    onClick={() =>
-                                      setOpenCategory(!openCategory)
-                                    }
-                                    className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
+                                    to={`/products/${link}`}
+                                    onClick={() => {
+                                      setSubCategory({});
+                                      setOpenCategory(!openCategory);
+                                    }}
+                                    class="flex items-center justify-between font-inherit hover:bg-gray-300 px-6 py-3 text-[14px] cursor-pointer capitalize"
                                   >
                                     {name}
                                   </Link>
-                                ))}
-                              </div>
-                            </AccordionBody>
-                          </Accordion>
-                        ))}
-                      </div>
-                    </Fragment>
-
-                    <div>
-                      <h1 className="text-xl mt-10 text-primary font-black]">
-                        Help & Settings
-                      </h1>
+                                )
+                              )}
+                            </h1>
+                          </div>
+                        )}
+                      </ul>
                     </div>
+                    {!subCategory?.sub_category?.length > 0 && (
+                      <div className="mb-6">
+                        <h1 className="text-xl px-6 my-1.5 text-primary font-semibold">
+                          Help & Settings
+                        </h1>
+                        <ul class="text-sm leading-4">
+                          <li class="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
+                            Your Account
+                          </li>
+                          <li class="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
+                            Customer Service
+                          </li>
+                          <li class="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
+                            Sign Out
+                          </li>
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div
-                  className="bg-black opacity-75 flex-1 transition-opacity duration-500 ease-in-out"
+                  className="bg-black opacity-75 flex-1"
                   onClick={() => setOpenCategory(!openCategory)}
                 ></div>
               </div>
