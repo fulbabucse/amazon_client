@@ -327,38 +327,41 @@ const Navbar = () => {
                       <FaTimes size={25} />
                     </button>
                   </div>
-                  <div class="font-roboto font-[400] left-0 block fixed top-12 bottom-0 shadow-xl bg-white w-[350px] text-primary transition-all duration-700 ease-in-out overflow-hidden flex-row flex-nowrap overflow-y-auto">
+                  <div className="font-roboto font-[400] left-0 block fixed top-12 bottom-0 shadow-xl bg-white w-[350px] text-primary transition-all duration-700 ease-in-out overflow-hidden flex-row flex-nowrap overflow-y-auto">
                     <div
                       className={`${
                         !subCategory?.sub_category?.length > 0 &&
                         "border-b border-b-gray-400"
                       } pb-2 relative`}
                     >
-                      <ul class="text-sm leading-4 relative">
+                      <ul className="text-sm leading-4 relative">
                         {!subCategory?.sub_category?.length > 0 && (
                           <div>
                             <h1 className="text-xl px-6 my-1.5 text-primary font-semibold">
                               Shop by Department
                             </h1>
-                            {data?.map(({ category_name, sub_category }) => (
-                              <li
-                                onClick={() =>
-                                  setSubCategory({
-                                    category_name,
-                                    sub_category,
-                                  })
-                                }
-                                class="flex items-center justify-between hover:bg-gray-300 px-6 py-[7px] text-[14px] cursor-pointer font-inherit"
-                              >
-                                {category_name}
-                                <span>
-                                  <MdKeyboardArrowRight
-                                    size={25}
-                                    className="text-gray-700"
-                                  />
-                                </span>
-                              </li>
-                            ))}
+                            {data?.map(
+                              ({ category_name, sub_category }, index) => (
+                                <li
+                                  key={index}
+                                  onClick={() =>
+                                    setSubCategory({
+                                      category_name,
+                                      sub_category,
+                                    })
+                                  }
+                                  className="flex items-center justify-between hover:bg-gray-300 pl-6 pr-2 py-[7px] text-[14px] cursor-pointer font-inherit"
+                                >
+                                  {category_name}
+                                  <span>
+                                    <MdKeyboardArrowRight
+                                      size={25}
+                                      className="text-gray-700"
+                                    />
+                                  </span>
+                                </li>
+                              )
+                            )}
                           </div>
                         )}
                         {subCategory && (
@@ -370,7 +373,7 @@ const Navbar = () => {
                           >
                             {subCategory?.sub_category?.length > 0 && (
                               <button
-                                class="flex items-center gap-1 w-full hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer uppercase font-roboto font-semibold border-b border-b-gray-400 text-gray-800"
+                                className="flex items-center gap-1 w-full hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer uppercase font-roboto font-semibold border-b border-b-gray-400 text-gray-800"
                                 onClick={() => {
                                   setSubCategory({});
                                 }}
@@ -386,12 +389,13 @@ const Navbar = () => {
                               {subCategory?.sub_category?.map(
                                 ({ name, link }) => (
                                   <Link
+                                    key={link}
                                     to={`/products/${link}`}
                                     onClick={() => {
                                       setSubCategory({});
                                       setOpenCategory(!openCategory);
                                     }}
-                                    class="flex items-center justify-between font-inherit hover:bg-gray-300 px-6 py-3 text-[14px] cursor-pointer capitalize"
+                                    className="flex items-center justify-between font-inherit hover:bg-gray-300 px-6 py-3 text-[14px] cursor-pointer capitalize"
                                   >
                                     {name}
                                   </Link>
@@ -407,14 +411,14 @@ const Navbar = () => {
                         <h1 className="text-xl px-6 my-1.5 text-primary font-semibold">
                           Help & Settings
                         </h1>
-                        <ul class="text-sm leading-4">
-                          <li class="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
+                        <ul className="text-sm leading-4">
+                          <li className="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
                             Your Account
                           </li>
-                          <li class="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
+                          <li className="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
                             Customer Service
                           </li>
-                          <li class="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
+                          <li className="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
                             Sign Out
                           </li>
                         </ul>

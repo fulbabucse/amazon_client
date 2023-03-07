@@ -7,43 +7,43 @@ const Users = () => {
     <div>
       <h1>All Users</h1>
       <div>
-        <div class="w-full">
-          <div class="overflow-auto lg:overflow-visible">
-            <table class="table text-gray-400 border-separate space-y-10 text-sm w-full">
-              <thead class="bg-gray-800 text-gray-500">
+        <div className="w-full">
+          <div className="overflow-auto lg:overflow-visible">
+            <table className="table text-gray-400 border-separate space-y-10 text-sm w-full">
+              <thead className="bg-gray-800 text-gray-500">
                 <tr>
-                  <th class="p-3 text-start">Name & Email address</th>
-                  <th class="p-3 text-left">Join Date</th>
-                  <th class="p-3 text-left">Type</th>
+                  <th className="p-3 text-start">Name & Email address</th>
+                  <th className="p-3 text-left">Join Date</th>
+                  <th className="p-3 text-left">Type</th>
                 </tr>
               </thead>
               <tbody>
                 {data?.map(({ name, isAdmin, email, photoURL, join_date }) => (
-                  <tr class="bg-gray-800">
-                    <td class="p-3">
-                      <div class="flex align-items-center">
+                  <tr className="bg-gray-800">
+                    <td className="p-3">
+                      <div className="flex align-items-center">
                         <img
-                          class="rounded-full h-12 w-12  object-cover"
+                          className="rounded-full h-12 w-12  object-cover"
                           src={photoURL}
                           alt={name}
                         />
-                        <div class="ml-3">
-                          <div class="">{name}</div>
-                          <div class="text-gray-500">{email}</div>
+                        <div className="ml-3">
+                          <div className="">{name}</div>
+                          <div className="text-gray-500">{email}</div>
                         </div>
                       </div>
                     </td>
 
-                    <td class="p-3 ">
+                    <td className="p-3 ">
                       <p>{join_date}</p>
                     </td>
-                    <td class="p-3">
+                    <td className="p-3">
                       {isAdmin ? (
-                        <span class="bg-green-400 text-gray-50 rounded-md px-4 py-1">
+                        <span className="bg-green-400 text-gray-50 rounded-md px-4 py-1">
                           Admin
                         </span>
                       ) : (
-                        <span class="bg-red-400 text-gray-50 rounded-md px-4 py-1">
+                        <span className="bg-red-400 text-gray-50 rounded-md px-4 py-1">
                           Subscribers
                         </span>
                       )}

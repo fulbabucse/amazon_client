@@ -1,11 +1,6 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import brandLogo from "../assets/icons/amazon_logo_white.png";
-import {
-  Accordion,
-  AccordionBody,
-  AccordionHeader,
-} from "@material-tailwind/react";
 import { FaTimes, FaBars } from "react-icons/fa";
 import { AiOutlineSearch, AiOutlineUser } from "react-icons/ai";
 import { useGetOrdersByEmailQuery } from "../features/products/cartApi";
@@ -13,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import cartIcon from "../assets/icons/cart.png";
 import { useGetCategoriesQuery } from "../features/categories/categoryApi";
 import { getSearchValue } from "../features/products/searchSlice";
+import { BsArrowLeft } from "react-icons/bs";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const SmallNavbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
@@ -25,12 +22,6 @@ const SmallNavbar = () => {
   } = useSelector((state) => state.auth);
   const { data: orders } = useGetOrdersByEmailQuery(email);
   const { data } = useGetCategoriesQuery();
-
-  const [open, setOpen] = useState(1);
-
-  const handleOpen = (value) => {
-    setOpen(open === value ? 0 : value);
-  };
 
   const quantity = orders?.reduce((total, current) => {
     return parseFloat(total) + parseFloat(current.quantity);
@@ -189,67 +180,18 @@ const SmallNavbar = () => {
               Fashions
             </Link>
           </div>
-
-          {/* <li className="list-none">
-            <Link
-              to="/customer-service"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
-            >
-              Customer service
-            </Link>
-          </li>
-          <div>
-            <Link
-              to="/best-sellers"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
-            >
-              Best sellers
-            </Link>
-          </div>
-          <div>
-            <Link
-              to="/new-releases"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
-            >
-              New Releases
-            </Link>
-          </div>
-          <div>
-            <Link
-              to="/today-deals"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
-            >
-              Today's Teals
-            </Link>
-          </div>
-          <div>
-            <Link
-              to="/books"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
-            >
-              Books
-            </Link>
-          </div>
-          <div>
-            <Link
-              to="/fashion"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[13px]"
-            >
-              Fashion
-            </Link>
-          </div> */}
         </div>
 
         <div
           className={`${
             openCategory
-              ? "translate-x-0 opacity-100 z-40 ease-in"
-              : "-translate-x-[9999px] opacity-0 z-40 ease-out"
-          } left-0 flex fixed top-0 bottom-0 shadow-xl w-full text-primary transition-opacity duration-1000`}
+              ? "translate-x-0 opacity-100"
+              : "opacity-0 -translate-x-full"
+          } left-0 inset-x-0 z-20 flex fixed top-0 bottom-0 shadow-xl w-full text-primary transition-all duration-500 ease-in-out`}
         >
-          <div className="w-[280px]">
-            <div className="w-full h-[130px] flex justify-between items-center px-5 bg-primary text-white text-center relative z-40">
-              <div className="w-full">
+          <div className="w-[300px] h-screen bg-gray-100">
+            <div className="w-full flex justify-between items-center px-5 bg-primary text-white text-center relative">
+              <div className="w-full h-[130px]">
                 <div className="absolute top-5 right-5">
                   {email ? (
                     <Link
@@ -284,53 +226,108 @@ const SmallNavbar = () => {
                 onClick={() => setOpenCategory(!openCategory)}
                 className={`${
                   openCategory ? "z-40" : undefined
-                } text-white absolute -right-10 top-10`}
+                } text-white absolute -right-10`}
               >
                 <FaTimes size={25} />
               </button>
             </div>
-            <div className="left-0 block fixed top-32 bottom-0 shadow-xl bg-white w-[280px] py-4 px-6 text-primary transition-all duration-700 ease-in-out overflow-hidden flex-row flex-nowrap overflow-y-auto z-40">
-              <Fragment>
-                <div className="space-y-3">
-                  {data?.map(({ category_name, sub_category }, index) => (
-                    <Accordion key={index} open={open === index + 1}>
-                      <AccordionHeader
-                        className="text-[17px]"
-                        onClick={() => handleOpen(index + 1)}
-                      >
-                        {category_name}
-                      </AccordionHeader>
-                      <AccordionBody>
-                        <div className="flex flex-col space-y-2">
-                          {sub_category?.map(({ name, link }, index) => (
-                            <Link
-                              key={index}
-                              to={`/products/${category_name
-                                .split(" ")
-                                .join("-")
-                                .toLowerCase()}/${link}`}
-                              onClick={() => setOpenCategory(!openCategory)}
-                              className="text-primary font-medium transition-colors duration-300  hover:underline hover:text-[#C9563C] text-sm text-start capitalize"
-                            >
-                              {name}
-                            </Link>
-                          ))}
-                        </div>
-                      </AccordionBody>
-                    </Accordion>
-                  ))}
-                </div>
-              </Fragment>
-
-              <div>
-                <h1 className="text-xl mt-10 text-primary font-black]">
-                  Help & Settings
-                </h1>
+            <div className="font-roboto font-[400] left-0 block fixed top-32 bottom-0 shadow-xl bg-white w-[300px] text-primary transition-all duration-700 ease-in-out overflow-hidden flex-row flex-nowrap overflow-y-auto">
+              <div
+                className={`${
+                  !subCategory?.sub_category?.length > 0 &&
+                  "border-b border-b-gray-400"
+                } pb-2 relative`}
+              >
+                <ul className="text-sm leading-4 relative">
+                  {!subCategory?.sub_category?.length > 0 && (
+                    <div>
+                      <h1 className="text-xl px-6 my-1.5 text-primary font-semibold">
+                        Shop by Department
+                      </h1>
+                      {data?.map(({ category_name, sub_category }) => (
+                        <li
+                          key={category_name}
+                          onClick={() =>
+                            setSubCategory({
+                              category_name,
+                              sub_category,
+                            })
+                          }
+                          className="flex items-center justify-between hover:bg-gray-300 pl-6 py-[7px] text-[14px] cursor-pointer font-inherit"
+                        >
+                          {category_name}
+                          <span>
+                            <MdKeyboardArrowRight
+                              size={25}
+                              className="text-gray-700"
+                            />
+                          </span>
+                        </li>
+                      ))}
+                    </div>
+                  )}
+                  {subCategory && (
+                    <div
+                      className={`${
+                        !subCategory?.sub_category?.length > 0 &&
+                        "opacity-0 translate-x-full"
+                      } inset-x-0 transition-all duration-300 ease-in-out w-full`}
+                    >
+                      {subCategory?.sub_category?.length > 0 && (
+                        <button
+                          className="flex items-center gap-1 w-full hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer uppercase font-roboto font-semibold border-b border-b-gray-400 text-gray-800"
+                          onClick={() => {
+                            setSubCategory({});
+                          }}
+                        >
+                          <BsArrowLeft size={20} />
+                          <span>Main Menu</span>
+                        </button>
+                      )}
+                      <h1 className="leading-3">
+                        <p className="text-lg px-6 my-1.5 text-primary font-medium">
+                          {subCategory?.category_name}
+                        </p>
+                        {subCategory?.sub_category?.map(({ name, link }) => (
+                          <Link
+                            key={link}
+                            to={`/products/${link}`}
+                            onClick={() => {
+                              setSubCategory({});
+                              setOpenCategory(!openCategory);
+                            }}
+                            className="flex items-center justify-between font-inherit hover:bg-gray-300 px-6 py-3 text-[14px] cursor-pointer capitalize"
+                          >
+                            {name}
+                          </Link>
+                        ))}
+                      </h1>
+                    </div>
+                  )}
+                </ul>
               </div>
+              {!subCategory?.sub_category?.length > 0 && (
+                <div className="mb-6">
+                  <h1 className="text-xl px-6 my-1.5 text-primary font-semibold">
+                    Help & Settings
+                  </h1>
+                  <ul className="text-sm leading-4">
+                    <li className="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
+                      Your Account
+                    </li>
+                    <li className="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
+                      Customer Service
+                    </li>
+                    <li className="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
+                      Sign Out
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
           <div
-            className="bg-black opacity-75 flex-1 transition-opacity duration-500 ease-in-out"
+            className="bg-black opacity-75 flex-1"
             onClick={() => setOpenCategory(!openCategory)}
           ></div>
         </div>
