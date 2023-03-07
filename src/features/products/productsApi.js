@@ -59,6 +59,11 @@ const productApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Product"],
     }),
+    getProductByDepartment: builder.query({
+      query: (department) => ({
+        url: `/products/dept/all/${department}`,
+      }),
+    }),
   }),
 });
 
@@ -72,4 +77,5 @@ export const {
   useGetFashionProductsQuery,
   useGetSearchProductsQuery,
   useDeleteProductMutation,
+  useGetProductByDepartmentQuery,
 } = productApi;

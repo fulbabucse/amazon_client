@@ -8,19 +8,29 @@ import SmallSpinner from "../components/shared/SmallSpinner";
 import {
   useGetAllProductsQuery,
   useGetBooksQuery,
+  useGetProductByDepartmentQuery,
+  useGetProductsByCategoryQuery,
 } from "../features/products/productsApi";
 
 const Home = () => {
   const { data, isLoading } = useGetAllProductsQuery();
+  const { data: toys } = useGetProductsByCategoryQuery("toys");
+  const { data: computers } = useGetProductByDepartmentQuery("computers");
+  const { data: decoration } = useGetProductByDepartmentQuery("decoration");
+  const { data: cosmetics } = useGetProductByDepartmentQuery("cosmetics");
   const { data: booksData } = useGetBooksQuery();
 
   if (isLoading) {
     return <SmallSpinner />;
   }
 
+  // console.log(computers);
+
   return (
     <div className="space-y-3">
       <Hero />
+
+      {/* Large Device Home page design and development */}
       <div className="hidden lg:block space-y-3">
         <Popular
           data={data}
@@ -35,18 +45,18 @@ const Home = () => {
 
         <NewArrival />
         <Popular
-          data={data}
+          data={computers}
           id={"wireless"}
           title="Popular products in Wireless internationally"
         />
         <Popular
-          data={data}
+          data={cosmetics}
           id={"beauty"}
           title="Popular products in Beauty internationally"
         />
         <NewArrival />
         <Popular
-          data={data}
+          data={decoration}
           id={"home_improvement"}
           title="International top sellers in Home Improvement"
         />
@@ -57,12 +67,13 @@ const Home = () => {
         />
         <NewArrival />
         <Popular
-          data={data}
+          data={toys}
           id={"top_toys"}
           title="Top Sellers in Toys for you"
         />
       </div>
 
+      {/* Small Device Home page design and development */}
       <div className="lg:hidden space-y-3">
         <PopularSmallDevice
           data={data}
