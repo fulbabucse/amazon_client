@@ -4,12 +4,13 @@ import { AiFillDelete } from "react-icons/ai";
 import { MdOutlineEditNote } from "react-icons/md";
 import { IconButton } from "@material-tailwind/react";
 import { useDeleteProductMutation } from "../../features/products/productsApi";
+import SmallSpinner from "../../components/shared/SmallSpinner";
 
 const AllProducts = () => {
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(25);
 
-  const { data } = useGetAdminAllProductsQuery({ page, size });
+  const { data, isLoading } = useGetAdminAllProductsQuery({ page, size });
   const [deleteProduct] = useDeleteProductMutation();
 
   const pages = Math.ceil(data?.count / size);
@@ -24,6 +25,10 @@ const AllProducts = () => {
   const handleDeleteProduct = (id) => {
     deleteProduct(id);
   };
+
+  if (isLoading) {
+    return <SmallSpinner />;
+  }
 
   return (
     <div>

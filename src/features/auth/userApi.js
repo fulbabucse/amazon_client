@@ -14,7 +14,15 @@ const userApi = apiSlice.injectEndpoints({
         dispatch(getUser(data?.email));
       },
     }),
+    getUsers: builder.query({
+      query: () => ({
+        url: "/users/all",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useSaveToDatabaseMutation } = userApi;
+export const { useSaveToDatabaseMutation, useGetUsersQuery } = userApi;

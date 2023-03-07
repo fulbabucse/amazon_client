@@ -24,7 +24,8 @@ const PopularSmallColumn = ({ data, cardTitle }) => {
                 {title}
               </Link>
               <p className="text-xl">
-                ${(price / 100) * (100 - 5)} <sup className="text-sm">00</sup>
+                ${((price / 100) * (100 - 5)).toFixed(0)}
+                <sup className="text-sm">00</sup>
                 <del className="text-sm ml-2">{price}</del>
               </p>
             </div>

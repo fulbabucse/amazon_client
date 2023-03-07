@@ -15,7 +15,6 @@ const AllType = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
 
   const handleProductPost = (data) => {
@@ -38,14 +37,16 @@ const AllType = () => {
   useEffect(() => {
     if (images.length > 0) {
       postProduct(productInfo);
-      // reset();
       setImages([]);
     }
+  }, [images]);
 
+  useEffect(() => {
     if (isSuccess) {
       toast.success("Product added success !!");
+      setImages([]);
     }
-  }, [images]);
+  }, []);
 
   return (
     <div>
@@ -373,6 +374,15 @@ const AllType = () => {
                 <option className="capitalize" value="books">
                   books
                 </option>
+                <option className="capitalize" value="decoration">
+                  decoration
+                </option>
+                <option className="capitalize" value="foods">
+                  foods
+                </option>
+                <option className="capitalize" value="others">
+                  others
+                </option>
               </select>
               {errors.department && (
                 <p className="text-red-400 text-xs font-medium">
@@ -411,6 +421,9 @@ const AllType = () => {
         <div className="flex items-center justify-center gap-5 mt-3">
           <Button type="submit" size="lg">
             Submit
+          </Button>
+          <Button type="reset" size="lg" color="red">
+            Reset
           </Button>
         </div>
       </form>
