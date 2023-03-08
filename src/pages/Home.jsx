@@ -27,8 +27,6 @@ const Home = () => {
     return <SmallSpinner />;
   }
 
-  // console.log(computers);
-
   return (
     <div className="space-y-3">
       <Hero />
