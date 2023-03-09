@@ -1,9 +1,11 @@
 import React from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { AiOutlineStar } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const HistoryCard = ({ product }) => {
+  const { pathname } = useLocation();
+  console.log(pathname);
   const { _id, title, price, rating, brand, images, category } = product;
 
   const ratingStar = Array.from({ length: 5 }, (_, i) => {
@@ -23,19 +25,35 @@ const HistoryCard = ({ product }) => {
   });
 
   return (
-    <div className="bg-white rounded-md relative h-full historyCard">
+    <div
+      className={`bg-white rounded-md relative h-full ${
+        pathname === "/history" ? "w-full" : "historyCard"
+      }`}
+    >
       {price > 300 && (
         <div className="absolute z-10 bg-[#F8B567] text-primary top-3 right-3 rounded-full p-1 text-xs">
           {price > 300 && <p>-20%</p>}
         </div>
       )}
 
-      <div className={`historyCard m-auto relative`}>
-        <div className="historyCard h-[220px] bg-center bg-cover duration-500">
+      <div
+        className={`${
+          pathname === "/history" ? "w-full" : "historyCard"
+        } m-auto relative`}
+      >
+        <div
+          className={`${
+            pathname === "/history"
+              ? "w-full h-[260px]"
+              : "historyCard h-[220px]"
+          } bg-center bg-cover duration-500`}
+        >
           <img
             src={images[0]}
             alt={title}
-            className="h-full historyCard transition-transform ease-out duration-500"
+            className={`h-full ${
+              pathname === "/history" ? "w-full" : "historyCard"
+            } transition-transform ease-out duration-500`}
           />
         </div>
       </div>

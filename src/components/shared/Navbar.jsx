@@ -561,6 +561,15 @@ const Navbar = () => {
                 >
                   <h1 className="font-[500] text-sm text-gray-900">
                     Your Browsing History
+                    <Link
+                      to={`/history?ref=nav_timeline_view_history&tm=${Date.now()}`}
+                      className="text-[#05a] font-medium hover:text-[#C9563C] text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-[#C9563C]"
+                      role="menuitem"
+                      tabIndex="-1"
+                      id="menu-item-0"
+                    >
+                      View and Edit
+                    </Link>
                   </h1>
                   <History />
                 </MenuList>

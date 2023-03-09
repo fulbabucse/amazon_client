@@ -1,5 +1,6 @@
 import React from "react";
 import Hero from "../components/Hero";
+import History from "../components/History";
 import NewArrival from "../components/NewArrival";
 import Popular from "../components/Popular";
 import PopularSmallDevice from "../components/PopularSmallColumn";
@@ -76,6 +77,8 @@ const Home = () => {
 
       {/* Small Device Home page design and development */}
       <div className="lg:hidden space-y-3">
+        <History />
+
         <PopularSmallDevice
           data={data}
           cardTitle="Popular Item in this Session"

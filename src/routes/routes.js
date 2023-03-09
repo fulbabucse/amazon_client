@@ -7,6 +7,7 @@ import Users from "../admin/pages/Users";
 import ProductDetails from "../components/shared/ProductDetails";
 import Admin from "../layouts/Admin";
 import Root from "../layouts/Root";
+import AllHistory from "../pages/AllHistory";
 import BestSeller from "../pages/BestSeller";
 import Books from "../pages/Books";
 import Cart from "../pages/Cart";
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
       { path: "/best-sellers", element: <BestSeller /> },
       { path: "/new-releases", element: <NewRelease /> },
       { path: "/today-deals", element: <TodayDeals /> },
+      { path: "/history", element: <AllHistory /> },
       {
         path: "/payments/success",
         element: (
