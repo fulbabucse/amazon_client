@@ -5,12 +5,15 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import SmallTimer from "./SmallTimer";
+import { useDispatch } from "react-redux";
+import { getHistory } from "../../features/products/historySlice";
 
 const ProductCard = ({ product, index }) => {
   const { _id, title, price, rating, brand, images, category } = product;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   const ratingStar = Array.from({ length: 5 }, (_, i) => {
     let number = i + 0.5;
@@ -112,7 +115,10 @@ const ProductCard = ({ product, index }) => {
       </div>
 
       <Link to={`/product/${category}/${_id}`}>
-        <div className="p-3 space-y-3">
+        <div
+          className="p-3 space-y-3"
+          onClick={() => dispatch(getHistory(product))}
+        >
           <p className="text-xs text-red-500">{brand}</p>
           <h3 className="text-[16px] font-openSans text-[#007185] font-medium group-hover:text-[#C9563C] leading-6 duration-500 group-hover:underline group-hover:underline-offset-4 group-hover:decoration-[#C9563C]">
             {pathname === "/our-shop"

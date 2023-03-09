@@ -28,6 +28,8 @@ const Navbar = () => {
     user: { email, name, photoURL, isAdmin },
   } = useSelector((state) => state.auth);
 
+  const history = JSON.parse(localStorage.getItem("browsing_history"));
+
   const { data } = useGetCategoriesQuery();
 
   const { data: orders } = useGetOrdersByEmailQuery(email);
@@ -536,32 +538,34 @@ const Navbar = () => {
             >
               Contact
             </Link>
-            {/* <button className="capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2">
-              Browsing history
-            </button> */}
 
-            <Menu open={openMenu} handler={setOpenMenu}>
-              <MenuHandler>
-                <button
+            {history?.length > 0 && (
+              <Menu open={openMenu} handler={setOpenMenu}>
+                <MenuHandler>
+                  <button
+                    {...triggers}
+                    className="flex items-center gap-1 capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
+                  >
+                    Browsing history
+                    <MdOutlineKeyboardArrowDown
+                      size={20}
+                      className={`transition-transform ${
+                        openMenu ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                </MenuHandler>
+                <MenuList
                   {...triggers}
-                  className="flex items-center gap-1 capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
+                  className="w-full overflow-visible px-4"
                 >
-                  Browsing history
-                  <MdOutlineKeyboardArrowDown
-                    size={20}
-                    className={`transition-transform ${
-                      openMenu ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-              </MenuHandler>
-              <MenuList {...triggers} className="w-full overflow-visible px-4">
-                <h1 className="font-[500]semibold text-sm text-gray-900">
-                  Your Browsing History
-                </h1>
-                <History />
-              </MenuList>
-            </Menu>
+                  <h1 className="font-[500] text-sm text-gray-900">
+                    Your Browsing History
+                  </h1>
+                  <History />
+                </MenuList>
+              </Menu>
+            )}
           </div>
         </div>
       </div>

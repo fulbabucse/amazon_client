@@ -1,16 +1,16 @@
 import React from "react";
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
-import { useGetAllProductsQuery } from "../features/products/productsApi";
-import PopularProductCard from "./shared/PopularProductCard";
+import HistoryCard from "./shared/HistoryCard";
 
 const History = () => {
-  const { data } = useGetAllProductsQuery();
+  const data = JSON.parse(localStorage.getItem("browsing_history"));
   const prevSlide = () => {
     document.getElementById("history").scrollLeft -= 800;
   };
   const nextSlide = () => {
     document.getElementById("history").scrollLeft += 800;
   };
+
   return (
     <div>
       <div className="bg-white relative group pb-5 hover:pb-[3px]">
@@ -37,9 +37,11 @@ const History = () => {
           id="history"
           className="flex gap-4 group-hover:overflow-x-auto mt-2 scroll-smooth overflow-hidden transition-transform duration-500 ease-in-out"
         >
-          {data?.slice(0, 15)?.map((product) => (
-            <PopularProductCard product={product} key={product?._id} />
-          ))}
+          {data
+            ?.sort((a, b) => a.createAt - b.createAt)
+            ?.map((product) => (
+              <HistoryCard product={product} key={product?._id} />
+            ))}
         </div>
       </div>
     </div>
