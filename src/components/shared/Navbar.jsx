@@ -12,10 +12,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../features/auth/authSlice";
 import { FaUserCircle, FaTimes, FaBars } from "react-icons/fa";
 import { BsArrowLeft } from "react-icons/bs";
-import { MdKeyboardArrowRight } from "react-icons/md";
+import {
+  MdKeyboardArrowRight,
+  MdOutlineKeyboardArrowDown,
+} from "react-icons/md";
 import { useGetCategoriesQuery } from "../../features/categories/categoryApi";
 import { useGetOrdersByEmailQuery } from "../../features/products/cartApi";
 import { getSearchValue } from "../../features/products/searchSlice";
+import History from "../History";
 
 const Navbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
@@ -25,7 +29,14 @@ const Navbar = () => {
   } = useSelector((state) => state.auth);
 
   const { data } = useGetCategoriesQuery();
+
   const { data: orders } = useGetOrdersByEmailQuery(email);
+  const [openMenu, setOpenMenu] = React.useState(false);
+
+  const triggers = {
+    onMouseEnter: () => setOpenMenu(true),
+    onMouseLeave: () => setOpenMenu(false),
+  };
 
   const dispatch = useDispatch();
 
@@ -63,9 +74,12 @@ const Navbar = () => {
 
   return (
     <div>
+      {/* Small device navbar */}
       <div className="lg:hidden">
         <SmallNavbar />
       </div>
+
+      {/* Large device navbar */}
       <div className="hidden lg:block">
         <div className="bg-secondary w-full text-white hidden lg:block">
           <div className="flex items-center justify-between px-4 py-2">
@@ -76,6 +90,7 @@ const Navbar = () => {
                 </Link>
               </div>
 
+              {/* Delivery Country changes */}
               <div className="flex items-center gap-[2px] border border-transparent hover:border-white py-2.5 px-2 cursor-pointer">
                 <div>
                   <HiOutlineLocationMarker size={20} />
@@ -87,6 +102,7 @@ const Navbar = () => {
               </div>
             </div>
 
+            {/* Search bar */}
             <div className="w-[720px]">
               <form onSubmit={handleSubmit} className="flex items-center">
                 <div className="bg-gray-200 rounded-l-md">
@@ -302,6 +318,7 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* All Categories */}
         <div className="bg-primary w-full text-white flex items-center gap-2">
           <div className="ml-4">
             <div className="relative group">
@@ -451,6 +468,8 @@ const Navbar = () => {
               </div>
             </div>
           </div>
+
+          {/* Sub navbar */}
           <div className="flex items-center">
             <Link
               to="/"
@@ -517,6 +536,32 @@ const Navbar = () => {
             >
               Contact
             </Link>
+            {/* <button className="capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2">
+              Browsing history
+            </button> */}
+
+            <Menu open={openMenu} handler={setOpenMenu}>
+              <MenuHandler>
+                <button
+                  {...triggers}
+                  className="flex items-center gap-1 capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
+                >
+                  Browsing history
+                  <MdOutlineKeyboardArrowDown
+                    size={20}
+                    className={`transition-transform ${
+                      openMenu ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+              </MenuHandler>
+              <MenuList {...triggers} className="w-full overflow-visible px-4">
+                <h1 className="font-[500]semibold text-sm text-gray-900">
+                  Your Browsing History
+                </h1>
+                <History />
+              </MenuList>
+            </Menu>
           </div>
         </div>
       </div>
