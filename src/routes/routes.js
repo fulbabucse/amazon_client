@@ -11,10 +11,8 @@ import BestSeller from "../pages/BestSeller";
 import Books from "../pages/Books";
 import Cart from "../pages/Cart";
 import ComingSoon from "../pages/ComingSoon";
-import Compare from "../pages/Compare";
 import Contact from "../pages/Contact";
 import Fashion from "../pages/Fashion";
-import Favorite from "../pages/Favorite";
 import Home from "../pages/Home";
 import NewRelease from "../pages/NewRelease";
 import Orders from "../pages/Orders";
@@ -25,6 +23,7 @@ import Success from "../pages/payments/Success";
 import Products from "../pages/Products";
 import Search from "../pages/Search";
 import TodayDeals from "../pages/TodayDeals";
+import Account from "../pages/users/Account";
 import SignIn from "../pages/users/SignIn";
 import SignUp from "../pages/users/SignUp";
 import AdminRoute from "./AdminRoute";
@@ -65,22 +64,22 @@ const router = createBrowserRouter([
         ),
       },
 
-      {
-        path: "/compare-product",
-        element: (
-          <PrivateRoute>
-            <Compare />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/wishlist-product",
-        element: (
-          <PrivateRoute>
-            <Favorite />
-          </PrivateRoute>
-        ),
-      },
+      // {
+      //   path: "/compare-product",
+      //   element: (
+      //     <PrivateRoute>
+      //       <Compare />
+      //     </PrivateRoute>
+      //   ),
+      // },
+      // {
+      //   path: "/wishlist-product",
+      //   element: (
+      //     <PrivateRoute>
+      //       <Favorite />
+      //     </PrivateRoute>
+      //   ),
+      // },
       {
         path: "/cart",
         element: (
@@ -90,10 +89,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/orders",
+        path: "/your-account/orders-history",
         element: (
           <PrivateRoute>
             <Orders />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/account",
+        element: (
+          <PrivateRoute>
+            <Account />
           </PrivateRoute>
         ),
       },

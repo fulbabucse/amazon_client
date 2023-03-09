@@ -122,7 +122,7 @@ const ProductCard = ({ product, index }) => {
           <button className="flex items-center text-[#C9563C] text-sm">
             {ratingStar} <span className="ml-1">({rating})</span>
           </button>
-          <h3 className="text-sm flex items-center">
+          <h3 className="text-lg font-semibold text-gray-800 flex items-center">
             {price > 300 ? (
               <p className="text-red-500">
                 ${((price / 100) * 80)?.toFixed(2)}{" "}

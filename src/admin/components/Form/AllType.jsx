@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useGetCategoriesQuery } from "../../../features/categories/categoryApi";
 import { usePostProductMutation } from "../../../features/products/productsApi";
-import convertBase64 from "../../../utils/convertBase64";
 
 const AllType = () => {
+  const [urls, setUrls] = useState([]);
   const { data: categories } = useGetCategoriesQuery();
   const [postProduct, { isSuccess }] = usePostProductMutation();
-  const [images, setImages] = useState([]);
+
   const [productData, setProductData] = useState({});
   const {
     register,
@@ -17,11 +17,25 @@ const AllType = () => {
     formState: { errors },
   } = useForm();
 
-  const handleProductPost = (data) => {
-    Array.from(data.images).forEach(async (image) => {
-      const base64 = await convertBase64(image);
-      setImages((prev) => [...prev, base64]);
-    });
+  const handleProductPost = async (data) => {
+    if (data?.images?.length > 4) {
+      toast.error("You can upload up to 4 product images !!");
+      return;
+    }
+    const formData = new FormData();
+    for (let i = 0; i < data.images.length; i++) {
+      formData.append(`image`, data.images[i]);
+      try {
+        const response = await fetch(process.env.REACT_APP_IMGBBLINK, {
+          method: "POST",
+          body: formData,
+        });
+        const result = await response.json();
+        setUrls((prev) => [...prev, result.data.url]);
+      } catch (error) {
+        console.error(error);
+      }
+    }
     setProductData({ ...data });
   };
 
@@ -33,20 +47,20 @@ const AllType = () => {
     });
   });
 
-  const productInfo = { ...productData, images };
+  const productInfo = { ...productData, images: urls };
   useEffect(() => {
-    if (images.length > 0) {
+    if (urls?.length === 4) {
       postProduct(productInfo);
-      setImages([]);
+      setUrls([]);
     }
-  }, [images]);
+  }, [urls]);
 
   useEffect(() => {
     if (isSuccess) {
       toast.success("Product added success !!");
-      setImages([]);
+      setUrls([]);
     }
-  }, []);
+  }, [isSuccess]);
 
   return (
     <div>

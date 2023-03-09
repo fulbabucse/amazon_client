@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import cartIcon from "../../assets/icons/cart.png";
 import brandLogo from "../../assets/icons/amazon_logo_white.png";
 import { AiOutlineSearch, AiOutlineUserAdd } from "react-icons/ai";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import SmallNavbar from "../SmallNavbar";
 import { Menu, MenuHandler, MenuList } from "@material-tailwind/react";
@@ -68,12 +69,25 @@ const Navbar = () => {
       <div className="hidden lg:block">
         <div className="bg-secondary w-full text-white hidden lg:block">
           <div className="flex items-center justify-between px-4 py-2">
-            <div className="w-28">
-              <Link to="/">
-                <img src={brandLogo} alt="Amazon" className="w-full" />
-              </Link>
+            <div className="flex items-center justify-between">
+              <div className="border border-transparent hover:border-white py-2 px-2">
+                <Link to="/">
+                  <img src={brandLogo} alt="Amazon" className="w-[104px]" />
+                </Link>
+              </div>
+
+              <div className="flex items-center gap-[2px] border border-transparent hover:border-white py-2.5 px-2 cursor-pointer">
+                <div>
+                  <HiOutlineLocationMarker size={20} />
+                </div>
+                <div className="leading-[13px]">
+                  <small className="text-[#999]">Deliver to</small>
+                  <h4>Bangladesh</h4>
+                </div>
+              </div>
             </div>
-            <div className="w-[640px]">
+
+            <div className="w-[720px]">
               <form onSubmit={handleSubmit} className="flex items-center">
                 <div className="bg-gray-200 rounded-l-md">
                   <select
@@ -106,7 +120,7 @@ const Navbar = () => {
                 <input
                   type="text"
                   name="search"
-                  className="w-full py-[10.4px] px-4 text-sm text-primary focus:outline-none"
+                  className="w-full py-[10.5px] px-4 text-sm text-primary focus:outline-none"
                   placeholder="Search here..."
                 />
                 <button
@@ -117,7 +131,7 @@ const Navbar = () => {
                 </button>
               </form>
             </div>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center">
               <Menu
                 animate={{
                   mount: { y: 0 },
@@ -125,10 +139,10 @@ const Navbar = () => {
                 }}
               >
                 <MenuHandler>
-                  <button>
+                  <button className="border border-transparent hover:border-white py-2 px-2">
                     <div className="flex items-center gap-1">
                       {email && photoURL ? (
-                        <div className="w-10 h-10">
+                        <div className="w-8 h-8">
                           <img
                             className="w-full h-full rounded-full"
                             src={photoURL}
@@ -138,7 +152,7 @@ const Navbar = () => {
                       ) : (
                         <AiOutlineUserAdd className="text-3xl font-medium" />
                       )}
-                      <h3 className="text-sm text-start font-semibold font-openSans">
+                      <h3 className="text-sm text-start font-semibold font-openSans leading-[14px]">
                         {email
                           ? `Hello, ${name?.split(" ")[0]}`
                           : "Hello, Log In"}
@@ -200,7 +214,10 @@ const Navbar = () => {
                     <div className="grid grid-cols-2 mt-3 border-t border-t-gray-300">
                       <div className="mt-3">
                         <Link
-                          to="/"
+                          to={`/account?user=${name
+                            ?.toLowerCase()
+                            ?.split(" ")
+                            .join("+")}&ref=${email?.split("@")?.join("+")}`}
                           className="text-primary hover:text-[#C9563C] text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-[#C9563C]"
                           role="menuitem"
                           tabIndex="-1"
@@ -226,7 +243,7 @@ const Navbar = () => {
                       <div className="mt-2 border-l border-l-gray-200">
                         <div className="flex flex-col">
                           <Link
-                            to="/orders"
+                            to={`/your-account/orders-history?ref=${email}`}
                             className="text-primary hover:text-[#C9563C] text-start w-full px-4 py-2 text-sm hover:underline hover:underline-offset-4 hover:decoration-[#C9563C]"
                             role="menuitem"
                             tabIndex="-1"
@@ -259,7 +276,10 @@ const Navbar = () => {
                 </MenuList>
               </Menu>
 
-              <Link to="/cart">
+              <Link
+                to="/cart"
+                className="border border-transparent hover:border-white py-2.5 px-2"
+              >
                 <div className="flex relative mr-8">
                   <div>
                     <img src={cartIcon} alt="" />
@@ -282,18 +302,16 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="bg-primary w-full text-white py-[8px] flex items-center gap-2">
-          <div className="px-4">
+        <div className="bg-primary w-full text-white flex items-center gap-2">
+          <div className="ml-4">
             <div className="relative group">
               <button
                 onClick={() => setOpenCategory(!openCategory)}
                 className="flex items-center gap-14"
               >
-                <div className="flex items-center gap-1">
-                  <FaBars className="text-white text-lg group-hover:text-[#C9563C] duration-500 transition-all ease-in-out" />
-                  <h1 className="font-radio-canada font-medium group-hover:text-[#C9563C] duration-500 transition-all ease-in-out">
-                    All
-                  </h1>
+                <div className="flex items-center gap-1 capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2">
+                  <FaBars className="text-white text-lg" />
+                  <h1 className="font-radio-canada font-medium">All</h1>
                 </div>
               </button>
 
@@ -433,69 +451,69 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center">
             <Link
               to="/"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
             >
               Home
             </Link>
 
             <Link
               to="/our-shop"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
             >
               Our Shop
             </Link>
 
             <Link
               to="/books"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
             >
               Books
             </Link>
             <Link
               to="/fashions"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
             >
               Fashions
             </Link>
 
             <Link
               to="/blogs"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
             >
               Blogs
             </Link>
 
             <Link
               to="/customer-service"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
             >
               Customer service
             </Link>
             <Link
               to="/best-sellers"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
             >
               Best sellers
             </Link>
             <Link
               to="/new-releases"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
             >
               New Releases
             </Link>
             <Link
               to="/today-deals"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
             >
               Today's Deals
             </Link>
 
             <Link
               to="/contact"
-              className="transition-colors duration-300 transform hover:text-[#C9563C] capitalize font-radio-canada text-[15px]"
+              className="capitalize font-radio-canada text-[15px] border border-transparent hover:border-white py-2 px-2"
             >
               Contact
             </Link>

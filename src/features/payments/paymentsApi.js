@@ -11,8 +11,19 @@ const paymentsApi = apiSlice.injectEndpoints({
         },
         body: data,
       }),
+      invalidatesTags: ["Payment"],
+    }),
+    getOrders: builder.query({
+      query: () => ({
+        url: `/payments/completed-orders`,
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("amazon_token")}`,
+        },
+      }),
+      providesTags: ["Payment"],
     }),
   }),
 });
 
-export const { useCreatePaymentSessionMutation } = paymentsApi;
+export const { useCreatePaymentSessionMutation, useGetOrdersQuery } =
+  paymentsApi;
