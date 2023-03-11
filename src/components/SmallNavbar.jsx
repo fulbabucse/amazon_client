@@ -10,6 +10,9 @@ import { useGetCategoriesQuery } from "../features/categories/categoryApi";
 import { getSearchValue } from "../features/products/searchSlice";
 import { BsArrowLeft } from "react-icons/bs";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { signOut } from "firebase/auth";
+import { logOut } from "../features/auth/authSlice";
+import auth from "../firebase/firebase.config";
 
 const SmallNavbar = () => {
   const [openCategory, setOpenCategory] = useState(false);
@@ -26,6 +29,15 @@ const SmallNavbar = () => {
   const quantity = orders?.reduce((total, current) => {
     return parseFloat(total) + parseFloat(current.quantity);
   }, 0);
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        dispatch(logOut());
+        localStorage.removeItem("cc_token");
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -318,9 +330,12 @@ const SmallNavbar = () => {
                     <li className="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
                       Customer Service
                     </li>
-                    <li className="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer">
+                    <button
+                      onClick={() => handleSignOut()}
+                      className="flex items-center justify-between hover:bg-gray-300 px-6 py-[11px] text-[14px] cursor-pointer"
+                    >
                       Sign Out
-                    </li>
+                    </button>
                   </ul>
                 </div>
               )}
