@@ -12,6 +12,7 @@ import {
   useGetProductByDepartmentQuery,
   useGetProductsByCategoryQuery,
 } from "../features/products/productsApi";
+import Helmet from "helmet";
 
 const Home = () => {
   const { data, isLoading } = useGetAllProductsQuery();
@@ -31,6 +32,10 @@ const Home = () => {
   return (
     <div className="space-y-3">
       <Hero />
+
+      <Helmet>
+        <title>Cart - Shopper's Delight</title>
+      </Helmet>
 
       {/* Large Device Home page design and development */}
       <div className="hidden lg:block space-y-3">

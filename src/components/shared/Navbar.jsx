@@ -345,16 +345,33 @@ const Navbar = () => {
               >
                 <div className="w-[350px] h-screen bg-gray-100">
                   <div className="w-full flex justify-between items-center px-5 bg-primary text-white text-center relative">
-                    <button
-                      onClick={() => {
-                        navigate("/sign-in");
-                        setOpenCategory(!openCategory);
-                      }}
-                      className="w-full flex py-2 items-center gap-2 text-[22px] font-openSans font-semibold"
-                    >
-                      <FaUserCircle size={25} />
-                      <span>Hello, Sign In</span>
-                    </button>
+                    {email && name ? (
+                      <>
+                        <button
+                          onClick={() => {
+                            navigate(`account?user=${name}&ref=${email}`);
+                            setOpenCategory(!openCategory);
+                          }}
+                          className="w-full flex py-2 items-center gap-2 text-[22px] font-openSans font-semibold"
+                        >
+                          <FaUserCircle size={25} />
+                          <span>Hello, {name}</span>
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => {
+                            navigate("/sign-in");
+                            setOpenCategory(!openCategory);
+                          }}
+                          className="w-full flex py-2 items-center gap-2 text-[22px] font-openSans font-semibold"
+                        >
+                          <FaUserCircle size={25} />
+                          <span>Hello, Sign In</span>
+                        </button>
+                      </>
+                    )}
                     <button
                       onClick={() => setOpenCategory(!openCategory)}
                       className={`${
