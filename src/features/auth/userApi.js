@@ -14,6 +14,18 @@ const userApi = apiSlice.injectEndpoints({
         dispatch(getUser(data?.email));
       },
     }),
+    sendMessage: builder.mutation({
+      query: (data) => ({
+        url: `/admin/contact/send-message`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    getMessages: builder.query({
+      query: () => ({
+        url: `/admin/contact/send-message`,
+      }),
+    }),
     getUsers: builder.query({
       query: () => ({
         url: "/users/all",
@@ -25,4 +37,9 @@ const userApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useSaveToDatabaseMutation, useGetUsersQuery } = userApi;
+export const {
+  useSaveToDatabaseMutation,
+  useGetUsersQuery,
+  useSendMessageMutation,
+  useGetMessagesQuery,
+} = userApi;

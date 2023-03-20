@@ -5,7 +5,6 @@ import { Link, useLocation } from "react-router-dom";
 
 const HistoryCard = ({ product }) => {
   const { pathname } = useLocation();
-  console.log(pathname);
   const { _id, title, price, rating, brand, images, category } = product;
 
   const ratingStar = Array.from({ length: 5 }, (_, i) => {

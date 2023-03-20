@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { AiOutlineProject, AiOutlineHome } from "react-icons/ai";
+import { AiOutlineProject, AiOutlineHome, AiOutlineMail } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
 import brandLogo from "../../assets/icons/amazon_logo_white.png";
@@ -31,11 +31,17 @@ const Sidebar = () => {
       link: "users",
       icon: <MdNotifications size={25} />,
     },
+    // {
+    //   id: 5,
+    //   name: "Uploads",
+    //   link: "uploads",
+    //   icon: <MdNotifications size={25} />,
+    // },
     {
-      id: 5,
-      name: "Uploads",
-      link: "uploads",
-      icon: <MdNotifications size={25} />,
+      id: 6,
+      name: "Messages",
+      link: "messages",
+      icon: <AiOutlineMail size={25} />,
     },
   ];
   return (

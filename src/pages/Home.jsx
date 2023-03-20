@@ -6,24 +6,40 @@ import Popular from "../components/Popular";
 import PopularSmallDevice from "../components/PopularSmallColumn";
 import PopularSmallGrid from "../components/PopularSmallGrid";
 import SmallSpinner from "../components/shared/SmallSpinner";
-import {
-  useGetAllProductsQuery,
-  useGetBooksQuery,
-  useGetProductByDepartmentQuery,
-  useGetProductsByCategoryQuery,
-} from "../features/products/productsApi";
+import { useGetAllProductsQuery } from "../features/products/productsApi";
 import Helmet from "helmet";
 
 const Home = () => {
   const { data, isLoading } = useGetAllProductsQuery();
-  const { data: toys } = useGetProductsByCategoryQuery("toys");
-  const { data: womensShoes } = useGetProductsByCategoryQuery("womens-shoes");
-  const { data: camera } = useGetProductsByCategoryQuery("camera-photo");
-  const { data: computers } = useGetProductByDepartmentQuery("computers");
-  const { data: electronics } = useGetProductByDepartmentQuery("electronics");
-  const { data: decoration } = useGetProductByDepartmentQuery("decoration");
-  const { data: cosmetics } = useGetProductByDepartmentQuery("cosmetics");
-  const { data: booksData } = useGetBooksQuery();
+  // const { data: toys } = useGetProductsByCategoryQuery("toys");
+  // const { data: womensShoes } = useGetProductsByCategoryQuery("womens-shoes");
+  // const { data: camera } = useGetProductsByCategoryQuery("camera-photo");
+  // const { data: computers } = useGetProductByDepartmentQuery("computers");
+  // const { data: electronics } = useGetProductByDepartmentQuery("electronics");
+  // const { data: decoration } = useGetProductByDepartmentQuery("decoration");
+  // const { data: cosmetics } = useGetProductByDepartmentQuery("cosmetics");
+  // const { data: booksData } = useGetBooksQuery();
+
+  const toys = data?.filter((product) => product?.category === "toys");
+  const books = data?.filter((product) => product?.category === "books");
+  const camera = data?.filter(
+    (product) => product?.category === "camera-photo"
+  );
+  const womenShoes = data?.filter(
+    (product) => product?.category === "womens-shoes"
+  );
+  const computers = data?.filter(
+    (product) => product?.department === "computers"
+  );
+  const electronics = data?.filter(
+    (product) => product?.department === "electronics"
+  );
+  const decoration = data?.filter(
+    (product) => product?.department === "decoration"
+  );
+  const cosmetics = data?.filter(
+    (product) => product?.department === "cosmetics"
+  );
 
   if (isLoading) {
     return <SmallSpinner />;
@@ -45,7 +61,7 @@ const Home = () => {
           title="Popular products in internationally"
         />
         <Popular
-          data={booksData}
+          data={books}
           id={"books"}
           title="Top Sellers in Books for you"
         />
@@ -89,7 +105,7 @@ const Home = () => {
           cardTitle="Popular Item in this Session"
         />
         <PopularSmallGrid
-          data={womensShoes}
+          data={womenShoes}
           cardTitle="Women's fashion sneakers"
         />
 

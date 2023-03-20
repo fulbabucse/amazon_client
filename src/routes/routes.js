@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Uploads from "../admin/components/Form/Uploads";
 import AdminHome from "../admin/pages/AdminHome";
 import AdminProducts from "../admin/pages/AdminProducts";
+import Messages from "../admin/pages/Messages";
 import Profile from "../admin/pages/Profile";
 import Users from "../admin/pages/Users";
 import ProductDetails from "../components/shared/ProductDetails";
@@ -120,7 +121,8 @@ const router = createBrowserRouter([
       { path: "products", element: <AdminProducts /> },
       { path: "users", element: <Users /> },
       { path: "profile", element: <Profile /> },
-      { path: "uploads", element: <Uploads /> },
+      // { path: "uploads", element: <Uploads /> },
+      { path: "messages", element: <Messages /> },
     ],
   },
   { path: "/sign-in", element: <SignIn /> },

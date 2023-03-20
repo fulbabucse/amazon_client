@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useSendMessageMutation } from "../features/auth/userApi";
 
 const Contact = () => {
+  const [contactUs, { isSuccess, status }] = useSendMessageMutation();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const handleContactSubmit = (data) => {
+    contactUs(data);
+  };
+
+  useEffect(() => {
+    if (isSuccess && status === "fulfilled") {
+      toast.success("Send message !!!");
+      reset();
+    }
+  }, [isSuccess, status]);
   return (
     <div className="bg-white">
       <section className="text-gray-700 body-font relative">
@@ -15,58 +36,99 @@ const Contact = () => {
             </p>
           </div>
           <div className="lg:w-1/2 md:w-2/3 mx-auto">
-            <div className="flex flex-wrap -m-2">
-              <div className="p-2 w-1/2">
-                <div className="relative">
-                  <label for="name" className="leading-7 text-sm text-gray-600">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                  />
+            <div className="flex flex-col flex-wrap -m-2">
+              <form onSubmit={handleSubmit(handleContactSubmit)}>
+                <div className="flex justify-between items-center">
+                  <div className="p-2 w-1/2">
+                    <div className="relative">
+                      <label
+                        for="name"
+                        className="leading-7 text-sm text-gray-600"
+                      >
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        {...register("name", { required: "Name is required!" })}
+                        id="name"
+                        name="name"
+                        className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      />
+                      {errors.name && (
+                        <p className="text-red-400 text-xs font-medium">
+                          {errors.name?.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="p-2 w-1/2">
+                    <div className="relative">
+                      <label
+                        for="email"
+                        className="leading-7 text-sm text-gray-600"
+                      >
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        {...register("email", {
+                          required: "Email is required!",
+                        })}
+                        id="email"
+                        name="email"
+                        className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      />
+                      {errors.email && (
+                        <p className="text-red-400 text-xs font-medium">
+                          {errors.email?.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="p-2 w-1/2">
-                <div className="relative">
-                  <label
-                    for="email"
-                    className="leading-7 text-sm text-gray-600"
+                <div className="p-2 w-full">
+                  <div className="relative">
+                    <label
+                      for="message"
+                      className="leading-7 text-sm text-gray-600"
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      {...register("message", {
+                        required: "Message is required!",
+                      })}
+                      name="message"
+                      className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                    ></textarea>
+                    {errors.message && (
+                      <p className="text-red-400 text-xs font-medium">
+                        {errors.message?.message}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="p-2 w-full">
+                  <button
+                    type="submit"
+                    className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
                   >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                  />
+                    Send
+                  </button>
                 </div>
-              </div>
-              <div className="p-2 w-full">
-                <div className="relative">
-                  <label
-                    for="message"
-                    className="leading-7 text-sm text-gray-600"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-                  ></textarea>
-                </div>
-              </div>
-              <div className="p-2 w-full">
-                <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                  Send
-                </button>
-              </div>
+              </form>
               <div className="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
-                <a className="text-indigo-500">admin@amazon.com</a>
+                <a
+                  className="text-indigo-500"
+                  href="mailto:fulbabucse@gmail.com"
+                >
+                  fulbabucse@gmail.com
+                </a>
+                <br />
+                <a className="text-indigo-500" href="tel:+8801736534295">
+                  +880 1736 534 295
+                </a>
                 <p className="leading-normal my-5">
                   10/A, 5400, Rangpur
                   <br />
